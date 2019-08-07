@@ -1,12 +1,12 @@
-# [Concept Name]
+# 
 
 ## Application Definition Statement
 
-*A* *clear* *high-level summary should be used to introduce the concept. This should be similar to an elevator pitch or a conversational reply to* *"What* *are you building**?”.* *You will e**xplore the audience and their demographics, the problem they are having, and your solution in subsequent sections in more detail but touch on them here.* 
-
-*Clarity over quantity should be the focus, to that end, creating visuals/charts to explain the more complex data or logical points could help to reinforce your Application’s Definition Statement.*
+____ is a news feed application intended for part-time investors seeking real-time updates on companies within their portfolio. Current RSS feeds provide information on topics which may align with user preference, though they are rarely geared toward an individual's position within a company. The unique value proposition of ___ combines sentiment analysis, filtration on current holdings, and push notifications to keep the investor informed.
 
 ## Target Market
+
+This application is geared towards individuals whose work is usually around their computer. Though this may be used by [...To be continued]
 
 *Using research, describe the people most likely to be utilizing your application. What are their ages, education level, employment sector, income level, hobbies, or any other defining characteristics that set them apart from other groups of people? Identifying specific groups will help drive application design choices.*
 
