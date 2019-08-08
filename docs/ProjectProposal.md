@@ -2,11 +2,34 @@
 
 ## Application Definition Statement
 
-____ is a news feed application intended for part-time investors seeking real-time updates on companies within their portfolio. Current RSS feeds provide information on topics which may align with user preference, though they are rarely geared toward an individual's position within a company. The unique value proposition of ___ combines sentiment analysis, filtration on current holdings, and push notifications to keep the investor informed.
+____ is a news feed application intended for part-time investors seeking real-time updates on companies within their portfolio. Current RSS feeds provide information on topics which may align with user preference, though they are rarely geared toward an individual's position within a company. The unique value proposition of ___ combines sentiment analysis, filtration on current holdings, and (as an extended goal) push notifications to keep the investor informed.
 
 ## Target Market
 
-This application is geared towards individuals whose work is usually around their computer. Though this may be used by [...To be continued]
+This application is geared towards individuals between the ages of 21 and 34, whose investing methods involve an online brokerage account. Robinhood, a popular commission-free trading app amongst Gen-Y and Z users - average age of 32, has a user base now surpassing E-Trade (Reddy, 2019). This mobile-friendly, commission-free method of investing focuses less on tooling and more on ease-of-use. As ______ will be seen as a complementary service to platforms such as Robinhood, these focal points will be mimicked.
+
+~ 30% of American adults have non-retirement investment accounts.
+
+According to a 2018 NFCS FinTech-related study, "younger respondents, those with higher incomes, and non-White respondents are more likely to use technology to help with personal financial management." (NFCS, 2018).
+
+
+
+- 39% of Americans use websites / apps for financial tasks, encompassing:
+
+ - Age
+    - 56% between 18 and 34
+    - 42% between 35 and 54
+    - 23% among 55+
+ - Race 
+    - 51% African American
+    - 49% Hispanic
+    - 34% White
+    - 45% Asian American
+    - 41% Other
+
+
+
+
 
 *Using research, describe the people most likely to be utilizing your application. What are their ages, education level, employment sector, income level, hobbies, or any other defining characteristics that set them apart from other groups of people? Identifying specific groups will help drive application design choices.*
 
@@ -45,3 +68,13 @@ This application is geared towards individuals whose work is usually around thei
 ## Integrations
 
 *Identify what 3rd party APIs, data sets, or external integrations are planned for use and outline how you will use them transformatively. Provide links to their respective documentation and verify that your intended use complies with their Terms of Service.*
+
+Intrinio
+- 
+Watson Discovery News
+- 
+Google Natural Language 
+
+Works Cited:
+https://markets.businessinsider.com/news/stocks/robinhood-trading-app-nears-funding-7-billion-valuation-2019-5-1028230045
+
