@@ -1,11 +1,11 @@
 # Ticker News
 
 1. [Application Definition Statement](#one)
-2. [Target Market](#two)
+2. [Target Market](#two)\
 2.1 [Analysis of Complementary Product](#two_one)\
-2.2 [Demographic Study](#two_two)
-2.3 [Target Summary](#two_three)\
-3. [Personas](#three)
+2.2 [Demographic Study](#two_two)\
+2.3 [Target Summary](#two_three)
+3. [Personas](#three)\
 3.1 [The Investing Newbie](#three_one)\
 3.2 [The Fearlessly Frugal](#three_two)
 4. [Use Cases](#four)
@@ -14,7 +14,7 @@
 7. [Solution Statement](#seven)
 8. [Competition](#eight)
 9. [Key Features](#nine)
-10. [Integrations](#ten)
+10. [Integrations](#ten)\
 10.1  [Intrinio](#ten_one)\
 10.2  [Watson Discovery](#ten_two)\
 10.3  [Google Natural Language](#ten_three)
