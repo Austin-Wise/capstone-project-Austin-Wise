@@ -1,8 +1,9 @@
-# APP
+
+# Ticker News
 
 ## Application Definition Statement
 
-____ is a news feed application intended for part-time investors seeking real-time updates on companies within their portfolio. Current RSS feeds provide information on topics which may align with user preference, though they are rarely geared toward an individual's position within a company. The unique value proposition of ___ combines sentiment analysis, filtration on current holdings, and (as an extended goal) push notifications to keep the investor informed.
+Ticker News is a news feed application intended for part-time investors seeking real-time updates on companies within their portfolio. Current RSS feeds provide information on topics which may align with user preference, though they are rarely geared toward an individual's position within a company. The unique value proposition of Ticker News combines sentiment analysis, filtration on current holdings, and (as an extended goal) push notifications to keep the investor informed.
 
 ## 1. Target Market
 
@@ -59,19 +60,71 @@ Primary factors for this analysis contain two categories: Use of websites/apps f
     - 59%  $75k+
 
 ### 1.3 Target Summary
-As **APP** will be seen as a complementary product to services such as Robinhood, the mean age will be a contributing factor to **APP**'s target age.
+As Ticker News will be seen as a complementary product to services such as Robinhood, the mean age will be a contributing factor to Ticker News's target age.
 
-Additional findings cited from the 2018 National Financial Capital Study suggest Hispanic and Asian American individuals as target ethnicities - as they not only spend less than income, but are also most likely to use websites and applications for financial tasks. 
+Additional findings cited from the 2018 National Financial Capital Study suggest Hispanic and Asian American individuals between as target ethnicities, as they not only spend less than income, but are also most likely to use websites and applications for financial tasks. 
 
-In terms of age group and education level, **APP** will be marketed towards college educated individuals between 21 and 34, where focus on age is skewed left.
+In terms of age group and education level, Ticker News will be marketed towards college educated individuals between 21 and 34, where focus is skewed left.
 
 Target income follows loosely towards $25-75k, as the financial well-being score naturally progresses as income increases.
 
 Individuals with African American and White ethnicity, as well as  individuals between 25 and 54 follow as Secondary markets, as their scores are satisfactory in terms of "Website / Application use for financial purposes" __or__ "Spending Less than Income". Though individuals above 55 have satisfactory scores for financial well-being, this age group scores very poorly within the "Website / Application Use" criteria and is not considered as a secondary market.
 
-## User Profile
+## Personas
 
-*User profiles are a snapshot of an actual person and helps to open a window into the mind of an actual user and will provide insight while tailoring and refining interaction details to best fit your ideal users within your Target Market.*
+> Jimmy Lee \#investingnoobie
+> ---
+> **Age:** 29\
+> **Pronouns:** He / Him / His\
+> **Income:** $43k\
+> **Portfolio:** $4k\
+> **Family-Size:** 3
+> 
+> **Goals:**
+> - Start education fund for child
+> - Gain better understand trends and reversals
+> - Find quality news publications related to investments
+>
+> **Frustrations:**
+> * Unable to identify market reversals
+> * Hard time finding beneficial news outlets
+> * Needs time for family-life
+> 
+> **Bio:** Jimmy is new to parenthood and understands the importance of investing early for his child's education. This recent decision has led to overly-eager trading mistakes. Though he has basic understanding of the companies he's invested in, he wishes to become more knowledgeable in their current events.
+> 
+> |Technology Confidence|   |
+> |--|--|
+> | IT and Internet | ••••• |
+> | Software | •• |
+> | Mobile Apps | ••••• |
+> | Social Networks| ••• |
+
+> Miriam Martìnez \#fearlesslyfrugal
+> ---
+> **Age:** 32\
+> **Pronouns:** She / Her / Hers\
+> **Income:** $61k\
+> **Portfolio:** $67k\
+> **Family-Size:** 1
+> 
+> **Goals:** 
+> * Maintain awareness on investment health
+> * Ability to research potential investments quickly
+> * Find platform with focus on business news without distractions
+>
+> **Frustrations:**
+> * Difficult to manage time needed for proper market research
+> * Fear of missing important company-related news updates
+> * Too many steps between checking portfolio and news
+> 
+> **Bio:** Miriam, a registered nurse, has been putting away a portion of her salary since college. Though she manages her finances well, she feels she doesn't have the time to exercise strategies necessary for better returns. She's regularly has many tabs open on her computer to quickly check market updates during her breaks at work.
+> 
+> |Technology Confidence|   |
+> |--|--|
+> | IT and Internet | •••• |
+> | Software | •• |
+> | Mobile Apps | ••••• |
+> | Social Networks| •••• |
 
 ## Use Cases
 
@@ -114,3 +167,6 @@ Individuals with African American and White ethnicity, as well as  individuals b
 https://markets.businessinsider.com/news/stocks/robinhood-trading-app-nears-funding-7-billion-valuation-2019-5-1028230045
 
 https://www.usfinancialcapability.org/downloads/NFCS_2018_Report_Natl_Findings.pdf
+
+
+
