@@ -61,9 +61,9 @@ Primary factors for this analysis contain two categories: Use of websites/apps f
 ### 1.3 Target Summary
 As **APP** will be seen as a complementary product to services such as Robinhood, the mean age will be a contributing factor to **APP**'s target age.
 
-Additional findings cited from the 2018 National Financial Capital Study suggest Hispanic and Asian American individuals between as target ethnicities, as they not only spend less than income, but are also most likely to use websites and applications for financial tasks. 
+Additional findings cited from the 2018 National Financial Capital Study suggest Hispanic and Asian American individuals as target ethnicities - as they not only spend less than income, but are also most likely to use websites and applications for financial tasks. 
 
-In terms of age group and education level, **APP** will be marketed towards college educated individuals between 21 and 34, where focus is skewed left.
+In terms of age group and education level, **APP** will be marketed towards college educated individuals between 21 and 34, where focus on age is skewed left.
 
 Target income follows loosely towards $25-75k, as the financial well-being score naturally progresses as income increases.
 
