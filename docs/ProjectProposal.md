@@ -1,12 +1,12 @@
 # Ticker News
 
 1. [Application Definition Statement](#one)
-2. [Target Market](#two)
-2.1 [Analysis of Complementary Product](#two_one)
-2.2 [Demographic Study](#two_two)
+2. [Target Market](#two)\
+2.1 [Analysis of Complementary Product](#two_one)\
+2.2 [Demographic Study](#two_two)\
 2.3 [Target Summary](#two_three)
-3. [Personas](#three)
-3.1 [The Investing Newbie](#three_one)
+3. [Personas](#three)\
+3.1 [The Investing Newbie](#three_one)\
 3.2 [The Fearlessly Frugal](#three_two)
 4. [Use Cases](#four)
 5. [Problem Statement](#five)
@@ -14,9 +14,9 @@
 7. [Solution Statement](#seven)
 8. [Competition](#eight)
 9. [Key Features](#nine)
-10. [Integrations](#ten)
-10.1  [Intrinio](#ten_one)
-10.2  [Watson Discovery](#ten_two)
+10. [Integrations](#ten)\
+10.1  [Intrinio](#ten_one)\
+10.2  [Watson Discovery](#ten_two)\
 10.3  [Google Natural Language](#ten_three)
 
 
@@ -75,6 +75,14 @@ Primary factors for this analysis contain two categories: Use of websites/apps f
     - 44%  <$25k
     - 51%  $25-75k
     - 59%  $75k+
+    
+### Employment Sector
+
+Ted Radio Hour: Dont Fear Math
+
+### Hobbies 
+
+Hobbies of 12 ultra-successful entrepreneurs
 
 ### <a name="two_three"></a>2.3 Target Summary
 As Ticker News will be seen as a complementary product to services such as Robinhood, the mean age will be a contributing factor to Ticker News's target age.
@@ -306,7 +314,7 @@ Individuals with African American and White ethnicity, as well as  individuals b
 > **Location:** Portland, OR
 > 
 > **Age:** 29
-> **Ethnicity:** Asian-American
+> **Ethnicity:** Asian American
 > **Pronouns:** He / Him / His
 > **Household-Size:** 3
 > 
@@ -341,7 +349,7 @@ Individuals with African American and White ethnicity, as well as  individuals b
 ### <a name="three_two"></a>3.2 Miriam Martìnez *#fearlesslyfrugal*
 > **Location:** Boston, MA
 > 
-> **Age:** 32
+>  **Age:** 32
 > **Ethnicity:** Hispanic
 > **Pronouns:** She / Her / Hers
 > **Household-Size:** 1
