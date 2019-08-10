@@ -20,13 +20,18 @@
 7.3 [Layman's Terms](#seven_three)
 7.4 [Organization](#seven_four)
 7.5 [Unbiased Assistance](#seven_five)
-8. [Competition](#eight)
-8.1 [Flipboard](#eight_one)
-8.2 [(Apple) News](#eight_two)
-8.3 [Feedly](#eight_three)
-8.4 [Facebook](#eight_four)
+8. [Competition](#eight)\
+8.1 [Flipboard](#eight_one)\
+8.2 [(Apple) News](#eight_two)\
+8.3 [Feedly](#eight_three)\
+8.4 [Facebook](#eight_four)\
 8.5 [TD Ameritrade](#eight_five)
-10. [Key Features](#nine)
+9. [Key Features](#nine)
+9.1 [Company Stock Price](#nine_one)
+9.2 [Sentiment Analysis](#nine_two)
+9.3 [Company-Specific Newsfeed](#nine_three)
+9.4 [Single-Page Design](#nine_four)
+9.5 [Reading List](#nine_five)
 11. [Integrations](#ten)\
 10.1  [Intrinio](#ten_one)\
 10.2  [Watson Discovery](#ten_two)\
@@ -284,20 +289,33 @@ This application lacks navigability - which **Ticker Tape** aims to address.
 
 ## <a name="nine"></a>9. Key Features
 
-*Define key features intended to provide solutions to specific problems and pain points you have identified. These key features should be specifically defined in response to problems / pain points. More generic features like User Authentication should not be defined here.*
+### <a name="nine_one"></a>9.1 Company Stock Price
+Providing the company stock price addresses the issue of navigability on Broker sites. The issue of adding too many tasks can create confusion for the user. Having this information here not only provides the user with a peer into their investment health, but also gives context to news articles regarding the company.
+### <a name="nine_two"></a>9.2 Sentiment Analysis
+A major contributor to the application's value proposition is the study of articles found within the newsfeed. Where it is not provided by a single competitor, Ticker Tape has this integrated to not only give insight into specific articles, but it also allows the user to quickly understand the severity of current events - as it pertains to their company of interest. 
+### <a name="nine_three"></a>9.3 Company-Specific Newsfeed
+Paired with the company stock price, is the news feed that is specific to it's company category. In combination with the sentiment analysis, users have the ability to quickly study companies of interest.
+### <a name="nine_four"></a>9.4 Single-Page Design
+An issue found within Brokerage applications is the cascading design. This not only causes confusion when considering site breadcrumbs, but the vast amount of potentially unneeded information made available to the user causes confusion. To combat this, a single-page design will be a focal point, aside from user-specific reading lists and settings.
+
+### <a name="nine_five"></a>9.5 Reading List
+To save time and promote continued use, a reading list allows users to save article addresses to their personal library. This feature is not provided within financial applications regularly, however can be a valuable asset when considering trade journal entries.
 
 ## <a name="ten"></a>10. Integrations
+### <a name="ten_one"></a>10.1 [Intrinio](https://docs.intrinio.com/documentation/api_v2/getting_started)
 
-*Identify what 3rd party APIs, data sets, or external integrations are planned for use and outline how you will use them transformatively. Provide links to their respective documentation and verify that your intended use complies with their Terms of Service.*
+Intrinio is a Financial Data API that allows the developer to gather company information, Ticker names, Stock Prices, as well as Graphical Data. The primary use of this will be to gather company information, ticker names, and stock prices to address [9.1](#nine_one) and [9.3](#nine_three). Use of this API will be used sparingly, as future research will needed to be conducted concerning average data pings.
 
-### <a name="ten_one"></a>10.1 Intrinio
-### <a name="ten_two"></a>10.2 Watson Discovery News
-### <a name="ten_three"></a>10.3 Google Natural Language 
-### <a name="ten_four"></a>10.4 Passport.js
+### <a name="ten_two"></a>10.2 [Watson Discovery News](https://cloud.ibm.com/docs/services/discovery?topic=discovery-gs-api#gs-api)
 
+Seen as a primary driver of the application, Watson Discovery News is the RSS feed engine for the application to address [9.2](#nine_two) and [9.3](#nine_three). The selling point for this service is the availability of the sentiment analysis. At this time, development for this application will not infringe on the terms of service.
 
+### <a name="ten_three"></a>10.3 [Google Natural Language](https://cloud.google.com/natural-language/)
 
+Seen as an alternative to the sentiment analysis provided by [10.2](#ten_two), Google Natural Language allows for many machine learning tools to analyze text. This service will also provide the ability to address [9.2](#nine_two).
 
+### <a name="ten_four"></a>10.4 [Passport.js](http://www.passportjs.org/docs/)
+Passport.js allows for the user to login via OAuth and for Username / Password login with ease. The deciding factor for this API is it's flexibility to cover multiple login-systems and the traditional route of login.  Having a login system is important for creating a customized user experience, giving way to [9.1](#nine_one), [9.2](#nine_two), [9.4](#nine_four), and [9.5](#nine_five).
 
 ## Works Cited
 
