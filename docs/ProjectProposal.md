@@ -100,10 +100,6 @@ The  [Journal of Behavioral and Experimental Economics](https://www.sciencedirec
 
 A connection can be made that individuals working with mathematics - as such in STEM career fields, have heightened financial literacy and therefore, are more likely to find value in this application. Features of the application such as sentiment analysis may allow these individuals approaching investing systematically may have advantage over widespread trends of investor fear or greed.
 
-#### Hobbies
-
-[Business Insider - Hobbies of 12 ultra-successful entrepreneurs]
-
 ### <a name="two_three"></a>2.3 Target Summary
 As Ticker Tape will be seen as a complementary product to services such as Robinhood, the mean age will be a contributing factor to Ticker Tape's target age.
 
@@ -118,6 +114,7 @@ Individuals with African American and White ethnicity, as well as  individuals b
 ## <a name="three"></a>3. Personas
 
 ### <a name="three_one"></a>3.1 Jimmy Woo  *#investingnoobie*
+![](https://images.pexels.com/photos/1697864/pexels-photo-1697864.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260 =250x180)
 > **Location:** Portland, OR
 > 
 > **Age:** 28\
@@ -154,6 +151,7 @@ Individuals with African American and White ethnicity, as well as  individuals b
 >**Hobbies:** Tennis, Cooking, Golf, Rowing
 
 ### <a name="three_two"></a>3.2 Miriam Martìnez *#fearlesslyfrugal*
+![](https://images.pexels.com/photos/945813/pexels-photo-945813.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260 =280x190)
 > **Location:** Houston, TX
 > 
 >  **Age:** 32
