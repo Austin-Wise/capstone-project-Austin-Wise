@@ -12,15 +12,26 @@
 4.2 [Article Analysis](#four_two)\
 4.3 [Navigability](#four_three)\
 4.4 [Bookmarks](#four_four)
-6. [Problem Statement](#five)
-7. [Pain Points](#six)
-8. [Solution Statement](#seven)
-9. [Competition](#eight)
+5. [Problem Statement](#five)
+6. [Pain Points](#six)
+7. [Solution Statement](#seven)
+7.1 [Navigability](#seven_one)
+7.2 [Source Diversity](#seven_two)
+7.3 [Layman's Terms](#seven_three)
+7.4 [Organization](#seven_four)
+7.5 [Unbiased Assistance](#seven_five)
+8. [Competition](#eight)
+8.1 [Flipboard](#eight_one)
+8.2 [(Apple) News](#eight_two)
+8.3 [Feedly](#eight_three)
+8.4 [Facebook](#eight_four)
+8.5 [TD Ameritrade](#eight_five)
 10. [Key Features](#nine)
 11. [Integrations](#ten)\
 10.1  [Intrinio](#ten_one)\
 10.2  [Watson Discovery](#ten_two)\
 10.3  [Google Natural Language](#ten_three)
+10.4 [Passport.js](#ten_four)
 
 
 ## <a name="one"></a>1. Application Definition Statement
@@ -245,14 +256,31 @@ The application will, by default, provide a newsfeed of all relevant information
 ## <a name="eight"></a>8. Competition
 
 ### Flipboard
+Flipboard allows users to select categories they wish to subscribe to on initial setup. Allowing the user to view a customized feed _along with_ an "Explore More" option, they have the ability to add or remove topics from their feed.
+
+Flipboard allows users to exchange generalized topics rather than company-specific news. Additionally, the application does not provide a sentiment analysis, bookmarks, nor company information and valuations.
 
 ### (Apple) News
 
+Found on all Apple computer products, (Apple) News is much like an RSS feed that provides categories by topic, category, and channel - allowing the user to filter topics on "NASDAQ" or "The Economist". The platform also provides a clear-set view of who published the article and when. This application in combination with (Apple) Finance allows for a more wholesome experience closely resembling what **Ticker Tape** is driven towards, providing both company news and value. However, these are two applications that require multiple steps to visit either area. Additionally, (Apple) news does not provide sentiment analysis.
+
 ### Feedly
+Feedly is an RSS Feed that allows users to create content categories and further sub-categorize topics of interest. It allows for bookmarked articles as well as sharing collections with other users.
+
+Though this application does provide an easy-to-navigate user interface, it does not provide generalized company information, valuation, or sentiment analysis.
 
 ### Facebook
 
+Facebook has long been a popular platform for keeping up-to-date with news and social circles. Though it automatically customizes advertisements and suggestions by use of content algorithms, these complex solutions have brought trouble to the platform and it's users. Misguided information and lack of trust make Facebook a poor choice for seeking current events.
+
+It is not to be ignored, however, that users continue to utilize Facebook for current events because of its convenience and ease-of-use. 
+
+Depending on what is published by companies, general information _may be_ available. Stock information and sentiment analysis are not provided.
+
 ### T.D.Ameritrade
+The only finance-specific application on the competition list, T.D. Ameritrade, is similar in scope to others mentioned in Section [ Section Five: Problem Statement](#five) - as Brokerage Firms. Applications found within this list provide the user the ability to both conduct research and trade. The size of the applications, however, create confusion - and tooling often utilizes jargon rarely understood by novice users.
+
+This application lacks navigability - which **Ticker Tape** aims to address.
 
 ## <a name="nine"></a>9. Key Features
 
