@@ -14,11 +14,11 @@
 4.4 [Bookmarks](#four_four)
 5. [Problem Statement](#five)
 6. [Pain Points](#six)
-7. [Solution Statement](#seven)
-7.1 [Navigability](#seven_one)
-7.2 [Source Diversity](#seven_two)
-7.3 [Layman's Terms](#seven_three)
-7.4 [Organization](#seven_four)
+7. [Solution Statement](#seven)\
+7.1 [Navigability](#seven_one)\
+7.2 [Source Diversity](#seven_two)\
+7.3 [Layman's Terms](#seven_three)\
+7.4 [Organization](#seven_four)\
 7.5 [Unbiased Assistance](#seven_five)
 8. [Competition](#eight)\
 8.1 [Flipboard](#eight_one)\
@@ -26,16 +26,16 @@
 8.3 [Feedly](#eight_three)\
 8.4 [Facebook](#eight_four)\
 8.5 [TD Ameritrade](#eight_five)
-9. [Key Features](#nine)
-9.1 [Company Stock Price](#nine_one)
-9.2 [Sentiment Analysis](#nine_two)
-9.3 [Company-Specific Newsfeed](#nine_three)
-9.4 [Single-Page Design](#nine_four)
+9. [Key Features](#nine)\
+9.1 [Company Stock Price](#nine_one)\
+9.2 [Sentiment Analysis](#nine_two)\
+9.3 [Company-Specific Newsfeed](#nine_three)\
+9.4 [Single-Page Design](#nine_four)\
 9.5 [Reading List](#nine_five)
 11. [Integrations](#ten)\
 10.1  [Intrinio](#ten_one)\
 10.2  [Watson Discovery](#ten_two)\
-10.3  [Google Natural Language](#ten_three)
+10.3  [Google Natural Language](#ten_three)\
 10.4 [Passport.js](#ten_four)
 
 
@@ -114,7 +114,7 @@ Individuals with African American and White ethnicity, as well as  individuals b
 ## <a name="three"></a>3. Personas
 
 ### <a name="three_one"></a>3.1 Jimmy Woo  *#investingnoobie*
-![](https://images.pexels.com/photos/1697864/pexels-photo-1697864.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260 =250x180)
+<img src="https://images.pexels.com/photos/1697864/pexels-photo-1697864.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" width="190px"></img>
 > **Location:** Portland, OR
 > 
 > **Age:** 28\
@@ -151,7 +151,7 @@ Individuals with African American and White ethnicity, as well as  individuals b
 >**Hobbies:** Tennis, Cooking, Golf, Rowing
 
 ### <a name="three_two"></a>3.2 Miriam Martìnez *#fearlesslyfrugal*
-![](https://images.pexels.com/photos/945813/pexels-photo-945813.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260 =280x190)
+<img src="https://images.pexels.com/photos/945813/pexels-photo-945813.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="190px"></img>
 > **Location:** Houston, TX
 > 
 >  **Age:** 32
@@ -259,20 +259,30 @@ The application will, by default, provide a newsfeed of all relevant information
 ## <a name="eight"></a>8. Competition
 
 ### Flipboard
+<img src="https://icdn2.digitaltrends.com/image/new-flipboard.jpg" width="500"></img>
+
+
 Flipboard allows users to select categories they wish to subscribe to on initial setup. Allowing the user to view a customized feed _along with_ an "Explore More" option, they have the ability to add or remove topics from their feed.
 
 Flipboard allows users to exchange generalized topics rather than company-specific news. Additionally, the application does not provide a sentiment analysis, bookmarks, nor company information and valuations.
 
 ### (Apple) News
+<img src="https://www.apple.com/newsroom/images/product/apple-news/Apple-news-plus-natgeo-iphone-ipad-macbook-pro-screen-03252019_big.jpg.large.jpg" width="500"></img>
+
 
 Found on all Apple computer products, (Apple) News is much like an RSS feed that provides categories by topic, category, and channel - allowing the user to filter topics on "NASDAQ" or "The Economist". The platform also provides a clear-set view of who published the article and when. This application in combination with (Apple) Finance allows for a more wholesome experience closely resembling what **Ticker Tape** is driven towards, providing both company news and value. However, these are two applications that require multiple steps to visit either area. Additionally, (Apple) news does not provide sentiment analysis.
 
 ### Feedly
+<img src="https://s5.feedly.com/images/landing/screenshot-web@2x.png" width="500"></img>
+
+
 Feedly is an RSS Feed that allows users to create content categories and further sub-categorize topics of interest. It allows for bookmarked articles as well as sharing collections with other users.
 
 Though this application does provide an easy-to-navigate user interface, it does not provide generalized company information, valuation, or sentiment analysis.
 
 ### Facebook
+<img src="https://store-images.s-microsoft.com/image/apps.29616.9007199266245907.65197407-cc70-4969-a3d7-ad4ed1459629.439ad97c-c668-4317-ab06-de861066a171?w=672&h=378&q=80&mode=letterbox&background=%23FFE4E4E4&format=jpg" width="500"></img>
+
 
 Facebook has long been a popular platform for keeping up-to-date with news and social circles. Though it automatically customizes advertisements and suggestions by use of content algorithms, these complex solutions have brought trouble to the platform and it's users. Misguided information and lack of trust make Facebook a poor choice for seeking current events.
 
@@ -281,6 +291,9 @@ It is not to be ignored, however, that users continue to utilize Facebook for cu
 Depending on what is published by companies, general information _may be_ available. Stock information and sentiment analysis are not provided.
 
 ### T.D.Ameritrade
+<img src="https://i.ytimg.com/vi/y-TdhWVgLCc/maxresdefault.jpg" width="500"></img>
+
+
 The only finance-specific application on the competition list, T.D. Ameritrade, is similar in scope to others mentioned in Section [ Section Five: Problem Statement](#five) - as Brokerage Firms. Applications found within this list provide the user the ability to both conduct research and trade. The size of the applications, however, create confusion - and tooling often utilizes jargon rarely understood by novice users.
 
 This application lacks navigability - which **Ticker Tape** aims to address.
