@@ -154,14 +154,14 @@ Individuals with African American and White ethnicity, as well as  individuals b
 <img src="https://images.pexels.com/photos/945813/pexels-photo-945813.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" width="190px"></img>
 > **Location:** Houston, TX
 > 
->  **Age:** 32
-> **Ethnicity:** Hispanic
-> **Pronouns:** She / Her / Hers
+>  **Age:** 32\
+> **Ethnicity:** Hispanic\
+> **Pronouns:** She / Her / Hers\
 > **Household-Size:** 1
 > 
-> **Profession:** Petrochemical Engineer
-> **Income:** $83k
-> **Portfolio:** $71k
+> **Profession:** Petrochemical Engineer\
+> **Income:** $83k\
+> **Portfolio:** $71k\
 > **Broker:** T.D. Ameritrade
 > 
 > **Goals:** 
