@@ -7,13 +7,17 @@
 3. [Personas](#three)\
 3.1 [The Investing Newbie](#three_one)\
 3.2 [The Fearlessly Frugal](#three_two)
-4. [Use Cases](#four)
-5. [Problem Statement](#five)
-6. [Pain Points](#six)
-7. [Solution Statement](#seven)
-8. [Competition](#eight)
-9. [Key Features](#nine)
-10. [Integrations](#ten)\
+4. [Use Cases](#four)\
+4.1 [Diverse Channels](#four_one)\
+4.2 [Article Analysis](#four_two)\
+4.3 [Navigability](#four_three)\
+4.4 [Bookmarks](#four_four)
+6. [Problem Statement](#five)
+7. [Pain Points](#six)
+8. [Solution Statement](#seven)
+9. [Competition](#eight)
+10. [Key Features](#nine)
+11. [Integrations](#ten)\
 10.1  [Intrinio](#ten_one)\
 10.2  [Watson Discovery](#ten_two)\
 10.3  [Google Natural Language](#ten_three)
@@ -218,20 +222,37 @@ Where financial news is regularly found, the brokerage website, the environment 
 The study found that many of these sites had a steep learning curve, disorganized product pages, and generally marginal usability (Sauro, 2018). To address potential financial anxiety, unevenness and sporadic design language should be minimized (Kreger, 2019). The culmination of these studies highlight a range of issues with current methods regarding the delivery of current events. As consumers will follow the path of least resistance, their portal for financial news should not be difficult to navigate nor should their opinions be manipulated by social media goliaths. 
 
 ## <a name="six"></a>6. Pain Points
-
+* New investors quickly realize a steep learning curve in terms of industry jargon with existing financial platforms.
 * Users feel obligated to use deceptive media outlets to consume information regarding current events.
 * Existing financial platforms are difficult to navigate.
 * Brokerage websites are often disorganized and inconsistent in design.
-* New investors quickly realize a steep learning curve in terms of navigability and jargon with existing platforms.
 * News platforms are often biased and diversity is often difficult due to social media algorithms. 
 
 ## <a name="seven"></a>7. Solution Statement
 
-*How is your project going to solve the problem outlined above? Consider the competing products in your market space. What makes your solution different from other’s attempts to solve the problem? How are you able to better solve the defined problem for your audience than your competition?*
+### Five Criteria to Success
+#### <a name="seven_one"></a>7.1 Navigability
+By having a clear purpose of the application, rather than a swiss-army knife of tools, a learning curve for the application is non-existent. The consumer understands the purpose. This will be done by color-coding, consistent UI and clear visual hierarchy.
+#### <a name="seven_two"></a>7.2 Source Diversity
+The application allows for discovering new sources. This will be done by filtering down from a large set of news agencies rather than the inverse.  Filters are clearly labeled and blocking content (by the user) is easily achievable.
+#### <a name="seven_three"></a>7.3 Layman's Terms
+Special consideration of language use when labeling decision points. In situations where industry jargon is the only solution, help functionality will be provided for ease-of-use.
+#### <a name="seven_four"></a>7.4 Organization
+The site has clear organization. Most of the tasks can be performed from the main page. Ticker Names (Categories) and Stock value will remain on the left, while the newsfeed and company information is provided on the right. Navigation options are in traditional locations to maintain application familiarity.
+#### <a name="seven_five"></a>7.5 Unbiased Assistance
+The application will, by default, provide a newsfeed of all relevant information to the ticker symbol regardless of the author's stance. The user is made aware of the position the author is expected to take within the article prior to opening, and as mentioned in [7.2](#seven_two), the ability to block and filter news agencies is made available to the user.
 
 ## <a name="eight"></a>8. Competition
 
-*What competing products exist to solve this or a similar problem? Identify and summarize competing products and how their approach to solving your identified problem differ from your own.*
+### Flipboard
+
+### (Apple) News
+
+### Feedly
+
+### Facebook
+
+### T.D.Ameritrade
 
 ## <a name="nine"></a>9. Key Features
 
@@ -245,6 +266,10 @@ The study found that many of these sites had a steep learning curve, disorganize
 ### <a name="ten_two"></a>10.2 Watson Discovery News
 ### <a name="ten_three"></a>10.3 Google Natural Language 
 ### <a name="ten_four"></a>10.4 Passport.js
+
+
+
+
 
 ## Works Cited
 
