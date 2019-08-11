@@ -32,11 +32,13 @@
 9.3 [Company-Specific Newsfeed](#nine_three)\
 9.4 [Single-Page Design](#nine_four)\
 9.5 [Reading List](#nine_five)
-11. [Integrations](#ten)\
+10. [Integrations](#ten)\
 10.1  [Intrinio](#ten_one)\
 10.2  [Watson Discovery](#ten_two)\
 10.3  [Google Natural Language](#ten_three)\
 10.4 [Passport.js](#ten_four)
+11. [Works Cited](#eleven)
+12. [Proposal Video](#twelve)
 
 
 ## <a name="one"></a>1. Application Definition Statement
@@ -258,7 +260,7 @@ The application will, by default, provide a newsfeed of all relevant information
 
 ## <a name="eight"></a>8. Competition
 
-### Flipboard
+### <a name="eight_one"></a>Flipboard
 <img src="https://icdn2.digitaltrends.com/image/new-flipboard.jpg" width="500"></img>
 
 
@@ -266,13 +268,13 @@ Flipboard allows users to select categories they wish to subscribe to on initial
 
 Flipboard allows users to exchange generalized topics rather than company-specific news. Additionally, the application does not provide a sentiment analysis, bookmarks, nor company information and valuations.
 
-### (Apple) News
+### <a name="eight_two"></a>(Apple) News
 <img src="https://www.apple.com/newsroom/images/product/apple-news/Apple-news-plus-natgeo-iphone-ipad-macbook-pro-screen-03252019_big.jpg.large.jpg" width="500"></img>
 
 
 Found on all Apple computer products, (Apple) News is much like an RSS feed that provides categories by topic, category, and channel - allowing the user to filter topics on "NASDAQ" or "The Economist". The platform also provides a clear-set view of who published the article and when. This application in combination with (Apple) Finance allows for a more wholesome experience closely resembling what **Ticker Tape** is driven towards, providing both company news and value. However, these are two applications that require multiple steps to visit either area. Additionally, (Apple) news does not provide sentiment analysis.
 
-### Feedly
+### <a name="eight_three"></a>Feedly
 <img src="https://s5.feedly.com/images/landing/screenshot-web@2x.png" width="500"></img>
 
 
@@ -280,7 +282,7 @@ Feedly is an RSS Feed that allows users to create content categories and further
 
 Though this application does provide an easy-to-navigate user interface, it does not provide generalized company information, valuation, or sentiment analysis.
 
-### Facebook
+### <a name="eight_four"></a>Facebook
 <img src="https://store-images.s-microsoft.com/image/apps.29616.9007199266245907.65197407-cc70-4969-a3d7-ad4ed1459629.439ad97c-c668-4317-ab06-de861066a171?w=672&h=378&q=80&mode=letterbox&background=%23FFE4E4E4&format=jpg" width="500"></img>
 
 
@@ -290,7 +292,7 @@ It is not to be ignored, however, that users continue to utilize Facebook for cu
 
 Depending on what is published by companies, general information _may be_ available. Stock information and sentiment analysis are not provided.
 
-### T.D.Ameritrade
+### <a name="eight_five"></a>T.D.Ameritrade
 <img src="https://i.ytimg.com/vi/y-TdhWVgLCc/maxresdefault.jpg" width="500"></img>
 
 
@@ -328,7 +330,7 @@ Seen as an alternative to the sentiment analysis provided by [10.2](#ten_two), G
 ### <a name="ten_four"></a>10.4 [Passport.js](http://www.passportjs.org/docs/)
 Passport.js allows for the user to login via OAuth and for Username / Password login with ease. The deciding factor for this API is it's flexibility to cover multiple login-systems and the traditional route of login.  Having a login system is important for creating a customized user experience, giving way to [9.1](#nine_one), [9.2](#nine_two), [9.4](#nine_four), and [9.5](#nine_five).
 
-## Works Cited
+## <a name="eleven"></a>11. Works Cited
 
 Batchu, Vamsi. “The Stock Trading Secrets to Help You Design for Finances - a UX Case Study.”  _Medium_, UX Collective, 21 Apr. 2019, uxdesign.cc/the-stock-trading-ux-case-study-secrets-to-help-you-design-for-finances-e7426c88ff82.
 
@@ -344,3 +346,6 @@ Reddy, Arjun. “Robinhood, a Trading App Loved by Millennials, Is Reportedly Ne
 
 Suaro, Jeff. “The UX of Brokerage Websites.”  _MeasuringU_, 6 Nov. 2018, measuringu.com/ux-brokerage/.
 
+
+### <a name="twelve"></a>12. Proposal Video
+[Spark Video Link](https://spark.adobe.com/video/cZjORyQo4ph0W)
