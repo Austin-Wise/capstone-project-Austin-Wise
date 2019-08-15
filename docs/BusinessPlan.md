@@ -1,7 +1,9 @@
 # Revenue
 
 ## Ticker Tape will make money by...
+
 After reviewing what works with the competition, I have concluded that paid advertisements trumps subscription or freemium services. Ideally, this will be seen slightly more involved than (Apple) News ~ much like Flipboard, however with the finesce of (Apple) News Advertisements. Not obvious in terns of location and message, these advertisements would be viewed in-line with other content.
+
 
 ## My competitors
 
@@ -55,6 +57,7 @@ _Ticker Tape is a research tool for expedited market analysis. Designed for the 
 
 ## Keywords
 
+
 `Finance News` `Market Research` `Market news` `FOREX` `FOREX News` `NASDAQ` `NASDAQ news` `Price Drop News` `Price Hike News` `Shares` `Share Drop News` `Share Hike News` `Finance` `Money` `Money Markets`
 
 # Change Orders
@@ -82,5 +85,7 @@ Impact:\
 Signature of Developer:\
 `__________________________`  `__`/`__`/`20__`
 
+
 Signature of Client:\
 `__________________________`  `__`/`__`/`20__`
+
