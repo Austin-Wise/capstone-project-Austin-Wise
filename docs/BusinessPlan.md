@@ -1,9 +1,7 @@
 # Revenue
 
 ## Ticker Tape will make money by...
-
-
-*If you plan to make it free, explain why this is a sensible decision. Note that ad-supported or freemium apps are not free. If you are going to make your app a paid service, explain how much and in what way (subscriptions, one-time costs, etc.) this fee will be collected.*
+After reviewing what works with the competition, I have concluded that paid advertisements trumps subscription or freemium services. Ideally, this will be seen slightly more involved than (Apple) News ~ much like Flipboard, however with the finesce of (Apple) News Advertisements. Not obvious in terns of location and message, these advertisements would be viewed in-line with other content.
 
 ## My competitors
 
@@ -24,34 +22,65 @@ Utilizes consumer data for targeting advertisements displayed throughout the sit
   Consumers are concerned about their privacy within Facebook, with fear that their data is being sold. Though the site does not directly sell consumer data, it is used internally for increasing effectiveness of third-party advertisements on the site. Though consumers enjoy that Facebook is free to use, they do not appreciate the tactics Facebook is using.
 
 ### T.D.Ameritrade: 
-
+   As T.D.Ameritrade is a brokerage firm, revenue is seen from brokerage fees, lending interest, and commission. The news portion is free for investors, funded by other portions of the site.
+   
 #### How Consumers Feel:
+
+Though investors keep updated on current events digitally, T.D.Amertrade users typically do not stay within the site to keep up-to-date. The site is too hard to navigate for convenience. Many options, such as Investor's Business Daily - have subscription-based services to provide to these users more conveniently.
 
 ### (Apple) News:
 
+Apple News operates with advertisements. This is interesting, as on first look, advertisements are few and far between. Further study suggested that advertisers tend to avoid paying to advertise on the Apple News platform because of this reason. Adversly, publishers are stating that Apple News is now driving more refferrals than Facebook (Mark,2019)
+
 #### How Consumers Feel:
+
+Viewership for Apple News has grown in the last few years, and this is partly due to trust in the platform. Having a hard time finding an advertisement when you are -looking- for one, speaks in volume to their success with their audience.
 
 ### Flipboard: 
 
+Flipboard has a range of monotization streams, including a shopping section and full-page advertisements that are shown once in every ten pages the viewer sees.
+
 #### How Consumers Feel:
 
-*Explain what your competition is doing to support their development and promotion. What do users think of this cost?*
+Flipboard has been around for almost ten years with success. Advertisers enjoy the application just as users do, as while reading, the advertisement does not crowd the screen. Swiping past the ad is simple and non-intrusive.
 
 ## Projected income
 *Given your projected target audience (from week 1), how much are you likely to make? Think about their income level and how much they would be willing to spend. Also think about how broad the audience is if your project only reaches a smaller set of the population, you are less likely as many users a project that has broad appeal, which impacts the projected income.*
 
-*Is your projected income enough to make it worth developing the project? Is there some other reason to build the app outside of revenue? If the answer is no to both those questions, reach out to your instructor because it might be better to make something else that will keep you engaged.*
-
-# Marketing
+*Is your projected income enough to make it worth developing the project? Is there some other reason to build the app outside of revenue? If the answer is no to both those questions, reac
 
 ## Elevator Pitch
 
-*An elevator pitch is a couple of short sentences that illustrate your problem, solution, and unique value. Think of being stuck in an elevator with someone in your target audience, and you only have till the ground floor to show them the value of your product. What would you say? What would you say to your aunt when she asks you about your project?*
+_Ticker Tape is a research tool for expedited market analysis. Designed for the part-time investor, while useful for the money manager, the application strives to bring investment holdings, breaking news and their respective sentimental analysis all on the table in a single, easy to use interface._
 
 ## Keywords
 
-*We will be talking more about marketing later in your Capstone Project, but it is essential that you are beginning to think about keywords now so that you can be using them in any content you write. Keywords should be both single words and groups of words that you can use to attract your target audience to your site.*
+`Finance News` `Market Research` `Market news` `FOREX` `FOREX News` `NASDAQ` `NASDAQ news` `Price Drop News` `Price Hike News` `Shares` `Share Drop News` `Share Hike News` `Finance` `Money` `Money Markets`
 
 # Change Orders
 
-*Create a markdown template here that you can use to make change orders to your project. Now that you have created your project plan when you wish to alter it, you will use this template to request a change to the plan.*
+Date (MM/DD/YYYY):\
+`___` / `___` / `20__`
+
+Name of Proposed Change:\
+`___________________________`
+
+Description:\
+`______________________________________________`
+`______________________________________________`
+`______________________________________________`
+
+Justification:\
+`______________________________________________`
+
+Category:\
+`______________________________________________`
+
+Impact:\
+`______________________________________________`
+
+Signature of Developer:\
+`__________________________`  `__`/`__`/`20__`
+
+Signature of Client:\
+`__________________________`  `__`/`__`/`20__`
