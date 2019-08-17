@@ -238,11 +238,11 @@ Where financial news is regularly found, the brokerage website, the environment 
 The study found that many of these sites had a steep learning curve, disorganized product pages, and generally marginal usability (Sauro, 2018). To address potential financial anxiety, unevenness and sporadic design language should be minimized (Kreger, 2019). The culmination of these studies highlight a range of issues with current methods regarding the delivery of current events. As consumers will follow the path of least resistance, their portal for financial news should not be difficult to navigate nor should their opinions be manipulated by social media goliaths. 
 
 ## <a name="six"></a>6. Pain Points
-* New investors quickly realize a steep learning curve in terms of industry jargon with existing financial platforms.
-* Users feel obligated to use deceptive media outlets to consume information regarding current events.
-* Existing financial platforms are difficult to navigate.
-* Brokerage websites are often disorganized and inconsistent in design.
-* News platforms are often biased and diversity is often difficult due to social media algorithms. 
+* New investors quickly realize a steep learning curve in terms of industry jargon with existing financial platforms (Sauro).
+* Users feel obligated to use deceptive media outlets to consume information regarding current events (Pullen).
+* Existing financial platforms are difficult to navigate (Kreger).
+* Brokerage websites are often disorganized and inconsistent in design (Batchu).
+* News platforms are often biased and diversity is often difficult due to social media algorithms(Fiusm). 
 
 ## <a name="seven"></a>7. Solution Statement
 
