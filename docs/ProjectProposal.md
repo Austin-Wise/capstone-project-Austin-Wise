@@ -207,14 +207,14 @@ As Jimmy Woo, I want to understand the tone of recent articles quickly to prepar
 * Customer can view the article sentiment analysis on -1 to 1 scale via the _newsfeed_ section of the website.
 * (Extended Goal): News updates are implemented to desktop via Push Notification.
 
-### USER STORY 3: <a name="four_three"></a>Navigability
+### USER STORY 2: <a name="four_three"></a>Navigability
 As Miriam Martìnez, I want to minimize steps between share value, graph data, and news.
 **Acceptable Criteria:**
 * Customer can view share price of all saved Ticker Feeds at all times within primary portions of the application.
 * Customer can view mean sentiment analysis of all articles regarding company shares at all times within primary portions of the application.
 * Customer can view company-specific information such as the traded stock exchange, CEO name, and company description within a subset of the _newsfeed_ view.
 
-### <a name="four_four"></a>USER STORY 4: Bookmarks
+### <a name="four_four"></a>USER STORY 2: Bookmarks
 As Miriam Martìnez, I want to save articles that interest me for future reading.
 **Acceptable Criteria:**
 * Customer can save link to articles while navigating the _newsfeed_ section.
