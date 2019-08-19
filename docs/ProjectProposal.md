@@ -1,4 +1,4 @@
-# Ticker Tape
+# TKR Prism
 1. [Application Definition Statement](#one)
 2. [Target Market](#two)\
 2.1 [Analysis of Complementary Product](#two_one)\
@@ -43,7 +43,7 @@
 
 ## <a name="one"></a>1. Application Definition Statement
 
-Ticker Tape is a news feed application intended for part-time investors seeking real-time updates on companies within their portfolio. Current RSS feeds provide information on topics which may align with user preference, though they are rarely geared toward an individual's position within a company. The unique value proposition of Ticker Tape combines sentiment analysis, filtration on current holdings, and (as an extended goal) push notifications to keep the investor informed.
+TKR Prism is a news feed application intended for part-time investors seeking real-time updates on companies within their portfolio. Current RSS feeds provide information on topics which may align with user preference, though they are rarely geared toward an individual's position within a company. The unique value proposition of TKR Prism combines sentiment analysis, filtration on current holdings, and (as an extended goal) push notifications to keep the investor informed.
 
 ## <a name="two"></a>2. Target Market
 
@@ -103,11 +103,11 @@ The  [Journal of Behavioral and Experimental Economics](https://www.sciencedirec
 A connection can be made that individuals working with mathematics - as such in STEM career fields, have heightened financial literacy and therefore, are more likely to find value in this application. Features of the application such as sentiment analysis may allow these individuals approaching investing systematically may have advantage over widespread trends of investor fear or greed.
 
 ### <a name="two_three"></a>2.3 Target Summary
-As Ticker Tape will be seen as a complementary product to services such as Robinhood, the mean age will be a contributing factor to Ticker Tape's target age.
+As TKR Prism will be seen as a complementary product to services such as Robinhood, the mean age will be a contributing factor to TKR Prism's target age.
 
 Additional findings cited from the 2018 National Financial Capital Study suggest Hispanic and Asian American individuals between as target ethnicities, as they not only spend less than income, but are also most likely to use websites and applications for financial tasks. 
 
-In terms of age group and education level, Ticker Tape will be marketed towards college educated individuals between 21 and 34, where focus is skewed left.
+In terms of age group and education level, TKR Prism will be marketed towards college educated individuals between 21 and 34, where focus is skewed left.
 
 Target income follows loosely towards $25-75k, as the financial well-being score naturally progresses as income increases. For employment sector, individuals within the science, technology, engineering, or mathematics fields are seen as primary candidates for the application, however secondary may fall to individuals within the business or logistics sectors.
 
@@ -272,7 +272,7 @@ Flipboard allows users to exchange generalized topics rather than company-specif
 <img src="https://www.apple.com/newsroom/images/product/apple-news/Apple-news-plus-natgeo-iphone-ipad-macbook-pro-screen-03252019_big.jpg.large.jpg" width="500"></img>
 
 
-Found on all Apple computer products, (Apple) News is much like an RSS feed that provides categories by topic, category, and channel - allowing the user to filter topics on "NASDAQ" or "The Economist". The platform also provides a clear-set view of who published the article and when. This application in combination with (Apple) Finance allows for a more wholesome experience closely resembling what **Ticker Tape** is driven towards, providing both company news and value. However, these are two applications that require multiple steps to visit either area. Additionally, (Apple) news does not provide sentiment analysis.
+Found on all Apple computer products, (Apple) News is much like an RSS feed that provides categories by topic, category, and channel - allowing the user to filter topics on "NASDAQ" or "The Economist". The platform also provides a clear-set view of who published the article and when. This application in combination with (Apple) Finance allows for a more wholesome experience closely resembling what **TKR Prism** is driven towards, providing both company news and value. However, these are two applications that require multiple steps to visit either area. Additionally, (Apple) news does not provide sentiment analysis.
 
 ### <a name="eight_three"></a>Feedly
 <img src="https://s5.feedly.com/images/landing/screenshot-web@2x.png" width="500"></img>
@@ -298,14 +298,14 @@ Depending on what is published by companies, general information _may be_ availa
 
 The only finance-specific application on the competition list, T.D. Ameritrade, is similar in scope to others mentioned in Section [ Section Five: Problem Statement](#five) - as Brokerage Firms. Applications found within this list provide the user the ability to both conduct research and trade. The size of the applications, however, create confusion - and tooling often utilizes jargon rarely understood by novice users.
 
-This application lacks navigability - which **Ticker Tape** aims to address.
+This application lacks navigability - which **TKR Prism** aims to address.
 
 ## <a name="nine"></a>9. Key Features
 
 ### <a name="nine_one"></a>9.1 Company Stock Price
 Providing the company stock price addresses the issue of navigability on Broker sites. The issue of adding too many tasks can create confusion for the user. Having this information here not only provides the user with a peer into their investment health, but also gives context to news articles regarding the company.
 ### <a name="nine_two"></a>9.2 Sentiment Analysis
-A major contributor to the application's value proposition is the study of articles found within the newsfeed. Where it is not provided by a single competitor, Ticker Tape has this integrated to not only give insight into specific articles, but it also allows the user to quickly understand the severity of current events - as it pertains to their company of interest. 
+A major contributor to the application's value proposition is the study of articles found within the newsfeed. Where it is not provided by a single competitor, TKR Prism has this integrated to not only give insight into specific articles, but it also allows the user to quickly understand the severity of current events - as it pertains to their company of interest. 
 ### <a name="nine_three"></a>9.3 Company-Specific Newsfeed
 Paired with the company stock price, is the news feed that is specific to it's company category. In combination with the sentiment analysis, users have the ability to quickly study companies of interest.
 ### <a name="nine_four"></a>9.4 Single-Page Design
