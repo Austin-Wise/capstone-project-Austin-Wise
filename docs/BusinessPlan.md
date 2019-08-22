@@ -1,8 +1,8 @@
 # Revenue
 
-## TKR Prism will make money by...
+## TKRtape will make money by...
 
-After reviewing what works with the competition, I have concluded that paid advertisements trumps subscription or freemium services. Ideally, this will be seen slightly more involved than (Apple) News ~ much like Flipboard, however with the finesce of (Apple) News Advertisements. Not obvious in terns of location and message, these advertisements would be viewed in-line with other content.
+After reviewing what works with the competition, I have concluded that paid advertisements trumps subscription or freemium services. Ideally, this will be seen slightly more involved than (Apple) News ~ much like Flipboard, however with the finesse of (Apple) News Advertisements. Not obvious in terms of location and message, these advertisements would be viewed in-line with other content. Alternative ways of making money could include adding a small fee to remove advertisements. This does not impede on user's ability to use the site, as opposed to Feedly's charges, while allowing income from customers that tend to ignore advertisements.
 
 
 ## My competitors
@@ -81,7 +81,7 @@ Although the target market is college educated individuals between 21 and 34 wit
 
 _As an example, 200,000 monthly views, 700 of whom click on an advertisement yields 25$ per click, which equals $175 per month._
 
-While the market has no shortage of news applications, this can be compared to the Robinhood application for investing. The unique value proposition found with TKR Prism is similar to that of Robinhood - simplicity. Adding value to this niche market may create a competitive advantage over Feedly, who between 2013 and 2015 saw a 900% userbase increase, or 50,000 subscribers. A "ballpark" estimate could be a conversion rate of 30% from Feedly's "Finance" userbase / year, provided our service is _cheaper_ and _more efficient_. Growth Rate may not see the first-mover advantage, however provided that the service would snowball within investment communities, the application could see a rapid increase to 75,000 users by end of year one.
+While the market has no shortage of news applications, this can be compared to the Robinhood application for investing. The unique value proposition found with TKRtape is similar to that of Robinhood - simplicity. Adding value to this niche market may create a competitive advantage over Feedly, who between 2013 and 2015 saw a 900% userbase increase, or 50,000 subscribers. A "ballpark" estimate could be a conversion rate of 30% from Feedly's "Finance" userbase / year, provided our service is _cheaper_ and _more efficient_. Growth Rate may not see the first-mover advantage, however provided that the service would snowball within investment communities, the application could see a rapid increase to 75,000 users by end of year one.
 
 [RSS FEEDS and Feedly](https://www.makeuseof.com/tag/rss-dead-look-numbers/)
 
@@ -91,7 +91,7 @@ While the market has no shortage of news applications, this can be compared to t
 
 ## Elevator Pitch
 
-_TKR Prism is a research tool for expedited market analysis. Current systems have either too many steps between research and holdings, are too expensive, or too biased. TKR Prism is designed for the part-time investor, while useful for the money manager. It strives to bring investment holdings, breaking news and their respective sentimental analysis all on the table in a single, easy to use interface._
+_TKRtape is a research tool for expedited market analysis. Current systems have either too many steps between research and holdings, are too expensive, or too biased. TKRtape is designed for the part-time investor, while useful for the money manager. It strives to bring investment holdings, breaking news and their respective sentimental analysis all on the table in a single, easy to use interface._
 
 ## Keywords
 
@@ -103,21 +103,25 @@ _TKR Prism is a research tool for expedited market analysis. Current systems hav
 Date (MM/DD/YYYY):\
 `___` / `___` / `20__`
 
+Requestor:\
+`___________________________`
+
 Name of Proposed Change:\
 `___________________________`
 
-Description:\
+Description of proposed change:\
 `______________________________________________`\
 `______________________________________________`\
 `______________________________________________`
 
-Justification:\
+Why are these changes needed:\
+(
 `______________________________________________`
 
-Category:\
+Category - Is this a design or functionality change:\
 `______________________________________________`
 
-Impact:\
+Impact - What are the implications if this change took place:\
 `______________________________________________`
 
 Signature of Developer:\
