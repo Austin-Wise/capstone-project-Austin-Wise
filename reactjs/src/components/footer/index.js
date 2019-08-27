@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, NavLink, Nav, NavItem } from 'reactstrap';
+import { Navbar, NavbarBrand, NavLink, Nav, NavItem } from 'reactstrap';
 import { NavLink as RRNavLink } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <>
       <Navbar>
-        <Navbar.Brand tag={RRNavLink} to="/landing">
+        <NavbarBrand tag={RRNavLink} to="/landing" className={styles.logo}>
           <img
             alt="TKRtape Logo"
             src="https://via.placeholder.com/46x56?text=Visit+Blogging.com+Now"
@@ -23,7 +23,7 @@ const Footer = () => {
             height="56"
             className="d-inline-block align-top"
           />
-        </Navbar.Brand>
+        </NavbarBrand>
         <Nav>
           <NavItem>
             <NavLink tag={RRNavLink} className={styles.link} to="/contact">

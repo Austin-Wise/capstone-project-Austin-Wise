@@ -9,7 +9,6 @@ function App() {
     <div className="App">
       <Router>
         <Route path="/landing" component={Footer} />
-        <Route exact path="/landing" component={Landing} />
       </Router>
     </div>
   );
