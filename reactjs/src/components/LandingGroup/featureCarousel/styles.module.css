@@ -1,0 +1,48 @@
+.carousel {
+  background: var(--color-omega_2);
+  color: var(--color-psi_2);
+  border-radius: 0 5px 5px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  padding: 6.4rem 6.4rem 3.2rem 6.4rem;
+  width: 40vw;
+  height: 100%;
+}
+
+.header,
+.body,
+.back,
+.next {
+  font-family: nimbus-sans, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+}
+
+.header {
+  font-weight: 700;
+  font-size: 6.4rem;
+}
+.body {
+  font-size: 2.4rem;
+}
+
+.back,
+.next {
+  border: 0;
+  padding: 0;
+  background-color: inherit;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons span {
+  color: var(--color-psi_1);
+  position: relative;
+  top: -3px;
+}

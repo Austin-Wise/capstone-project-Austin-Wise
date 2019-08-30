@@ -1,0 +1,19 @@
+.modal :global .modal-content {
+  background-color: var(--color-omega_2) !important;
+  padding: 8px 32px;
+  width: 30vw;
+}
+
+.heading :global .modal-title {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5.6rem;
+}
+
+.h1 :global .modal-title {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5.6rem;
+}

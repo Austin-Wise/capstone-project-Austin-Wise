@@ -8,7 +8,7 @@ h1 {
 
 h2 {
   font-family: orpheuspro, serif;
-  font-weight: 500
+  font-weight: 500;
   font-style: normal;
   size: 4.8rem;
 }
@@ -28,10 +28,10 @@ h4 {
 }
 
 p {
-font-family: nimbus-sans, sans-serif;
-font-weight: 400;
-font-style: light;
-size: 1.8rem;
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 400;
+  font-style: light;
+  size: 1.8rem;
 }
 
 .sidebar_descriptive_text {
@@ -41,7 +41,7 @@ size: 1.8rem;
   size: 2rem;
 }
 
-.small_section_label{
+.small_section_label {
   font-family: nimbus-sans, sans-serif;
   font-weight: 700;
   font-style: normal;
