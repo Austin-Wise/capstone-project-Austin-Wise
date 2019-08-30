@@ -50,7 +50,7 @@ export class LoginModal extends Component {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={this.toggle}>
+          <Button color="danger" onClick={this.toggle} className="mr-5">
             Cancel
           </Button>{' '}
           <Button
@@ -76,7 +76,7 @@ export class RegisterModal extends Component {
     return (
       <Modal
         isOpen={true}
-        className={this.props.className}
+        className={(this.props.className, styles.modal)}
         contentClassName={styles.modal}
       >
         <ModalHeader toggle={this.toggle} className={styles.h1}>

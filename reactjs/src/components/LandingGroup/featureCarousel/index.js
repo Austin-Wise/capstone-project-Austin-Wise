@@ -10,6 +10,8 @@ import {
   faChevronLeft
 } from '@fortawesome/free-solid-svg-icons';
 
+import { Col } from 'reactstrap';
+
 const items = [
   {
     heading: 'Sentimental Analysis',
@@ -76,7 +78,7 @@ class FeatureCarousel extends Component {
 
   render() {
     return (
-      <section className={styles.carousel}>
+      <Col className={styles.carousel}>
         <h3 className={styles.header}>{items[this.state.count].heading}</h3>
         <img
           src={items[this.state.count].image}
@@ -99,7 +101,7 @@ class FeatureCarousel extends Component {
             <FontAwesomeIcon icon={faChevronRight} size="md" color="#878a86" />
           </button>
         </div>
-      </section>
+      </Col>
     );
   }
 }

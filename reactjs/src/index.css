@@ -77,7 +77,7 @@
 .btn-danger:hover {
   background-color: var(--color-omega_2);
   color: var(--color-arktos);
-  border: 2px solid var(--color-arktos);
+  box-shadow: inset 2px var(--color-arktos);
 }
 .btn-link {
   background-color: var(--color-tavros);

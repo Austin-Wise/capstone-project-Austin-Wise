@@ -1,48 +1,40 @@
 .c2a {
-  background: var(--color-psi_1-a5);
-  border-radius: 5px;
-  display: flex;
-  padding-right: 0;
-  flex-direction: row;
-  position: relative;
+  background: var(--color-psi_1);
   height: 100%;
+  border-radius: 5px 0 0 5px;
+  padding: 6.4rem 12.8rem;
 }
 
-.c2aBody {
-  padding: 6.4rem;
+.c2a > *:not(:last-child) {
+  margin-bottom: 4rem;
+}
+
+.c2aBack {
+  height: 95vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  background: url(/svg_css/shattered-dark.svg) repeat;
 }
 
-.c2aBody h2 {
-  font-size: 6.5rem;
+.c2a button,
+.c2a button:hover {
+  font-size: 2rem;
+  width: fit-content;
+}
+
+.c2a h2 {
+  font-size: 6.4rem;
   font-family: orpheuspro, serif;
   font-weight: 700;
   font-style: normal;
   color: var(--color-omega_2);
 }
 
-.c2aBody p {
-  font-size: 3.1rem;
+.c2a p {
+  font-size: 3rem;
   font-family: nimbus-sans, sans-serif;
   font-weight: 300;
   font-style: light;
   color: var(--color-omega_2);
-}
-
-.c2aBack {
-  height: 95vh;
-  padding: 10vh 5vw;
-  justify-content: center;
-  background: url(/svg_css/shattered-dark.svg) repeat;
-}
-
-.c2aBody button {
-  font-size: 2rem;
-  width: fit-content;
-}
-.c2aBody button:hover {
-  font-size: 2rem;
-  width: fit-content;
 }
