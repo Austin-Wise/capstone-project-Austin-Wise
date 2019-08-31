@@ -10,7 +10,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "reactjs": "cd reactjs && npm start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm server\" \"npm reactjs\""
   },
   "repository": {
     "type": "git",
@@ -30,7 +33,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
   "devDependencies": {
+    "concurrently": "^4.0.1",
     "eslint": "^6.2.2",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.1.0",
