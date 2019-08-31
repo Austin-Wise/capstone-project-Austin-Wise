@@ -1,28 +1,16 @@
 import React from 'react';
 
 import {
-  Navbar,
-  Collapse,
-  NavbarToggler,
-  NavbarBrand,
   NavLink,
   Nav,
   NavItem,
-  Container,
   Col,
   Row,
-  Jumbotron,
-  Card,
-  CardTitle,
-  CardBody,
-  CardText,
-  CardFooter,
   Button,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Form,
   Input
 } from 'reactstrap';
 
@@ -59,7 +47,7 @@ export default class UserArea extends React.Component {
           <Col md="4" className={styles.Navigation}>
             <Nav tabs className={styles.NavHeader}>
               <NavItem>
-                <NavLink tag={RRNavLink} exact to="/">
+                <NavLink tag={RRNavLink} to="/">
                   <img
                     src="/svg_css/LogoInactive.svg"
                     alt="Home"
@@ -154,6 +142,7 @@ export default class UserArea extends React.Component {
               </ModalFooter>
             </Modal>
           </div>
+          <Route path="/" component={News} />
           <Route path="/news" component={News} />
           <Route path="/journal" component={Journal} />
           <Route path="/bookmark" component={Bookmark} />

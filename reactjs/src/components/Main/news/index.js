@@ -18,8 +18,8 @@ export default class News extends Component {
   render() {
     const { company, news } = this.props;
     return (
-      <Col md="8">
-        <Jumbotron>
+      <Col md="8" className={styles.News}>
+        <Jumbotron className={styles.Jumbo}>
           <Row>
             <div className="ml-5">
               <h2>{company.ticker}</h2>
@@ -63,15 +63,15 @@ export default class News extends Component {
                   CEO: <span className={styles.coData}>{company.ceo}</span>
                 </li>
                 <li>
-                  Employees:
+                  Employees:{' '}
                   <span className={styles.coData}>{company.employees}</span>
                 </li>
                 <li>
-                  Industry Group:
+                  Industry Group:{' '}
                   <span className={styles.coData}>{company.industry}</span>
                 </li>
                 <li>
-                  Location:
+                  Location:{' '}
                   <span className={styles.coData}>{company.location}</span>
                 </li>
               </ul>
@@ -122,25 +122,30 @@ export default class News extends Component {
             </Col>
           </Row>
         </Jumbotron>
-        <Row>
-          <Col md="6">
-            <Card>
-              <CardBody>
-                <CardTitle>Card title</CardTitle>
-                <CardText>Card content</CardText>
+        <Row className="d-flex justify-content-center">
+          {news.map(article => (
+            <Card className="col-md-5 p-0 m-4">
+              <CardBody className={styles.Card}>
+                <Row>
+                  <Col md="10">
+                    <CardTitle>{article.title}</CardTitle>
+                  </Col>
+                  <Col md="2">
+                    <button className={styles.Bookmark}></button>
+                  </Col>
+                </Row>
+                <CardText className={styles.cardText}>{article.text}</CardText>
+                <img
+                  src="/svg_css/scale-0.svg"
+                  alt="Scale Placeholder"
+                  className={styles.AnImage}
+                />
               </CardBody>
-              <CardFooter>Card content</CardFooter>
+              <CardFooter>
+                Published on {article.published} by '{article.source}'
+              </CardFooter>
             </Card>
-          </Col>
-          <Col md="6">
-            <Card>
-              <CardBody>
-                <CardTitle>Card title</CardTitle>
-                <CardText>Card content</CardText>
-              </CardBody>
-              <CardFooter>Card content</CardFooter>
-            </Card>
-          </Col>
+          ))}
         </Row>
       </Col>
     );
@@ -172,7 +177,7 @@ News.defaultProps = {
       title:
         'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
       text:
-        'Google has released a compilation of in-depth research on vulnerabilities in Apple’s iPhone operating system.',
+        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
       source: 'CNBC',
       published: '22/05/2001',
       rating: -0.2,
@@ -182,7 +187,7 @@ News.defaultProps = {
       title:
         'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
       text:
-        'Google has released a compilation of in-depth research on vulnerabilities in Apple’s iPhone operating system.',
+        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
       source: 'CNBC',
       published: '22/05/2001',
       rating: -0.2,
@@ -192,7 +197,7 @@ News.defaultProps = {
       title:
         'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
       text:
-        'Google has released a compilation of in-depth research on vulnerabilities in Apple’s iPhone operating system.',
+        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
       source: 'CNBC',
       published: '22/05/2001',
       rating: -0.2,
@@ -202,7 +207,7 @@ News.defaultProps = {
       title:
         'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
       text:
-        'Google has released a compilation of in-depth research on vulnerabilities in Apple’s iPhone operating system.',
+        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
       source: 'CNBC',
       published: '22/05/2001',
       rating: -0.2,

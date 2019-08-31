@@ -1,0 +1,123 @@
+.News {
+  height: 100vh;
+  overflow: scroll;
+  background-color: var(--color-omega_2);
+}
+
+.News .Jumbo {
+  background: var(--color-omega_1);
+  margin: 0 8rem;
+}
+
+.News h2,
+h4 {
+  font-family: futura-pt-bold, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 6.4rem;
+  color: var(--color-psi_2);
+}
+
+h4 {
+  margin-left: auto;
+  margin-right: 5rem;
+  display: inline-flex;
+  justify-content: end;
+  font-size: 3.2rem;
+  margin-top: 2rem;
+}
+
+h4 span:first-of-type {
+  margin-right: 5rem;
+}
+h4:last-child {
+  margin-right: 10vw;
+}
+
+h3 {
+  text-indent: 0.5rem;
+  color: var(--color-psi_2);
+  font-weight: 700;
+}
+
+.CoList li {
+  list-style: none;
+  line-height: 300%;
+}
+
+.Bookmark {
+  background: url(/svg_css/Bookmark.svg) no-repeat;
+  width: 36px;
+  height: 32px;
+  border: none;
+}
+
+.Card :global .card-title {
+  font-family: futura-pt-bold, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 2.4rem;
+}
+
+.AnImage :global .card-body {
+  margin: 0 auto !important;
+}
+
+.coData,
+h3,
+.cardText {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 300;
+  font-style: light;
+  font-size: 1.8rem;
+  color: var(--color-psi_2);
+}
+
+.ModalHeader,
+.ModalHeader h5 {
+  border-bottom: none;
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5.6rem;
+}
+
+.Modal input {
+  padding: 1rem;
+  border-radius: 5px;
+  background: var(--color-omega_3);
+  font-size: 1.8rem;
+}
+.modal :global .modal-content {
+  background-color: var(--color-omega_2);
+  padding: 8px 32px;
+  width: 30vw;
+  border: none;
+}
+
+.h1 :global .modal-title {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5.6rem;
+}
+
+div.Modal :global .modal-header {
+  border-bottom: none;
+}
+
+div.Modal :global .modal-footer {
+  border-top: none;
+}
+
+.Modal :global button.close {
+  position: relative;
+  left: -6px;
+  text-indent: -9999px;
+  background: url(/svg_css/Delete.svg) no-repeat;
+  background-size: contain;
+  opacity: 1;
+  height: 32px;
+  width: 32px;
+  margin-top: 1rem;
+}
