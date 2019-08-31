@@ -1,0 +1,17 @@
+.Form,
+.Jumbo {
+  background-color: var(--color-omega_1);
+  border-radius: 0 0 10px 10px;
+}
+
+.Jumbo {
+  padding-bottom: 10px;
+}
+
+.InputItem {
+  margin-bottom: 1rem;
+}
+
+.Section {
+  background-color: var(--color-omega_2);
+}

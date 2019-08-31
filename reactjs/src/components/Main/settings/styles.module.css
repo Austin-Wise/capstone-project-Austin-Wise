@@ -1,0 +1,69 @@
+.Settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-left: 10vw;
+  color: var(--color-psi_1);
+}
+
+.Settings h3 {
+  font-family: orpheuspro, serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 3.8rem;
+}
+
+.Settings,
+.Settings form {
+  background: var(--color-omega_2);
+}
+
+.Settings p,
+.Settings input::placeholder,
+.Settings span {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 300;
+  font-style: light;
+  font-size: 1.8rem;
+}
+
+.Settings form button {
+  position: relative;
+  top: 5px;
+}
+
+.InputItem {
+  padding: 0;
+}
+
+.Settings ul {
+  background: var(--color-omega_3);
+  height: 25rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.Settings input,
+.Settings ul {
+  padding: 1rem;
+  border-radius: 5px;
+  background: var(--color-omega_3);
+  font-size: 1.8rem;
+}
+
+.Settings li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-right: 1rem;
+}
+
+.Settings p {
+  position: relative;
+  top: 5px;
+}
+.Settings li button {
+  background: none;
+  border: none;
+}
