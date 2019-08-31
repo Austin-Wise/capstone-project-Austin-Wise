@@ -1,0 +1,44 @@
+.c2a {
+  background: var(--color-psi_1);
+  height: 100%;
+  border-radius: 5px 0 0 5px;
+  padding: 6.4rem 12.8rem;
+}
+
+.c2a > *:not(:last-child) {
+  margin-bottom: 4rem;
+}
+
+.c2aBack {
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: url(/svg_css/shattered-dark.svg) repeat;
+}
+
+.c2a button,
+.c2a button:hover {
+  font-size: 2rem;
+  width: fit-content;
+}
+
+.c2a h2 {
+  font-size: 6.4rem;
+  font-family: orpheuspro, serif;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--color-omega_2);
+}
+
+.c2a p {
+  font-size: 3rem;
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 300;
+  font-style: light;
+  color: var(--color-omega_2);
+}
+
+.c2a::before {
+  border-left: 2px solid var(--color-alpha);
+}

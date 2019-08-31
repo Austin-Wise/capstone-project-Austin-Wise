@@ -1,0 +1,69 @@
+.Navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background: url(/svg_css/classy-fabric.svg);
+  padding: 0;
+}
+
+.mainNav {
+  position: relative;
+  margin-top: 5rem;
+  top: -34vh;
+}
+
+.NavHeader {
+  background: white;
+  border-bottom: solid 3px var(--color-alpha);
+  padding: 0;
+}
+
+.ModalHeader,
+.ModalHeader h5 {
+  border-bottom: none;
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5.6rem;
+}
+
+.Modal input {
+  padding: 1rem;
+  border-radius: 5px;
+  background: var(--color-omega_3);
+  font-size: 1.8rem;
+}
+.modal :global .modal-content {
+  background-color: var(--color-omega_2);
+  padding: 8px 32px;
+  width: 30vw;
+  border: none;
+}
+
+.h1 :global .modal-title {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5.6rem;
+}
+
+div.Modal :global .modal-header {
+  border-bottom: none;
+}
+
+div.Modal :global .modal-footer {
+  border-top: none;
+}
+
+.Modal :global button.close {
+  position: relative;
+  left: -6px;
+  text-indent: -9999px;
+  background: url(/svg_css/Delete.svg) no-repeat;
+  background-size: contain;
+  opacity: 1;
+  height: 32px;
+  width: 32px;
+  margin-top: 1rem;
+}

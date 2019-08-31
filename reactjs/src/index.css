@@ -1,0 +1,103 @@
+/* Media ================================*/
+/* =============== Media ================*/
+/* =============================== Media */
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1440px;
+  }
+}
+
+/* Color ================================*/
+/* =============== Color ================*/
+/* =============================== Color */
+
+:root {
+  --color-alpha: #f2b825;
+  --color-beta: #5b4a3a;
+  --color-gamma: #545871;
+  --color-delta: #7f231c;
+  --color-arktos: #e84033;
+  --color-tavros: #00713d;
+  --color-psi_1: #878a86;
+  --color-psi_1-a5: rgba(135, 138, 134, 0.5);
+  --color-psi_2: #707070;
+  --color-omega_1: #ffffff;
+  --color-omega_2: #ebedea;
+  --color-omega_3: #d3d8d1;
+
+  --breakpoint-xl: 1440px;
+  font-size: 10px !important;
+}
+
+/* Button ===============================*/
+/* ============== Button ================*/
+/* ============================== Button */
+
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger,
+.btn-link {
+  border-radius: 100px;
+  padding: 6px 32px;
+}
+
+.btn-primary,
+.btn-primary:hover {
+  background-color: var(--color-tavros);
+  color: var(--color-omega_2);
+  border: none;
+}
+
+.btn-secondary {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--color-omega_2);
+  border: 2px solid var(--color-alpha);
+}
+
+.btn-success {
+  background-color: var(--color-tavros);
+  color: var(--color-omega_2);
+  border: none;
+}
+.btn-info {
+  background-color: var(--color-gamma);
+  color: var(--color-omega_2);
+  border: none;
+}
+.btn-warning {
+  background-color: var(--color-alpha);
+  color: var(--color-omega_2);
+  border: none;
+}
+.btn-danger,
+.btn-danger:hover {
+  background-color: var(--color-omega_2);
+  color: var(--color-arktos);
+  box-shadow: inset 2px var(--color-arktos);
+}
+.btn-link {
+  background-color: var(--color-tavros);
+  color: var(--color-omega_2);
+  border: none;
+}
+
+/* Modal ================================*/
+/* ============== Modal =================*/
+/* =============================== Modal */
+
+.modal-content {
+  border-radius: 10px;
+  border: none;
+}
+
+.modal-footer {
+  justify-content: center;
+}
+
+.modal-dialog {
+  margin-top: 20vh;
+}

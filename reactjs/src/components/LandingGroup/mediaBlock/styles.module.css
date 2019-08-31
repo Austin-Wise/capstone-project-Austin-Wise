@@ -1,0 +1,67 @@
+@import url('https://use.typekit.net/plt8rro.css');
+
+header {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 98vh;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 10px solid var(--color-psi_1);
+}
+
+.media {
+  /* Make video to at least 100% wide and tall */
+  min-width: 100%;
+  min-height: 100%;
+
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  width: auto;
+  height: auto;
+
+  /* Center the video */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: -1;
+}
+
+.loginOptions {
+  z-index: 900;
+}
+.loginItem {
+  color: var(--color-omega_1);
+  margin-right: 6rem;
+  font-size: 2.4rem;
+}
+
+.bannerText {
+  font-family: futura-pt, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20rem;
+  line-height: 95%;
+  color: var(--color-omega_1);
+  position: relative;
+  left: -20px;
+}
+
+.bannerText span {
+  font-size: 9rem;
+  position: relative;
+  top: -70px;
+}
+
+img[alt='Scroll Down'] {
+  position: absolute;
+  top: 90vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.banner {
+  margin-top: 7rem;
+}
