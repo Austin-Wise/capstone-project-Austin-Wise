@@ -1,33 +1,83 @@
 import React, { Component } from 'react';
 
-import { Form, Row, FormGroup, Col, Input, Container } from 'reactstrap';
+import {
+  Form,
+  Row,
+  FormGroup,
+  Col,
+  Input,
+  Container,
+  Button,
+  NavLink
+} from 'reactstrap';
+
+import { NavLink as RRNavLink } from 'react-router-dom';
+
+import styles from './styles.module.css';
 
 class Contact extends Component {
   render() {
     return (
       <>
-        <Container>
-          <Form>
-            <Row form>
-              <FormGroup>
-                <Col md={6}>
-                  <Input type="text" name="name" id="name" placeholder="Name" />
-                </Col>
-                <Col md={6}>
-                  <Input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Email"
-                  />
-                </Col>
+        <div className={styles.contact}>
+          <Container className="row justify-content-center">
+            <Form className="col-lg-8">
+              <h2>Contact Us</h2>
+              <FormGroup className="col col-12">
+                <Row>
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="contactName"
+                      placeholder="Name"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="contactEmail"
+                      placeholder="Email"
+                    />
+                  </div>
+                </Row>
               </FormGroup>
-            </Row>
-            <FormGroup>
-              <Input type="textarea" name="text" id="exampleText" />
-            </FormGroup>
-          </Form>
-        </Container>
+              <FormGroup className="col col-12">
+                <input
+                  type="text"
+                  name="contactSubject"
+                  class="form-control"
+                  placeholder="Subject"
+                />
+              </FormGroup>
+              <FormGroup className="col col-12">
+                <Input
+                  type="textarea"
+                  name="contactMessage"
+                  placeholder="Message"
+                />
+              </FormGroup>
+              <FormGroup className="col col-12 row d-flex justify-content-center">
+                <NavLink tag={RRNavLink} to="/" className="col col-md-3">
+                  <Button color="danger" className="col-12 h-100 text-nowrap">
+                    Back to Home
+                  </Button>
+                </NavLink>
+                <Button
+                  color="primary"
+                  type="submit"
+                  form="Login"
+                  value="Submit"
+                  onClick={this.toggle}
+                  className="col col-md-3"
+                >
+                  Send
+                </Button>{' '}
+              </FormGroup>
+            </Form>
+          </Container>
+        </div>
       </>
     );
   }

@@ -38,3 +38,7 @@
   font-style: light;
   color: var(--color-omega_2);
 }
+
+.c2a::before {
+  border-left: 2px solid var(--color-alpha);
+}

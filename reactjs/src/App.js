@@ -2,13 +2,18 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 import Landing from './components/LandingGroup/landing';
-import NotFound from './components/notFound';
+import UserArea from './components/Main/userArea';
 
 function App() {
-  const loggedIn = false;
+  const loggedIn = true;
   return (
     <div className="App" id="#override">
-      <Router>{!loggedIn && <Route path="/" component={Landing} />}</Router>
+      <Router>
+        <Switch>
+          {!loggedIn && <Route path="/" component={Landing} />}
+          {loggedIn && <Route path="/" component={UserArea} />}
+        </Switch>
+      </Router>
     </div>
   );
 }
