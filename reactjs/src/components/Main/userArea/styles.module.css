@@ -15,7 +15,7 @@
 
 .NavHeader {
   background: white;
-  border-bottom: solid 1px var(--color-alpha);
+  border-bottom: solid 3px var(--color-alpha);
   padding: 0;
 }
 
