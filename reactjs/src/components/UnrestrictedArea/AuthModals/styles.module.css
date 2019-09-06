@@ -1,0 +1,38 @@
+.modal :global .modal-content {
+  background-color: var(--color-omega_2);
+  padding: 8px 32px;
+  width: 30vw;
+  border: none;
+}
+
+.heading :global .modal-title {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5.6rem;
+}
+
+.h1 :global .modal-title {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5.6rem;
+}
+
+div.modal :global .modal-header {
+  border-bottom: none;
+}
+
+div.modal :global .modal-footer {
+  border-top: none;
+}
+
+.modal :global button.close {
+  text-indent: -9999px;
+  background: url(/svg_css/Delete.svg) no-repeat;
+  background-size: contain;
+  opacity: 1;
+  height: 32px;
+  width: 32px;
+  margin-top: 1rem;
+}

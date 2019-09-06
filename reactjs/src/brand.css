@@ -1,0 +1,49 @@
+@import url('https://use.typekit.net/plt8rro.css');
+h1 {
+  font-family: futura-pt-bold, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 5.4rem;
+}
+
+h2 {
+  font-family: orpheuspro, serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 4.8rem;
+}
+
+h3 {
+  font-family: futura-pt-bold, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 3.2rem;
+}
+
+h4 {
+  font-family: orpheuspro, serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 2.4rem;
+}
+
+p {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 400;
+  font-style: light;
+  font-size: 1.8rem;
+}
+
+.sidebar_descriptive_text {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2rem;
+}
+
+.small_section_label {
+  font-family: nimbus-sans, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.2rem;
+}

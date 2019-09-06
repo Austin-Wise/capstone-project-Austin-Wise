@@ -1,0 +1,11 @@
+<svg id="Journal" xmlns="http://www.w3.org/2000/svg" width="23.677" height="32" viewBox="0 0 23.677 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f2b825;
+      }
+    </style>
+  </defs>
+  <path id="Path_55" data-name="Path 55" class="cls-1" d="M35.3,40.156h-.043V8.2H17.4v32H35.3Z" transform="translate(-17.4 -8.2)"/>
+  <path id="Path_56" data-name="Path 56" class="cls-1" d="M65.612,9.134A4.354,4.354,0,0,0,63,8.2V40.15a4.576,4.576,0,0,0,2.511-.89,3.381,3.381,0,0,0,1.306-2.581V11.493A3.183,3.183,0,0,0,65.612,9.134Z" transform="translate(-43.14 -8.2)"/>
+</svg>
