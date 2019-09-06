@@ -196,6 +196,8 @@ const Journal = props => {
   );
 };
 
+export default Journal;
+
 Journal.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({

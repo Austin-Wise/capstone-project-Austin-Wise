@@ -19,7 +19,7 @@ const PortfolioPanel = props => {
                 {item.now > item.close
                   ? `$${(item.now - item.close).toFixed(2)}`
                   : (item.now - item.close).toFixed(2).replace(/-/g, '-$')}
-              </p>
+              </p>{' '}
               <img
                 src={
                   item.now > item.close
@@ -42,8 +42,6 @@ const PortfolioPanel = props => {
   );
 };
 
-export default PortfolioPanel;
-
 PortfolioPanel.propTypes = {
   tickers: PropTypes.arrayOf(
     PropTypes.shape({
@@ -57,10 +55,10 @@ PortfolioPanel.propTypes = {
       high: PropTypes.number,
       low: PropTypes.number,
       volume: PropTypes.number,
+      adjclose: PropTypes.number,
       adjopen: PropTypes.number,
       adjhigh: PropTypes.number,
       adjlow: PropTypes.number,
-      adjclose: PropTypes.number,
       adjVolume: PropTypes.number,
       now: PropTypes.number
     })

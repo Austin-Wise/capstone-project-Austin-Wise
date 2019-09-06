@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Landing from './components/LandingGroup/landing';
-import UserArea from './components/Main/userArea';
+import Landing from './components/UnrestrictedArea';
+import UserArea from './components/RestrictedArea';
 
 class App extends Component {
   constructor(props) {

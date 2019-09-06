@@ -13,7 +13,8 @@
     "precommit": "lint-staged",
     "reactjs": "cd reactjs && npm start",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run reactjs\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run reactjs\"",
+    "heroku-postbuild": "npm install --only=dev --prefix reactjs && npm install --prefix reactjs && npm run build --prefix reactjs"
   },
   "repository": {
     "type": "git",

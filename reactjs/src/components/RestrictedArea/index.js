@@ -18,11 +18,11 @@ import {
 
 import { Route, NavLink as RRNavLink } from 'react-router-dom';
 
-import PortfolioPanel from '../portfolioPanel';
-import News from '../news';
-import Journal from '../journal';
-import Bookmark from '../bookmark';
-import Settings from '../settings';
+import PortfolioPanel from './portfolioPanel';
+import News from './news';
+import Journal from './journal';
+import Bookmark from './bookmark';
+import Settings from './settings';
 
 import styles from './styles.module.css';
 

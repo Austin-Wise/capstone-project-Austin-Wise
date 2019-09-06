@@ -68,6 +68,8 @@ const Settings = props => {
   );
 };
 
+export default Settings;
+
 Settings.propTypes = {
   blocks: PropTypes.arrayOf(
     PropTypes.shape({
