@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from 'react';
 
 import PropTypes from 'prop-types';
@@ -50,56 +51,26 @@ export default class UserArea extends React.Component {
         <Row>
           <Col md="4" className={styles.Navigation}>
             <Nav tabs className={styles.NavHeader}>
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/">
-                  <img
-                    src="/svg_css/LogoInactive.svg"
-                    alt="Home"
-                    height="32"
-                    width="32"
+              {navigation.map(link => (
+                <NavItem>
+                  <NavLink
+                    tag={RRNavLink}
+                    to={link.to}
+                    activeStyle={{
+                      backgroundImage: `/svg_css/${link.name}.svg`,
+                      height: '32px',
+                      width: '32px',
+                      backgroundPosition: 'center'
+                    }}
+                    style={{
+                      backgroundImage: `/svg_css/${link.name}Inactive.svg`,
+                      height: '32px',
+                      width: '32px',
+                      backgroundPosition: 'center'
+                    }}
                   />
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={RRNavLink} onClick={this.toggle} to="/news/new">
-                  <img
-                    src="/svg_css/AddInactive.svg"
-                    alt="Add"
-                    height="32"
-                    width="32"
-                  />
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/journal">
-                  <img
-                    src="/svg_css/JournalInactive.svg"
-                    alt="Journal"
-                    height="32"
-                    width="32"
-                  />
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/bookmark">
-                  <img
-                    src="/svg_css/BookmarkInactive.svg"
-                    alt="Bookmark"
-                    height="32"
-                    width="32"
-                  />
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/settings">
-                  <img
-                    src="/svg_css/UserInactive.svg"
-                    alt="User"
-                    height="32"
-                    width="32"
-                  />
-                </NavLink>
-              </NavItem>
+                </NavItem>
+              ))}
             </Nav>
             <PortfolioPanel />
             <Nav>
@@ -158,5 +129,35 @@ export default class UserArea extends React.Component {
 }
 
 UserArea.propTypes = {
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  navigation: PropTypes.shape({
+    name: PropTypes.string,
+    to: PropTypes.string,
+    imgSrc: PropTypes.string
+  })
+};
+
+UserArea.defaultProps = {
+  navigation: [
+    {
+      name: 'Home',
+      path: '/'
+    },
+    {
+      name: 'Add',
+      path: '/news/new'
+    },
+    {
+      name: 'Journal',
+      path: '/journal'
+    },
+    {
+      name: 'Bookmark',
+      path: '/bookmark'
+    },
+    {
+      name: 'Settings',
+      path: '/settings'
+    }
+  ]
 };
