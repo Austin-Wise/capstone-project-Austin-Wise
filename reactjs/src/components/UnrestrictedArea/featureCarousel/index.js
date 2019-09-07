@@ -50,7 +50,7 @@ class FeatureCarousel extends Component {
     };
   }
 
-  incrementCount(count) {
+  incrementCount = count => () => {
     if (count < items.length - 1) {
       this.setState({
         count: count + 1
@@ -60,9 +60,9 @@ class FeatureCarousel extends Component {
         count: 0
       });
     }
-  }
+  };
 
-  decrementCount(count) {
+  decrementCount = count => () => {
     if (count > 0) {
       this.setState({
         count: count - 1
@@ -72,7 +72,7 @@ class FeatureCarousel extends Component {
         count: items.length - 1
       });
     }
-  }
+  };
 
   render() {
     const { count } = this.state;

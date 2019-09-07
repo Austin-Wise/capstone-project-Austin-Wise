@@ -1,6 +1,7 @@
 .Navigation {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   height: 100vh;
   background: url(/svg_css/classy-fabric.svg);
@@ -16,7 +17,12 @@
 .NavHeader {
   background: white;
   border-bottom: solid 3px var(--color-alpha);
-  padding: 0;
+  padding: 4px;
+  width: 64px;
+  height: 300px;
+}
+
+.active {
 }
 
 .ModalHeader,
@@ -66,4 +72,9 @@ div.Modal :global .modal-footer {
   height: 32px;
   width: 32px;
   margin-top: 1rem;
+}
+
+.footer {
+  align-self: flex-end;
+  width: 100%;
 }

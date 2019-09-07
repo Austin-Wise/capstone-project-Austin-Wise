@@ -9,12 +9,11 @@ import {
   ModalBody,
   ModalFooter,
   Form,
-  FormGroup,
   Input
 } from 'reactstrap';
 import styles from './styles.module.css';
 
-export default class LoginModal extends Component {
+export default class TickerModal extends Component {
   toggle = () => {
     const { history } = this.props;
     history.push('/');
@@ -25,30 +24,18 @@ export default class LoginModal extends Component {
     return (
       <Modal isOpen className={(className, styles.modal)}>
         <ModalHeader toggle={this.toggle} className={styles.h1}>
-          Login
+          New Feed
         </ModalHeader>
         <ModalBody>
-          <Form id="Login">
-            <FormGroup>
-              <Input
-                type="email"
-                name="email"
-                id="Email"
-                placeholder="Email"
-                aria-label="Email"
-                className={styles.input}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Input
-                type="password"
-                name="password"
-                id="Password"
-                placeholder="Password"
-                aria-label="Password"
-                className={styles.input}
-              />
-            </FormGroup>
+          <Form id="Feed">
+            <Input
+              type="text"
+              name="newFeed"
+              id="newFeed"
+              placeholder="GOOGL"
+              aria-label="New News Feed"
+              className={styles.input}
+            />
           </Form>
         </ModalBody>
         <ModalFooter>
@@ -58,8 +45,9 @@ export default class LoginModal extends Component {
           <Button
             color="primary"
             type="submit"
-            form="Login"
+            form="Feed"
             value="Submit"
+            className="mb-3"
             onClick={this.toggle}
           >
             Confirm
@@ -70,7 +58,7 @@ export default class LoginModal extends Component {
   }
 }
 
-LoginModal.propTypes = {
+TickerModal.propTypes = {
   className: PropTypes.string.isRequired,
   history: ReactRouterPropTypes.history.isRequired
 };

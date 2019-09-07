@@ -10,9 +10,12 @@ const PortfolioPanel = props => {
   const { tickers } = props;
   return (
     <Nav vertical pills className={('flex-column', styles.mainNav)}>
+      <NavItem className={styles.sectionHeader}>
+        <h2>Portfolio</h2>
+      </NavItem>
       {tickers.map(item => (
         <NavItem>
-          <NavLink tag={RRNavLink} exact to="/news/{item.ticker}">
+          <NavLink tag={RRNavLink} exact to={`/news/${item.ticker}`}>
             <div className={styles.item}>
               <h3>{item.ticker}</h3>
               <p>

@@ -26,12 +26,14 @@ import Bookmark from './bookmark';
 import Settings from './settings';
 
 import styles from './styles.module.css';
+import TickerModal from './tickerModal';
 
 export default class UserArea extends React.Component {
   constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
     this.state = {
-      modal: false
+      isOpen: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -39,13 +41,13 @@ export default class UserArea extends React.Component {
 
   toggle() {
     this.setState(prevState => ({
-      modal: !prevState.modal
+      isOpen: !prevState.isOpen
     }));
   }
 
   render() {
-    const { className } = this.props;
-    const { modal } = this.state;
+    const { navigation } = this.props;
+    const { isOpen } = this.state;
     return (
       <div className="container-fluid">
         <Row>
@@ -55,25 +57,28 @@ export default class UserArea extends React.Component {
                 <NavItem>
                   <NavLink
                     tag={RRNavLink}
-                    to={link.to}
+                    to={link.path}
                     activeStyle={{
-                      backgroundImage: `/svg_css/${link.name}.svg`,
+                      backgroundImage: `url(/svg_css/${link.name}.svg)`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'contain',
                       height: '32px',
                       width: '32px',
-                      backgroundPosition: 'center'
+                      border: 'none'
                     }}
                     style={{
-                      backgroundImage: `/svg_css/${link.name}Inactive.svg`,
+                      backgroundImage: `url(/svg_css/${link.name}Inactive.svg)`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'contain',
                       height: '32px',
-                      width: '32px',
-                      backgroundPosition: 'center'
+                      width: '32px'
                     }}
                   />
                 </NavItem>
               ))}
             </Nav>
             <PortfolioPanel />
-            <Nav>
+            <Nav className={styles.footer}>
               <NavItem>
                 <NavLink active href="#">
                   Log Out
@@ -90,38 +95,12 @@ export default class UserArea extends React.Component {
               </NavItem>
             </Nav>
           </Col>
-          <div>
-            <Modal
-              isOpen={modal}
-              toggle={this.toggle}
-              className={(className, styles.Modal)}
-            >
-              <ModalHeader className={styles.ModalHeader} toggle={this.toggle}>
-                New Feed
-              </ModalHeader>
-              <ModalBody>
-                <Input
-                  type="text"
-                  id="newFeed"
-                  name="newFeed"
-                  placeholder="Ticker Symbol"
-                />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" onClick={this.toggle}>
-                  Cancel
-                </Button>
-                <Button color="primary" onClick={this.toggle}>
-                  Save
-                </Button>
-              </ModalFooter>
-            </Modal>
-          </div>
-          <Route path="/" component={News} />
-          <Route path="/news" component={News} />
-          <Route path="/journal" component={Journal} />
-          <Route path="/bookmark" component={Bookmark} />
-          <Route path="/settings" component={Settings} />
+          <Route path="/" exact component={News} />
+          <Route path="/news/:ticker" exact component={News} />
+          <Route path="/news/new" component={TickerModal} />
+          <Route path="/journal" exact component={Journal} />
+          <Route path="/bookmark" exact component={Bookmark} />
+          <Route path="/settings" exact component={Settings} />
         </Row>
       </div>
     );

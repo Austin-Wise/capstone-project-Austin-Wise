@@ -36,7 +36,7 @@ class CallToAction extends Component {
                   </Button>
                 </div>
               </Col>
-              <Col className="col col-lg-4 pl-0">
+              <Col className="col col-xl-4 col-l-6 pl-0">
                 <FeatureCarousel className="carousel" />
               </Col>
             </Row>
