@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// Provider makes the Redux store available to any nested components that have been wrapped in the connect() function.
+// ?Provider makes the Redux store available to any nested components that have been wrapped in the connect() function.
 
 import Landing from './components/UnrestrictedArea';
 import UserArea from './components/RestrictedArea';

@@ -12,42 +12,35 @@ import {
   Modal,
   ModalHeader,
   ModalFooter,
-  Button
+  Button,
+  NavItem
 } from 'reactstrap';
-
+import { Route, NavLink as RRNavLink } from 'react-router-dom';
+import NotesModal from '../notes';
 import styles from './styles.module.css';
 
 class Bookmark extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      notesModal: false
+      isOpen: false
     };
-
-    this.toggleBookmark = this.toggleBookmark.bind(this);
-    this.toggleNotes = this.toggleNotes.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
-  toggleBookmark() {
+  toggle() {
     this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
-
-  toggleNotes() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
+      isOpen: !prevState.isOpen
     }));
   }
 
   render() {
-    const { news, className } = this.props;
-    const { modal, notesModal } = this.state;
+    const { bookmark, className } = this.props;
+    const { modal, isOpen } = this.state;
     return (
       <Col md="8">
         <Row className="d-flex justify-content-center">
-          {news.map(article =>
+          {bookmark.map(article =>
             article.bookmark ? (
               <Card className="col-md-5 p-0 m-4">
                 <CardBody className={styles.Card}>
@@ -72,12 +65,14 @@ class Bookmark extends Component {
                     alt="Scale Placeholder"
                     className={styles.AnImage}
                   />
-                  <button
-                    className={styles.Notes}
-                    type="button"
-                    aria-labelledby="add note"
-                    onClick={this.toggleNotes}
-                  />
+                  <NavItem
+                    className={('mr-5', styles.loginItem)}
+                    tag={RRNavLink}
+                    to="/:bookmarkId/note/:noteId"
+                    exact
+                  >
+                    <img src="/svg_css/pencilEmpty.svg" alt="Notes Icon" />
+                  </NavItem>
                 </CardBody>
                 <CardFooter>
                   Published on {article.published} by &apos;{article.source}
@@ -111,29 +106,7 @@ class Bookmark extends Component {
             </ModalFooter>
           </Modal>
         </div>
-        <div>
-          <Modal
-            isOpen={notesModal}
-            toggleNotes={this.toggleNotes}
-            className={(className, styles.Modal)}
-          >
-            <ModalHeader
-              className={styles.ModalHeader}
-              toggleNotes={this.toggleNotes}
-            >
-              Are you sure?
-            </ModalHeader>
-
-            <ModalFooter>
-              <Button color="danger" onClick={this.toggleNotes}>
-                So
-              </Button>
-              <Button color="primary" onClick={this.toggleNotes}>
-                Yes, Delete
-              </Button>{' '}
-            </ModalFooter>
-          </Modal>
-        </div>
+        <Route path="/:bookmarkId/note/:noteId" component={NotesModal} />
       </Col>
     );
   }
@@ -142,64 +115,23 @@ class Bookmark extends Component {
 export default Bookmark;
 
 Bookmark.defaultProps = {
-  news: [
+  bookmark: [
     {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3',
-      bookmark: false
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3',
-      bookmark: false
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3',
-      bookmark: true
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3',
-      bookmark: true
+      id: '506f4a26-dd6a-4432-8fde-c54eafd61720',
+      newsId: 'b9f9e99a-8b91-4dde-93b8-a2dcc1d3a215',
+      ticker: 'AAPL',
+      userId: '1e1f588b-38c1-4170-bc8e-68a4364e3ed8'
     }
   ]
 };
 
 Bookmark.propTypes = {
-  news: PropTypes.arrayOf(
+  bookmark: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string,
-      text: PropTypes.string,
-      source: PropTypes.string,
-      published: PropTypes.instanceOf(Date),
-      rating: PropTypes.number,
       id: PropTypes.string,
-      bookmark: PropTypes.bool
+      newsId: PropTypes.string,
+      ticker: PropTypes.string,
+      userId: PropTypes.string
     })
   ),
   className: PropTypes.string.isRequired

@@ -31,11 +31,9 @@ import TickerModal from './tickerModal';
 export default class UserArea extends React.Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false
     };
-
     this.toggle = this.toggle.bind(this);
   }
 
@@ -108,7 +106,6 @@ export default class UserArea extends React.Component {
 }
 
 UserArea.propTypes = {
-  className: PropTypes.string.isRequired,
   navigation: PropTypes.shape({
     name: PropTypes.string,
     to: PropTypes.string,
