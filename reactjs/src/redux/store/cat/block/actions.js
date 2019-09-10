@@ -1,28 +1,52 @@
+/* eslint-disable import/prefer-default-export */
 import API from '../../../../API';
 
 import {
   REQ_BLOCK_PENDING,
   REQ_BLOCK_SUCCESS,
-  REQ_BLOCK_ERROR
+  REQ_BLOCK_ERROR,
+  REQ_BLOCKS_PENDING,
+  REQ_BLOCKS_SUCCESS,
+  REQ_BLOCKS_ERROR,
+  DELETE_BLOCK_PENDING,
+  DELETE_BLOCK_SUCCESS,
+  DELETE_BLOCK_ERROR
 } from '../../actionTypes';
 
 // cache data for 5 minutes
 const CACHE_TIME = 1000 * 60 * 5;
 
-const fetchBlock = () => ({
+export const fetchBlock = id => ({
+  types: [REQ_BLOCK_PENDING, REQ_BLOCK_SUCCESS, REQ_BLOCK_ERROR],
+  callAPI: () => API.get(`/blocks/${id}`),
+  shouldCallAPI: state => {
+    const block = state.blocks.byId[id] || {};
+    const { loadedAt, isLoading } = block;
+    if (!block || isLoading) return false;
+    const isCached = Date.now() - loadedAt < CACHE_TIME;
+    return !loadedAt || !isCached;
+  },
+  payload: { id }
+});
+
+export const fetchBlocks = () => ({
   // types for this action - "request, success, error"
-  types: [REQ_BLOCK_PENDING, REQ_BLOCK_SUCCESS, REQ_BLOCK_ERROR]
-    //  a function used to call the api
-  callAPI: () => API.get('/items'),
+  types: [REQ_BLOCKS_PENDING, REQ_BLOCKS_SUCCESS, REQ_BLOCKS_ERROR],
+  //  a function used to call the api
+  callAPI: () => API.get('/blocks'),
   // receives the current app state and returns true if we should call the api
   shouldCallAPI: state => {
-    const { loadedAt, isLoading } = state.items;
-    // if items are currently loading don't call again
+    const { loadedAt, isLoading } = state.blocks;
+    // if block items are currently loading don't call again
     if (isLoading) return false;
     const isCached = Date.now() - loadedAt < CACHE_TIME;
-    // if we don't have the item or it's beyond the cache timeout make the api call
+    // if we don't have the blocked item or it's beyond the cache timeout make the api call
     return !loadedAt || !isCached;
   }
 });
 
-export default fetchBlock;
+export const deleteBlock = id => ({
+  types: [DELETE_BLOCK_PENDING, DELETE_BLOCK_SUCCESS, DELETE_BLOCK_ERROR],
+  callAPI: () => API.delete(`/blocks/${id}`),
+  payload: { id }
+});

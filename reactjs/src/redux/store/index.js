@@ -18,8 +18,24 @@ import storage from 'redux-persist/lib/storage';
 
 import callAPI from './helpers/callAPIMiddleware';
 
+// List of all reducers
+import blocks from './cat/block/reducer';
+import bookmarks from './cat/bookmark/reducer';
+import journals from './cat/journal/reducer';
+import notes from './cat/note/reducer';
+import tickers from './cat/ticker/reducer';
+import articles from './cat/article/reducer';
+import companyData from './cat/companyData/reducer';
 // combine multiple reducers into one
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  blocks,
+  bookmarks,
+  journals,
+  notes,
+  tickers,
+  articles,
+  companyData
+});
 
 const persistConfig = {
   key: 'root',

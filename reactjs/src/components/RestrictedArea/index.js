@@ -1,21 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-return-assign */
 import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import {
-  NavLink,
-  Nav,
-  NavItem,
-  Col,
-  Row,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Input
-} from 'reactstrap';
+import { NavLink, Nav, NavItem, Col, Row } from 'reactstrap';
 
 import { Route, NavLink as RRNavLink } from 'react-router-dom';
 
@@ -52,7 +41,7 @@ export default class UserArea extends React.Component {
           <Col md="4" className={styles.Navigation}>
             <Nav tabs className={styles.NavHeader}>
               {navigation.map(link => (
-                <NavItem>
+                <NavItem key={link.name}>
                   <NavLink
                     tag={RRNavLink}
                     to={link.path}
@@ -106,11 +95,13 @@ export default class UserArea extends React.Component {
 }
 
 UserArea.propTypes = {
-  navigation: PropTypes.shape({
-    name: PropTypes.string,
-    to: PropTypes.string,
-    imgSrc: PropTypes.string
-  })
+  navigation: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      to: PropTypes.string,
+      imgSrc: PropTypes.string
+    })
+  )
 };
 
 UserArea.defaultProps = {

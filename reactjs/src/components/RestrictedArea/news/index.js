@@ -30,8 +30,8 @@ export default class News extends React.PureComponent {
                 {company.now > company.close
                   ? `$${(company.now - company.close).toFixed(2)}`
                   : (company.now - company.close)
-                    .toFixed(2)
-                    .replace(/-/g, '-$')}
+                      .toFixed(2)
+                      .replace(/-/g, '-$')}
               </span>
               <span className={styles.percent}>
                 {company.now > company.close
@@ -129,7 +129,7 @@ export default class News extends React.PureComponent {
         </Jumbotron>
         <Row className="d-flex justify-content-center">
           {news.map(article => (
-            <Card className="col-md-5 p-0 m-4">
+            <Card key={article.id} className="col-md-5 p-0 m-4">
               <CardBody className={styles.Card}>
                 <Row>
                   <Col md="10">

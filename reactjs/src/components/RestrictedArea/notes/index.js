@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
-
 import {
   Button,
   Modal,
@@ -11,18 +10,24 @@ import {
   Form,
   Input
 } from 'reactstrap';
+import container from './container';
+
 import styles from './styles.module.css';
 
-export default class NotesModal extends Component {
+class NotesModal extends Component {
+  constructor(props) {
+    super(props);
+    props.fetchItems();
+  }
+
   toggle = () => {
     const { history } = this.props;
     history.push('/');
   };
 
   render() {
-    const { className } = this.props;
     return (
-      <Modal isOpen className={(className, styles.modal)}>
+      <Modal isOpen className={styles.modal}>
         <ModalHeader toggle={this.toggle} className={styles.h1}>
           New Note
         </ModalHeader>
@@ -58,7 +63,9 @@ export default class NotesModal extends Component {
   }
 }
 
+export default container(NotesModal);
+
 NotesModal.propTypes = {
-  className: PropTypes.string.isRequired,
-  history: ReactRouterPropTypes.history.isRequired
+  history: ReactRouterPropTypes.history.isRequired,
+  fetchItems: PropTypes.func.isRequired
 };

@@ -16,6 +16,7 @@ import {
   NavItem
 } from 'reactstrap';
 import { Route, NavLink as RRNavLink } from 'react-router-dom';
+import container from './container';
 import NotesModal from '../notes';
 import styles from './styles.module.css';
 
@@ -25,114 +26,126 @@ class Bookmark extends Component {
     this.state = {
       isOpen: false
     };
-    this.toggle = this.toggle.bind(this);
+    this.loadData();
   }
 
-  toggle() {
+  loadData = async () => {
+    const { fetchBookmarks } = this.props;
+    await fetchBookmarks();
+    const { bookmarks, fetchArticle } = this.props;
+    bookmarks.forEach(bookmark => {
+      fetchArticle(bookmark.articleId);
+    });
+  };
+
+  toggle = id => () => {
     this.setState(prevState => ({
-      isOpen: !prevState.isOpen
+      isOpen: !prevState.isOpen,
+      id
     }));
-  }
+  };
+
+  deleteBookmarkFunc = async () => {
+    const { deleteBookmark } = this.props;
+    const { id } = this.state;
+    await deleteBookmark(id);
+    this.toggle()();
+  };
 
   render() {
-    const { bookmark, className } = this.props;
+    const { bookmarks } = this.props;
     const { modal, isOpen } = this.state;
+
+    console.log(bookmarks);
     return (
       <Col md="8">
         <Row className="d-flex justify-content-center">
-          {bookmark.map(article =>
-            article.bookmark ? (
-              <Card className="col-md-5 p-0 m-4">
-                <CardBody className={styles.Card}>
-                  <Row>
-                    <Col md="10">
-                      <CardTitle>{article.title}</CardTitle>
-                    </Col>
-                    <Col md="2">
-                      <button
-                        className={styles.Bookmark}
-                        type="button"
-                        aria-labelledby="bookmark"
-                        onClick={this.toggleBookmark}
-                      />
-                    </Col>
-                  </Row>
-                  <CardText className={styles.cardText}>
-                    {article.text}
-                  </CardText>
-                  <img
-                    src="/svg_css/scale-0.svg"
-                    alt="Scale Placeholder"
-                    className={styles.AnImage}
-                  />
-                  <NavItem
-                    className={('mr-5', styles.loginItem)}
-                    tag={RRNavLink}
-                    to="/:bookmarkId/note/:noteId"
-                    exact
-                  >
-                    <img src="/svg_css/pencilEmpty.svg" alt="Notes Icon" />
-                  </NavItem>
-                </CardBody>
-                <CardFooter>
-                  Published on {article.published} by &apos;{article.source}
-                  &apos;
-                </CardFooter>
-              </Card>
-            ) : (
-              ''
-            )
-          )}
+          {bookmarks.map(bookmark => (
+            <Card key={bookmark.id} className="col-md-5 p-0 m-4">
+              <CardBody className={styles.Card}>
+                <Row>
+                  <Col md="10">
+                    <CardTitle>{bookmark.article.title}</CardTitle>
+                  </Col>
+                  <Col md="2">
+                    <button
+                      className={styles.Bookmark}
+                      type="button"
+                      aria-labelledby="bookmark"
+                      onClick={this.toggle(bookmark.id)}
+                    />
+                  </Col>
+                </Row>
+                <CardText className={styles.cardText}>
+                  {bookmark.article.text}
+                </CardText>
+                <img
+                  src="/svg_css/scale-0.svg"
+                  alt="Scale Placeholder"
+                  className={styles.AnImage}
+                />
+                <NavItem
+                  className={('mr-5', styles.loginItem)}
+                  tag={RRNavLink}
+                  to="/:bookmarkId/note/:noteId"
+                  exact
+                >
+                  <img src="/svg_css/pencilEmpty.svg" alt="Notes Icon" />
+                </NavItem>
+              </CardBody>
+              <CardFooter>
+                Published on {bookmark.article.published} by &apos;
+                {bookmark.article.source}
+                &apos;
+              </CardFooter>
+            </Card>
+          ))}
         </Row>{' '}
         <div>
-          <Modal
-            isOpen={modal}
-            toggleBookmark={this.toggleBookmark}
-            className={(className, styles.Modal)}
-          >
-            <ModalHeader
-              className={styles.ModalHeader}
-              toggleBookmark={this.toggleBookmark}
-            >
+          <Modal isOpen={isOpen} toggle={this.toggle} className={styles.Modal}>
+            <ModalHeader className={styles.ModalHeader} toggle={this.toggle()}>
               Are you sure?
             </ModalHeader>
             <ModalFooter>
-              <Button color="danger" onClick={this.toggleBookmark}>
+              <Button color="danger" onClick={this.toggle()}>
                 No,Cancel
               </Button>
-              <Button color="primary" onClick={this.toggleBookmark}>
+              <Button color="primary" onClick={this.deleteBookmarkFunc}>
                 Yes, Delete
-              </Button>{' '}
+              </Button>
             </ModalFooter>
           </Modal>
         </div>
-        <Route path="/:bookmarkId/note/:noteId" component={NotesModal} />
+        {/* // ? new modal */}
+        <Route path="/:bookmarkId/note/new" exact component={NotesModal} />
+        {/* // ? existing modal */}
+        <Route path="/:bookmarkId/note/:noteId" exact component={NotesModal} />
       </Col>
     );
   }
 }
 
-export default Bookmark;
+export default container(Bookmark);
 
 Bookmark.defaultProps = {
-  bookmark: [
-    {
-      id: '506f4a26-dd6a-4432-8fde-c54eafd61720',
-      newsId: 'b9f9e99a-8b91-4dde-93b8-a2dcc1d3a215',
-      ticker: 'AAPL',
-      userId: '1e1f588b-38c1-4170-bc8e-68a4364e3ed8'
-    }
-  ]
+  bookmarks: []
 };
 
 Bookmark.propTypes = {
-  bookmark: PropTypes.arrayOf(
+  bookmarks: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      newsId: PropTypes.string,
+      articleId: PropTypes.string,
       ticker: PropTypes.string,
-      userId: PropTypes.string
+      userId: PropTypes.string,
+      article: PropTypes.shape({
+        title: PropTypes.string,
+        text: PropTypes.string,
+        published: PropTypes.instanceOf(Date),
+        source: PropTypes.string
+      })
     })
   ),
-  className: PropTypes.string.isRequired
+  fetchBookmarks: PropTypes.func.isRequired,
+  fetchArticle: PropTypes.func.isRequired
 };

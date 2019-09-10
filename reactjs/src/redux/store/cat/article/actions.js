@@ -1,0 +1,52 @@
+/* eslint-disable import/prefer-default-export */
+import API from '../../../../API';
+
+import {
+  REQ_ARTICLE_PENDING,
+  REQ_ARTICLE_SUCCESS,
+  REQ_ARTICLE_ERROR,
+  REQ_ARTICLES_PENDING,
+  REQ_ARTICLES_SUCCESS,
+  REQ_ARTICLES_ERROR,
+  DELETE_ARTICLE_PENDING,
+  DELETE_ARTICLE_SUCCESS,
+  DELETE_ARTICLE_ERROR
+} from '../../actionTypes';
+
+// cache data for 5 minutes
+const CACHE_TIME = 1000 * 60 * 5;
+
+export const fetchArticle = id => ({
+  types: [REQ_ARTICLE_PENDING, REQ_ARTICLE_SUCCESS, REQ_ARTICLE_ERROR],
+  callAPI: () => API.get(`/articles/${id}`),
+  shouldCallAPI: state => {
+    const article = state.articles.byId[id] || {};
+    const { loadedAt, isLoading } = article;
+    if (!article || isLoading) return false;
+    const isCached = Date.now() - loadedAt < CACHE_TIME;
+    return !loadedAt || !isCached;
+  },
+  payload: { id }
+});
+
+export const fetchArticles = () => ({
+  // types for this action - "request, success, error"
+  types: [REQ_ARTICLES_PENDING, REQ_ARTICLES_SUCCESS, REQ_ARTICLES_ERROR],
+  //  a function used to call the api
+  callAPI: () => API.get('/articles'),
+  // receives the current app state and returns true if we should call the api
+  shouldCallAPI: state => {
+    const { loadedAt, isLoading } = state.articles;
+    // if article items are currently loading don't call again
+    if (isLoading) return false;
+    const isCached = Date.now() - loadedAt < CACHE_TIME;
+    // if we don't have the article item or it's beyond the cache timeout make the api call
+    return !loadedAt || !isCached;
+  }
+});
+
+export const deleteArticle = id => ({
+  types: [DELETE_ARTICLE_PENDING, DELETE_ARTICLE_SUCCESS, DELETE_ARTICLE_ERROR],
+  callAPI: () => API.delete(`/articles/${id}`),
+  payload: { id }
+});

@@ -22,7 +22,7 @@ h4 {
   margin-left: auto;
   margin-right: 5rem;
   display: inline-flex;
-  justify-content: end;
+  justify-content: flex-end;
   font-size: 3.2rem;
   margin-top: 2rem;
 }
