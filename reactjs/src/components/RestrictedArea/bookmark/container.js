@@ -15,7 +15,7 @@ function mapStateToProps(state) {
   return {
     bookmarks: allIds.map(id => ({
       ...byId[id].data,
-      article: articles[byId[id].data.articleId].data || {}
+      article: (articles[byId[id].data.articleId] || {}).data
     }))
   };
 }

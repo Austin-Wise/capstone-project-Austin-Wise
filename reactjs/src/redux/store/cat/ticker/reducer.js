@@ -1,6 +1,9 @@
 import createReducer from '../../helpers/createReducer';
 
 import {
+  ADD_TICKER_PENDING,
+  ADD_TICKER_SUCCESS,
+  ADD_TICKER_ERROR,
   REQ_TICKER_PENDING,
   REQ_TICKER_SUCCESS,
   REQ_TICKER_ERROR,
@@ -42,6 +45,7 @@ function tickerPending(state, action) {
 
 function tickerSuccess(state, action) {
   // clear loading and error, update cache time, add tickers
+  // under data, grab id from payload instead of data.. endpoint id vs frontend generated id messes this up.
   return {
     ...state,
     byId: {
@@ -50,7 +54,10 @@ function tickerSuccess(state, action) {
         isLoading: false,
         error: null,
         loadedAt: Date.now(),
-        data: action.data
+        data: {
+          ...action.data,
+          id: action.payload.id
+        }
       }
     },
     allIds: [...new Set([...state.allIds, action.payload.id])]
@@ -130,6 +137,9 @@ function deleteTickerSuccess(state, action) {
 }
 
 export default createReducer(initialState, {
+  [ADD_TICKER_PENDING]: tickerPending,
+  [ADD_TICKER_SUCCESS]: tickerSuccess,
+  [ADD_TICKER_ERROR]: tickerError,
   [REQ_TICKER_PENDING]: tickerPending,
   [REQ_TICKER_SUCCESS]: tickerSuccess,
   [REQ_TICKER_ERROR]: tickerError,

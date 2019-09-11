@@ -1,26 +1,18 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react';
-
+import { Route, Link, NavLink as RRNavLink, Redirect } from 'react-router-dom';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 
-import {
-  NavLink,
-  Nav,
-  NavItem,
-  Modal,
-  ModalHeader,
-  ModalFooter,
-  Button
-} from 'reactstrap';
-import { NavLink as RRNavLink } from 'react-router-dom';
+import { NavLink, Nav, NavItem } from 'reactstrap';
+
 import container from './container';
 import styles from './styles.module.css';
+import DeleteModal from '../../Shared/deleteModal';
 
 class PortfolioPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false
-    };
     this.loadData();
   }
 
@@ -33,24 +25,10 @@ class PortfolioPanel extends Component {
     });
   };
 
-  toggle = id => () => {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen,
-      id
-    }));
-  };
-
-  deleteTickerFunc = async () => {
-    const { deleteTicker } = this.props;
-    const { id } = this.state;
-    await deleteTicker(id);
-    this.toggle()();
-  };
-
   render() {
-    const { tickers } = this.props;
-    const { modal, isOpen } = this.state;
-    console.log(tickers);
+    const { tickers, deleteTicker, location, match } = this.props;
+    if (match.url === '/' && tickers[0])
+      return <Redirect to={`/news/${tickers[0].symbol}`} />;
     return (
       <Nav vertical pills className={('flex-column', styles.mainNav)}>
         <NavItem className={styles.sectionHeader}>
@@ -58,7 +36,7 @@ class PortfolioPanel extends Component {
         </NavItem>
         {tickers.map(ticker => (
           <NavItem key={ticker.id} id>
-            <NavLink tag={RRNavLink} exact to={`/news/${ticker.ticker}`}>
+            <NavLink tag={RRNavLink} exact to={`/news/${ticker.symbol}`}>
               <div className={styles.item}>
                 <h3>{ticker.symbol}</h3>
                 <p>
@@ -82,31 +60,19 @@ class PortfolioPanel extends Component {
                   height="27.29px"
                   width="32px"
                 />
+                <Link to={`${match.url}/delete_ticker/${ticker.id}`}>X</Link>
               </div>
-              <button
-                className={styles.RemoveTicker}
-                type="button"
-                aria-labelledby="Remove Ticker"
-                onClick={this.toggle(ticker.id)}
-              />
             </NavLink>
           </NavItem>
         ))}
-        <div>
-          <Modal isOpen={isOpen} toggle={this.toggle} className={styles.Modal}>
-            <ModalHeader className={styles.ModalHeader} toggle={this.toggle()}>
-              Are you sure?
-            </ModalHeader>
-            <ModalFooter>
-              <Button color="danger" onClick={this.toggle()}>
-                No,Cancel
-              </Button>
-              <Button color="primary" onClick={this.deleteTickerFunc}>
-                Yes, Delete
-              </Button>
-            </ModalFooter>
-          </Modal>
-        </div>
+        {/* // ? delete modal */}
+        <Route
+          path={`${match.url}/delete_ticker/:id`}
+          exact
+          render={routeProps => (
+            <DeleteModal deleteFunc={deleteTicker} {...routeProps} />
+          )}
+        />
       </Nav>
     );
   }
@@ -136,9 +102,11 @@ PortfolioPanel.propTypes = {
       now: PropTypes.number
     })
   ),
+  history: ReactRouterPropTypes.history.isRequired,
   fetchTickers: PropTypes.func.isRequired,
   deleteTicker: PropTypes.func.isRequired,
-  fetchCompanyData: PropTypes.func.isRequired
+  fetchCompanyData: PropTypes.func.isRequired,
+  match: ReactRouterPropTypes.match.isRequired
 };
 
 PortfolioPanel.defaultProps = {

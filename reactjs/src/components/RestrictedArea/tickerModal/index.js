@@ -17,26 +17,54 @@ import styles from './styles.module.css';
 class TickerModal extends Component {
   constructor(props) {
     super(props);
-    props.fetchItems();
+    props.fetchTicker();
+    this.state = {
+      symbol: ''
+    };
   }
+
+  handleInputChange = event => {
+    // get the input from the event
+    const { target } = event;
+    // find the value of the input
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    // get the name of the input from it's attribute
+    const { name } = target;
+    // set state to the name and the value. For example, { description: 'hi'}
+    this.setState({
+      [name]: value
+    });
+  };
 
   toggle = () => {
     const { history } = this.props;
     history.push('/');
   };
 
+  save = async event => {
+    // make sure the form doesn't submit with the browser
+    event.preventDefault();
+    const { createTicker } = this.props;
+    const { symbol } = this.state;
+    await createTicker({ symbol: symbol.toUpperCase() });
+    this.toggle();
+  };
+
   render() {
+    const { symbol } = this.state;
     return (
       <Modal isOpen className={styles.modal}>
         <ModalHeader toggle={this.toggle} className={styles.h1}>
           New Feed
         </ModalHeader>
         <ModalBody>
-          <Form id="Feed">
+          <Form id="Feed" onSubmit={this.save}>
             <Input
               type="text"
-              name="newFeed"
-              id="newFeed"
+              name="symbol"
+              id="symbol"
+              onChange={this.handleInputChange}
+              value={symbol}
               placeholder="i.e. 'GOOGL'"
               aria-label="New News Feed"
               className={styles.input}
@@ -53,7 +81,6 @@ class TickerModal extends Component {
             form="Feed"
             value="Submit"
             className="mb-3"
-            onClick={this.toggle}
           >
             Confirm
           </Button>
@@ -67,5 +94,6 @@ export default container(TickerModal);
 
 TickerModal.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
-  fetchItems: PropTypes.func.isRequired
+  fetchTicker: PropTypes.func.isRequired,
+  createTicker: PropTypes.func.isRequired
 };

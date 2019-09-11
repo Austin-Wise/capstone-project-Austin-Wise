@@ -17,7 +17,7 @@ import styles from './styles.module.css';
 class Settings extends Component {
   constructor(props) {
     super(props);
-    props.fetchItems();
+    props.fetchBlocks();
   }
 
   render() {
@@ -90,7 +90,8 @@ Settings.propTypes = {
     name: PropTypes.string,
     email: PropTypes.string
   }),
-  fetchItems: PropTypes.func.isRequired
+  fetchBlocks: PropTypes.func.isRequired,
+  deleteBlock: PropTypes.func.isRequired
 };
 
 Settings.defaultProps = {

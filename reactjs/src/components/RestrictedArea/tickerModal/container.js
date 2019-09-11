@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
-import { fetchTicker } from '../../../redux/store/cat/ticker/actions';
+import {
+  fetchTicker,
+  createTicker
+} from '../../../redux/store/cat/ticker/actions';
 
 function mapStateToProps(state) {
   const {
@@ -10,7 +13,7 @@ function mapStateToProps(state) {
 }
 
 // set the actions we need in this component
-const mapDispatchToProps = { fetchTicker };
+const mapDispatchToProps = { fetchTicker, createTicker };
 
 export default connect(
   mapStateToProps,

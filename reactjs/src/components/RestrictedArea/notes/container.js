@@ -6,13 +6,13 @@ import { fetchNote, deleteNote } from '../../../redux/store/cat/note/actions';
 function mapStateToProps(state) {
   const {
     bookmarks: { byId, allIds },
-    articles: { byId: articles }
+    notes: { byId: notes }
   } = state;
   // turn the array of ids into an array of objects
   return {
     bookmarks: allIds.map(id => ({
       ...byId[id].data,
-      article: articles[byId[id].data.articleId].data || {}
+      note: notes[byId[id].data.noteId].data || {}
     }))
   };
 }

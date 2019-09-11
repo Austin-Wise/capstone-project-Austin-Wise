@@ -1,7 +1,11 @@
 /* eslint-disable import/prefer-default-export */
+import uuid from 'uuid/v4';
 import API from '../../../../API';
 
 import {
+  ADD_BOOKMARK_PENDING,
+  ADD_BOOKMARK_SUCCESS,
+  ADD_BOOKMARK_ERROR,
   REQ_BOOKMARK_PENDING,
   REQ_BOOKMARK_SUCCESS,
   REQ_BOOKMARK_ERROR,
@@ -15,6 +19,16 @@ import {
 
 // cache data for 5 minutes
 const CACHE_TIME = 1000 * 60 * 5;
+
+export const createBookmark = bookmark => {
+  // create a uuid for this bookmark so that we can use it in the reducer for pending and loading
+  const id = uuid();
+  return {
+    types: [ADD_BOOKMARK_PENDING, ADD_BOOKMARK_SUCCESS, ADD_BOOKMARK_ERROR],
+    callAPI: () => API.post('/bookmarks', { ...bookmark, id }),
+    payload: { id }
+  };
+};
 
 export const fetchBookmark = id => ({
   types: [REQ_BOOKMARK_PENDING, REQ_BOOKMARK_SUCCESS, REQ_BOOKMARK_ERROR],

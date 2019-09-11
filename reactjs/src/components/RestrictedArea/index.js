@@ -32,8 +32,10 @@ export default class UserArea extends React.Component {
     }));
   }
 
+  // Match url always matches "/", moving the "/" to the end of the array for route wildcards allows for if/else checking on route alternatives
+
   render() {
-    const { navigation } = this.props;
+    const { navigation, match } = this.props;
     const { isOpen } = this.state;
     return (
       <div className="container-fluid">
@@ -64,7 +66,16 @@ export default class UserArea extends React.Component {
                 </NavItem>
               ))}
             </Nav>
-            <PortfolioPanel />
+            <Route
+              path={[
+                '/news/:ticker',
+                '/journal',
+                '/bookmark',
+                '/settings',
+                '/'
+              ]}
+              component={PortfolioPanel}
+            />
             <Nav className={styles.footer}>
               <NavItem>
                 <NavLink active href="#">
@@ -83,11 +94,11 @@ export default class UserArea extends React.Component {
             </Nav>
           </Col>
           <Route path="/" exact component={News} />
-          <Route path="/news/:ticker" exact component={News} />
+          <Route path="/news/:ticker" component={News} />
           <Route path="/news/new" component={TickerModal} />
-          <Route path="/journal" exact component={Journal} />
-          <Route path="/bookmark" exact component={Bookmark} />
-          <Route path="/settings" exact component={Settings} />
+          <Route path="/journal" component={Journal} />
+          <Route path="/bookmark" component={Bookmark} />
+          <Route path="/settings" component={Settings} />
         </Row>
       </div>
     );

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,17 +16,15 @@ import {
   Button,
   NavItem
 } from 'reactstrap';
-import { Route, NavLink as RRNavLink } from 'react-router-dom';
+import { Route, Link, NavLink as RRNavLink } from 'react-router-dom';
 import container from './container';
 import NotesModal from '../notes';
+import DeleteModal from '../../Shared/deleteModal';
 import styles from './styles.module.css';
 
 class Bookmark extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false
-    };
     this.loadData();
   }
 
@@ -38,25 +37,8 @@ class Bookmark extends Component {
     });
   };
 
-  toggle = id => () => {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen,
-      id
-    }));
-  };
-
-  deleteBookmarkFunc = async () => {
-    const { deleteBookmark } = this.props;
-    const { id } = this.state;
-    await deleteBookmark(id);
-    this.toggle()();
-  };
-
   render() {
-    const { bookmarks } = this.props;
-    const { modal, isOpen } = this.state;
-
-    console.log(bookmarks);
+    const { bookmarks, deleteBookmark } = this.props;
     return (
       <Col md="8">
         <Row className="d-flex justify-content-center">
@@ -68,12 +50,13 @@ class Bookmark extends Component {
                     <CardTitle>{bookmark.article.title}</CardTitle>
                   </Col>
                   <Col md="2">
-                    <button
+                    <Link
+                      to={`/bookmark/delete/${bookmark.id}`}
                       className={styles.Bookmark}
-                      type="button"
                       aria-labelledby="bookmark"
-                      onClick={this.toggle(bookmark.id)}
-                    />
+                    >
+                      X
+                    </Link>
                   </Col>
                 </Row>
                 <CardText className={styles.cardText}>
@@ -100,26 +83,18 @@ class Bookmark extends Component {
               </CardFooter>
             </Card>
           ))}
-        </Row>{' '}
-        <div>
-          <Modal isOpen={isOpen} toggle={this.toggle} className={styles.Modal}>
-            <ModalHeader className={styles.ModalHeader} toggle={this.toggle()}>
-              Are you sure?
-            </ModalHeader>
-            <ModalFooter>
-              <Button color="danger" onClick={this.toggle()}>
-                No,Cancel
-              </Button>
-              <Button color="primary" onClick={this.deleteBookmarkFunc}>
-                Yes, Delete
-              </Button>
-            </ModalFooter>
-          </Modal>
-        </div>
+        </Row>
         {/* // ? new modal */}
         <Route path="/:bookmarkId/note/new" exact component={NotesModal} />
         {/* // ? existing modal */}
         <Route path="/:bookmarkId/note/:noteId" exact component={NotesModal} />
+        <Route
+          path="/bookmark/delete/:id"
+          exact
+          render={routeProps => (
+            <DeleteModal deleteFunc={deleteBookmark} {...routeProps} />
+          )}
+        />
       </Col>
     );
   }
@@ -147,5 +122,6 @@ Bookmark.propTypes = {
     })
   ),
   fetchBookmarks: PropTypes.func.isRequired,
+  deleteBookmark: PropTypes.func.isRequired,
   fetchArticle: PropTypes.func.isRequired
 };

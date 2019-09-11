@@ -1,7 +1,11 @@
 /* eslint-disable import/prefer-default-export */
+import uuid from 'uuid/v4';
 import API from '../../../../API';
 
 import {
+  ADD_ARTICLE_PENDING,
+  ADD_ARTICLE_SUCCESS,
+  ADD_ARTICLE_ERROR,
   REQ_ARTICLE_PENDING,
   REQ_ARTICLE_SUCCESS,
   REQ_ARTICLE_ERROR,
@@ -15,6 +19,16 @@ import {
 
 // cache data for 5 minutes
 const CACHE_TIME = 1000 * 60 * 5;
+
+export const createArticle = article => {
+  // create a uuid for this article so that we can use it in the reducer for pending and loading
+  const id = uuid();
+  return {
+    types: [ADD_ARTICLE_PENDING, ADD_ARTICLE_SUCCESS, ADD_ARTICLE_ERROR],
+    callAPI: () => API.post('/articles', { ...article, id }),
+    payload: { id }
+  };
+};
 
 export const fetchArticle = id => ({
   types: [REQ_ARTICLE_PENDING, REQ_ARTICLE_SUCCESS, REQ_ARTICLE_ERROR],

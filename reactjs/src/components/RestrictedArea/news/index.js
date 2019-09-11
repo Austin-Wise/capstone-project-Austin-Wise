@@ -30,8 +30,8 @@ export default class News extends React.PureComponent {
                 {company.now > company.close
                   ? `$${(company.now - company.close).toFixed(2)}`
                   : (company.now - company.close)
-                      .toFixed(2)
-                      .replace(/-/g, '-$')}
+                    .toFixed(2)
+                    .replace(/-/g, '-$')}
               </span>
               <span className={styles.percent}>
                 {company.now > company.close
@@ -162,67 +162,8 @@ export default class News extends React.PureComponent {
 }
 
 News.defaultProps = {
-  company: {
-    name: 'Alphabet Inc Class A',
-    ticker: 'GOOGL',
-    ceo: 'Larry Page',
-    employees: 98771,
-    industry: 'Software and Data',
-    location: 'Mountain View, CA',
-    open: 1185.17,
-    high: 1195.67,
-    low: 1150.0,
-    close: 1153.58,
-    volume: 1508729,
-    adjOpen: 1185.17,
-    adjHigh: 1195.67,
-    adjLow: 1150.0,
-    adjClose: 1153.58,
-    adjVolume: 1508729,
-    now: 1195.67
-  },
-  news: [
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3'
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3'
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3'
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3'
-    }
-  ]
+  company: {},
+  news: []
 };
 
 News.propTypes = {

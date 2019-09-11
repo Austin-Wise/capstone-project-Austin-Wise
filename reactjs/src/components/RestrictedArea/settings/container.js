@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
-import { fetchBlock } from '../../../redux/store/cat/block/actions';
+import {
+  fetchBlocks,
+  deleteBlock
+} from '../../../redux/store/cat/block/actions';
 
 function mapStateToProps(state) {
   const {
@@ -10,7 +13,7 @@ function mapStateToProps(state) {
 }
 
 // set the actions we need in this component
-const mapDispatchToProps = { fetchBlock };
+const mapDispatchToProps = { fetchBlocks, deleteBlock };
 
 export default connect(
   mapStateToProps,

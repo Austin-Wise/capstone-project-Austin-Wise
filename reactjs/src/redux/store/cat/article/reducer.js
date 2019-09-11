@@ -1,12 +1,18 @@
 import createReducer from '../../helpers/createReducer';
 
 import {
+  ADD_ARTICLE_PENDING,
+  ADD_ARTICLE_SUCCESS,
+  ADD_ARTICLE_ERROR,
   REQ_ARTICLE_PENDING,
   REQ_ARTICLE_SUCCESS,
   REQ_ARTICLE_ERROR,
   REQ_ARTICLES_PENDING,
   REQ_ARTICLES_SUCCESS,
-  REQ_ARTICLES_ERROR
+  REQ_ARTICLES_ERROR,
+  DELETE_ARTICLE_PENDING,
+  DELETE_ARTICLE_SUCCESS,
+  DELETE_ARTICLE_ERROR
 } from '../../actionTypes';
 
 const initialState = {
@@ -117,11 +123,27 @@ function articlesError(state, action) {
   };
 }
 
+function deleteArticleSuccess(state, action) {
+  // clear loading and error, update cache time, add blocks
+  const { [action.payload.id]: deletedArticle, ...withoutArticle } = state.byId;
+  return {
+    ...state,
+    byId: withoutArticle,
+    allIds: state.allIds.filter(id => id !== action.payload.id)
+  };
+}
+
 export default createReducer(initialState, {
+  [ADD_ARTICLE_PENDING]: articlePending,
+  [ADD_ARTICLE_SUCCESS]: articleSuccess,
+  [ADD_ARTICLE_ERROR]: articleError,
   [REQ_ARTICLE_PENDING]: articlePending,
   [REQ_ARTICLE_SUCCESS]: articleSuccess,
   [REQ_ARTICLE_ERROR]: articleError,
   [REQ_ARTICLES_PENDING]: articlesPending,
   [REQ_ARTICLES_SUCCESS]: articlesSuccess,
-  [REQ_ARTICLES_ERROR]: articlesError
+  [REQ_ARTICLES_ERROR]: articlesError,
+  [DELETE_ARTICLE_PENDING]: articlePending,
+  [DELETE_ARTICLE_SUCCESS]: deleteArticleSuccess,
+  [DELETE_ARTICLE_ERROR]: articleError
 });

@@ -1,7 +1,11 @@
 /* eslint-disable import/prefer-default-export */
+import uuid from 'uuid/v4';
 import API from '../../../../API';
 
 import {
+  ADD_BLOCK_PENDING,
+  ADD_BLOCK_SUCCESS,
+  ADD_BLOCK_ERROR,
   REQ_BLOCK_PENDING,
   REQ_BLOCK_SUCCESS,
   REQ_BLOCK_ERROR,
@@ -15,6 +19,16 @@ import {
 
 // cache data for 5 minutes
 const CACHE_TIME = 1000 * 60 * 5;
+
+export const createBlock = block => {
+  // create a uuid for this block so that we can use it in the reducer for pending and loading
+  const id = uuid();
+  return {
+    types: [ADD_BLOCK_PENDING, ADD_BLOCK_SUCCESS, ADD_BLOCK_ERROR],
+    callAPI: () => API.post('/blocks', { ...block, id }),
+    payload: { id }
+  };
+};
 
 export const fetchBlock = id => ({
   types: [REQ_BLOCK_PENDING, REQ_BLOCK_SUCCESS, REQ_BLOCK_ERROR],

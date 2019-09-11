@@ -1,6 +1,9 @@
 import createReducer from '../../helpers/createReducer';
 
 import {
+  ADD_BOOKMARK_PENDING,
+  ADD_BOOKMARK_SUCCESS,
+  ADD_BOOKMARK_ERROR,
   REQ_BOOKMARK_PENDING,
   REQ_BOOKMARK_SUCCESS,
   REQ_BOOKMARK_ERROR,
@@ -133,6 +136,9 @@ function deleteBookmarkSuccess(state, action) {
 }
 
 export default createReducer(initialState, {
+  [ADD_BOOKMARK_PENDING]: bookmarkPending,
+  [ADD_BOOKMARK_SUCCESS]: bookmarkSuccess,
+  [ADD_BOOKMARK_ERROR]: bookmarkError,
   [REQ_BOOKMARK_PENDING]: bookmarkPending,
   [REQ_BOOKMARK_SUCCESS]: bookmarkSuccess,
   [REQ_BOOKMARK_ERROR]: bookmarkError,

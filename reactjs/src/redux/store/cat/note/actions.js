@@ -1,7 +1,11 @@
 /* eslint-disable import/prefer-default-export */
+import uuid from 'uuid/v4';
 import API from '../../../../API';
 
 import {
+  ADD_NOTE_PENDING,
+  ADD_NOTE_SUCCESS,
+  ADD_NOTE_ERROR,
   REQ_NOTE_PENDING,
   REQ_NOTE_SUCCESS,
   REQ_NOTE_ERROR,
@@ -15,6 +19,16 @@ import {
 
 // cache data for 5 minutes
 const CACHE_TIME = 1000 * 60 * 5;
+
+export const createNote = note => {
+  // create a uuid for this note so that we can use it in the reducer for pending and loading
+  const id = uuid();
+  return {
+    types: [ADD_NOTE_PENDING, ADD_NOTE_SUCCESS, ADD_NOTE_ERROR],
+    callAPI: () => API.post('/notes', { ...note, id }),
+    payload: { id }
+  };
+};
 
 export const fetchNote = id => ({
   types: [REQ_NOTE_PENDING, REQ_NOTE_SUCCESS, REQ_NOTE_ERROR],

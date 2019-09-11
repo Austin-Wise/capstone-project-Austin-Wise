@@ -1,7 +1,11 @@
 /* eslint-disable import/prefer-default-export */
+import uuid from 'uuid/v4';
 import API from '../../../../API';
 
 import {
+  ADD_JOURNAL_PENDING,
+  ADD_JOURNAL_SUCCESS,
+  ADD_JOURNAL_ERROR,
   REQ_JOURNAL_PENDING,
   REQ_JOURNAL_SUCCESS,
   REQ_JOURNAL_ERROR,
@@ -15,6 +19,16 @@ import {
 
 // cache data for 5 minutes
 const CACHE_TIME = 1000 * 60 * 5;
+
+export const createJournal = journal => {
+  // create a uuid for this journal so that we can use it in the reducer for pending and loading
+  const id = uuid();
+  return {
+    types: [ADD_JOURNAL_PENDING, ADD_JOURNAL_SUCCESS, ADD_JOURNAL_ERROR],
+    callAPI: () => API.post('/journals', { ...journal, id }),
+    payload: { id }
+  };
+};
 
 export const fetchJournal = id => ({
   types: [REQ_JOURNAL_PENDING, REQ_JOURNAL_SUCCESS, REQ_JOURNAL_ERROR],

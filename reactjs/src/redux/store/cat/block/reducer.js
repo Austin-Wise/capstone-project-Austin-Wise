@@ -1,6 +1,9 @@
 import createReducer from '../../helpers/createReducer';
 
 import {
+  ADD_BLOCK_PENDING,
+  ADD_BLOCK_SUCCESS,
+  ADD_BLOCK_ERROR,
   REQ_BLOCK_PENDING,
   REQ_BLOCK_SUCCESS,
   REQ_BLOCK_ERROR,
@@ -130,6 +133,9 @@ function deleteBlockSuccess(state, action) {
 }
 
 export default createReducer(initialState, {
+  [ADD_BLOCK_PENDING]: blockPending,
+  [ADD_BLOCK_SUCCESS]: blockSuccess,
+  [ADD_BLOCK_ERROR]: blockError,
   [REQ_BLOCK_PENDING]: blockPending,
   [REQ_BLOCK_SUCCESS]: blockSuccess,
   [REQ_BLOCK_ERROR]: blockError,

@@ -1,6 +1,9 @@
 import createReducer from '../../helpers/createReducer';
 
 import {
+  ADD_JOURNAL_PENDING,
+  ADD_JOURNAL_SUCCESS,
+  ADD_JOURNAL_ERROR,
   REQ_JOURNAL_PENDING,
   REQ_JOURNAL_SUCCESS,
   REQ_JOURNAL_ERROR,
@@ -130,6 +133,9 @@ function deleteJournalSuccess(state, action) {
 }
 
 export default createReducer(initialState, {
+  [ADD_JOURNAL_PENDING]: journalPending,
+  [ADD_JOURNAL_SUCCESS]: journalSuccess,
+  [ADD_JOURNAL_ERROR]: journalError,
   [REQ_JOURNAL_PENDING]: journalPending,
   [REQ_JOURNAL_SUCCESS]: journalSuccess,
   [REQ_JOURNAL_ERROR]: journalError,

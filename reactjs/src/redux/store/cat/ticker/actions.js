@@ -1,7 +1,11 @@
 /* eslint-disable import/prefer-default-export */
+import uuid from 'uuid/v4';
 import API from '../../../../API';
 
 import {
+  ADD_TICKER_PENDING,
+  ADD_TICKER_SUCCESS,
+  ADD_TICKER_ERROR,
   REQ_TICKER_PENDING,
   REQ_TICKER_SUCCESS,
   REQ_TICKER_ERROR,
@@ -15,6 +19,16 @@ import {
 
 // cache data for 5 minutes
 const CACHE_TIME = 1000 * 60 * 5;
+
+export const createTicker = ticker => {
+  // create a uuid for this ticker so that we can use it in the reducer for pending and loading
+  const id = uuid();
+  return {
+    types: [ADD_TICKER_PENDING, ADD_TICKER_SUCCESS, ADD_TICKER_ERROR],
+    callAPI: () => API.post('/tickers', { ...ticker, id }),
+    payload: { id }
+  };
+};
 
 export const fetchTicker = id => ({
   types: [REQ_TICKER_PENDING, REQ_TICKER_SUCCESS, REQ_TICKER_ERROR],

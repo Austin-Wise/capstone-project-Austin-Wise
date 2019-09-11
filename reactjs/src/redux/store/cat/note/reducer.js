@@ -1,6 +1,9 @@
 import createReducer from '../../helpers/createReducer';
 
 import {
+  ADD_NOTE_PENDING,
+  ADD_NOTE_SUCCESS,
+  ADD_NOTE_ERROR,
   REQ_NOTE_PENDING,
   REQ_NOTE_SUCCESS,
   REQ_NOTE_ERROR,
@@ -128,6 +131,9 @@ function deleteNoteSuccess(state, action) {
 }
 
 export default createReducer(initialState, {
+  [ADD_NOTE_PENDING]: notePending,
+  [ADD_NOTE_SUCCESS]: noteSuccess,
+  [ADD_NOTE_ERROR]: noteError,
   [REQ_NOTE_PENDING]: notePending,
   [REQ_NOTE_SUCCESS]: noteSuccess,
   [REQ_NOTE_ERROR]: noteError,
