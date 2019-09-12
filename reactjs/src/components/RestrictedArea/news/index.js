@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import {
   Jumbotron,
   Row,
@@ -11,38 +10,63 @@ import {
   CardFooter,
   Col
 } from 'reactstrap';
+import container from './container';
 
 import styles from './styles.module.css';
 
-export default class News extends React.PureComponent {
+class News extends Component {
+  constructor(props) {
+    super(props);
+    this.loadData();
+  }
+
+  loadData = () => {
+    const {
+      fetchArticles,
+      fetchCompanyData,
+      fetchBookmarks,
+      createBookmark,
+      match
+    } = this.props;
+    fetchCompanyData(match.params.ticker);
+    fetchArticles(match.params.ticker);
+    fetchBookmarks();
+  };
+
   render() {
-    const { company, news } = this.props;
+    const { companyData, articles, bookmarks } = this.props;
+    console.log(bookmarks);
     return (
       <Col md="8" className={styles.News}>
         <Jumbotron className={styles.Jumbo}>
           <Row>
             <div className="ml-5">
-              <h2>{company.ticker}</h2>
-              <h3>{company.name}</h3>
+              <h2>{companyData.ticker}</h2>
+              <h3>{companyData.name}</h3>
             </div>
             <h4>
               <span className={styles.dollar}>
-                {company.now > company.close
-                  ? `$${(company.now - company.close).toFixed(2)}`
-                  : (company.now - company.close)
+                {companyData.now > companyData.close
+                  ? `$${(companyData.now - companyData.close).toFixed(2)}`
+                  : (companyData.now - companyData.close)
                     .toFixed(2)
                     .replace(/-/g, '-$')}
               </span>
               <span className={styles.percent}>
-                {company.now > company.close
-                  ? `${((company.now / company.close) * 100 - 100).toFixed(2)}`
-                  : ((company.close / company.now) * 100 - 100).toFixed(2)}
+                {companyData.now > companyData.close
+                  ? `${(
+                    (companyData.now / companyData.close) * 100 -
+                      100
+                  ).toFixed(2)}`
+                  : ((companyData.close / companyData.now) * 100 - 100).toFixed(
+                    2
+                  )}
                 %
               </span>
               <img
                 className="ml-5"
                 src={
-                  company.now > company.close
+                  companyData.now > companyData.close
                     ? '/svg_css/greenArrow.svg'
                     : '/svg_css/redArrow.svg'
                 }
@@ -60,75 +84,75 @@ export default class News extends React.PureComponent {
             <Col md="4">
               <ul className={styles.CoList}>
                 <li>
-                  CEO:
-                  <span className={styles.coData}>{company.ceo}</span>
+                  CEO:&nbsp;
+                  <span className={styles.coData}>{companyData.ceo}</span>
                 </li>
                 <li>
-                  Employees:
-                  <span className={styles.coData}>{company.employees}</span>
+                  Employees:&nbsp;
+                  <span className={styles.coData}>{companyData.employees}</span>
                 </li>
                 <li>
-                  Industry Group:
-                  <span className={styles.coData}>{company.industry}</span>
+                  Industry Group:&nbsp;
+                  <span className={styles.coData}>{companyData.industry}</span>
                 </li>
                 <li>
-                  Location:
-                  <span className={styles.coData}>{company.location}</span>
-                </li>
-              </ul>
-            </Col>
-            <Col md="4">
-              <ul className={styles.CoList}>
-                <li>
-                  Open:
-                  <span className={styles.coData}>{company.open}</span>
-                </li>
-                <li>
-                  High:
-                  <span className={styles.coData}>{company.high}</span>
-                </li>
-                <li>
-                  Low:
-                  <span className={styles.coData}>{company.low}</span>
-                </li>
-                <li>
-                  Close:
-                  <span className={styles.coData}>{company.close}</span>
-                </li>
-                <li>
-                  Volume:
-                  <span className={styles.coData}>{company.volume}</span>
+                  Location:&nbsp;
+                  <span className={styles.coData}>{companyData.location}</span>
                 </li>
               </ul>
             </Col>
             <Col md="4">
               <ul className={styles.CoList}>
                 <li>
-                  Adj. Open:
-                  <span className={styles.coData}>{company.adjOpen}</span>
+                  Open:&nbsp;
+                  <span className={styles.coData}>{companyData.open}</span>
                 </li>
                 <li>
-                  Adj. High:
-                  <span className={styles.coData}>{company.adjHigh}</span>
+                  High:&nbsp;
+                  <span className={styles.coData}>{companyData.high}</span>
                 </li>
                 <li>
-                  Adj. Low:
-                  <span className={styles.coData}>{company.adjLow}</span>
+                  Low:&nbsp;
+                  <span className={styles.coData}>{companyData.low}</span>
                 </li>
                 <li>
-                  Adj. Close:
-                  <span className={styles.coData}>{company.adjClose}</span>
+                  Close:&nbsp;
+                  <span className={styles.coData}>{companyData.close}</span>
                 </li>
                 <li>
-                  Adj. Volume:
-                  <span className={styles.coData}>{company.adjVolume}</span>
+                  Volume:&nbsp;
+                  <span className={styles.coData}>{companyData.volume}</span>
+                </li>
+              </ul>
+            </Col>
+            <Col md="4">
+              <ul className={styles.CoList}>
+                <li>
+                  Adj. Open:&nbsp;
+                  <span className={styles.coData}>{companyData.adjOpen}</span>
+                </li>
+                <li>
+                  Adj. High:&nbsp;
+                  <span className={styles.coData}>{companyData.adjHigh}</span>
+                </li>
+                <li>
+                  Adj. Low:&nbsp;
+                  <span className={styles.coData}>{companyData.adjLow}</span>
+                </li>
+                <li>
+                  Adj. Close:&nbsp;
+                  <span className={styles.coData}>{companyData.adjClose}</span>
+                </li>
+                <li>
+                  Adj. Volume:&nbsp;
+                  <span className={styles.coData}>{companyData.adjVolume}</span>
                 </li>
               </ul>
             </Col>
           </Row>
         </Jumbotron>
         <Row className="d-flex justify-content-center">
-          {news.map(article => (
+          {articles.map(article => (
             <Card key={article.id} className="col-md-5 p-0 m-4">
               <CardBody className={styles.Card}>
                 <Row>
@@ -136,11 +160,19 @@ export default class News extends React.PureComponent {
                     <CardTitle>{article.title}</CardTitle>
                   </Col>
                   <Col md="2">
-                    <button
-                      type="button"
-                      className={styles.Bookmark}
-                      aria-labelledby="Bookmark"
-                    />
+                    {bookmarks.find(mark => mark.articleId === article.id) ? (
+                      <button
+                        type="button"
+                        className={styles.Bookmark}
+                        aria-labelledby="Bookmark Active"
+                      />
+                    ) : (
+                      <button
+                        type="button"
+                        className={styles.BookmarkInactive}
+                        aria-labelledby="Bookmark Inactive"
+                      />
+                    )}
                   </Col>
                 </Row>
                 <CardText className={styles.cardText}>{article.text}</CardText>
@@ -161,13 +193,15 @@ export default class News extends React.PureComponent {
   }
 }
 
+export default container(News);
+
 News.defaultProps = {
-  company: {},
+  companyData: {},
   news: []
 };
 
 News.propTypes = {
-  company: PropTypes.shape({
+  companyData: PropTypes.shape({
     name: PropTypes.string,
     ticker: PropTypes.string,
     ceo: PropTypes.string,

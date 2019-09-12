@@ -11,34 +11,99 @@ import {
   Input
 } from 'reactstrap';
 import container from './container';
-
 import styles from './styles.module.css';
 
 class NotesModal extends Component {
   constructor(props) {
     super(props);
-    props.fetchItems();
+    this.state = {
+      heading: '',
+      body: ''
+    };
+    this.loadData();
   }
 
   toggle = () => {
     const { history } = this.props;
-    history.push('/');
+    history.push('/bookmark');
+  };
+
+  handleInputChange = event => {
+    // get the input from the event
+    const { target } = event;
+    // find the value of the input
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    // get the name of the input from it's attribute
+    const { name } = target;
+    // set state to the name and the value.
+    this.setState({
+      [name]: value
+    });
+    console.log(name);
+  };
+
+  save = async event => {
+    // make sure the form doesn't submit with the browser
+    event.preventDefault();
+    const {
+      createNote,
+      updateNote,
+      match: {
+        params: { noteId }
+      }
+    } = this.props;
+    const { heading, body } = this.state;
+    if (noteId) {
+      await updateNote({ id: noteId, heading, body });
+    } else {
+      await createNote({ heading, body });
+    }
+    this.toggle();
+  };
+
+  loadData = async () => {
+    const {
+      match: {
+        params: { noteId }
+      },
+      fetchNote
+    } = this.props;
+    console.log(this.props.match.params);
+    if (!noteId) return;
+    await fetchNote(noteId);
+    // update state with data from updated item
+    const { note } = this.props;
+    this.setState({ ...note });
   };
 
   render() {
+    const { heading, body } = this.state;
+    const { match } = this.props;
     return (
       <Modal isOpen className={styles.modal}>
         <ModalHeader toggle={this.toggle} className={styles.h1}>
           New Note
         </ModalHeader>
         <ModalBody>
-          <Form id="Note">
+          <Form id="Note" onSubmit={this.save}>
+            <Input
+              type="text"
+              name="heading"
+              id="heading"
+              onChange={this.handleInputChange}
+              value={heading}
+              placeholder="Note Heading"
+              aria-label="New News Feed"
+              className={styles.input}
+            />
             <Input
               type="textarea"
-              name="newNote"
-              id="newNote"
-              aria-label="New Article Notes"
-              placeholder="Notes on Article"
+              name="body"
+              id="body"
+              onChange={this.handleInputChange}
+              value={body}
+              aria-label="Note Body"
+              placeholder="Notes on article..."
               rows="6"
             />
           </Form>
@@ -53,7 +118,7 @@ class NotesModal extends Component {
             form="Note"
             value="Submit"
             className="mb-3"
-            onClick={this.toggle}
+            // onClick={this.toggle}
           >
             Confirm
           </Button>
@@ -66,6 +131,17 @@ class NotesModal extends Component {
 export default container(NotesModal);
 
 NotesModal.propTypes = {
+  note: PropTypes.shape({
+    header: PropTypes.string,
+    body: PropTypes.string
+  }),
   history: ReactRouterPropTypes.history.isRequired,
-  fetchItems: PropTypes.func.isRequired
+  fetchNote: PropTypes.func.isRequired,
+  createNote: PropTypes.func.isRequired,
+  updateNote: PropTypes.func.isRequired,
+  deleteNote: PropTypes.func.isRequired
+};
+
+NotesModal.defaultProps = {
+  note: Object
 };

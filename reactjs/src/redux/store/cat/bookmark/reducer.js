@@ -53,7 +53,10 @@ function bookmarkSuccess(state, action) {
         isLoading: false,
         error: null,
         loadedAt: Date.now(),
-        data: action.data
+        data: {
+          ...action.data,
+          id: action.payload.id
+        }
       }
     },
     allIds: [...new Set([...state.allIds, action.payload.id])]

@@ -10,6 +10,9 @@ import {
   REQ_NOTES_PENDING,
   REQ_NOTES_SUCCESS,
   REQ_NOTES_ERROR,
+  UPDATE_NOTE_PENDING,
+  UPDATE_NOTE_SUCCESS,
+  UPDATE_NOTE_ERROR,
   DELETE_NOTE_PENDING,
   DELETE_NOTE_SUCCESS,
   DELETE_NOTE_ERROR
@@ -53,7 +56,10 @@ function noteSuccess(state, action) {
         isLoading: false,
         error: null,
         loadedAt: Date.now(),
-        data: action.data
+        data: {
+          ...action.data,
+          id: action.payload.id
+        }
       }
     },
     allIds: [...new Set([...state.allIds, action.payload.id])]
@@ -140,6 +146,9 @@ export default createReducer(initialState, {
   [REQ_NOTES_PENDING]: notesPending,
   [REQ_NOTES_SUCCESS]: notesSuccess,
   [REQ_NOTES_ERROR]: notesError,
+  [UPDATE_NOTE_PENDING]: notePending,
+  [UPDATE_NOTE_SUCCESS]: noteSuccess,
+  [UPDATE_NOTE_ERROR]: noteError,
   [DELETE_NOTE_PENDING]: notePending,
   [DELETE_NOTE_SUCCESS]: deleteNoteSuccess,
   [DELETE_NOTE_ERROR]: noteError

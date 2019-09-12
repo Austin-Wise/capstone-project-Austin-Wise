@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import {
   fetchBlocks,
-  deleteBlock
+  deleteBlock,
+  createBlock
 } from '../../../redux/store/cat/block/actions';
 
 function mapStateToProps(state) {
@@ -13,7 +14,7 @@ function mapStateToProps(state) {
 }
 
 // set the actions we need in this component
-const mapDispatchToProps = { fetchBlocks, deleteBlock };
+const mapDispatchToProps = { fetchBlocks, deleteBlock, createBlock };
 
 export default connect(
   mapStateToProps,

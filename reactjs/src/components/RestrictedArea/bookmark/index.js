@@ -10,13 +10,9 @@ import {
   CardText,
   CardFooter,
   Col,
-  Modal,
-  ModalHeader,
-  ModalFooter,
-  Button,
   NavItem
 } from 'reactstrap';
-import { Route, Link, NavLink as RRNavLink } from 'react-router-dom';
+import { Route, Link, NavLink as RRNavLink, Switch } from 'react-router-dom';
 import container from './container';
 import NotesModal from '../notes';
 import DeleteModal from '../../Shared/deleteModal';
@@ -29,7 +25,8 @@ class Bookmark extends Component {
   }
 
   loadData = async () => {
-    const { fetchBookmarks } = this.props;
+    const { fetchBookmarks, fetchNotes } = this.props;
+    fetchNotes();
     await fetchBookmarks();
     const { bookmarks, fetchArticle } = this.props;
     bookmarks.forEach(bookmark => {
@@ -38,18 +35,19 @@ class Bookmark extends Component {
   };
 
   render() {
-    const { bookmarks, deleteBookmark } = this.props;
+    const { bookmarks, deleteBookmark, notes } = this.props;
     return (
       <Col md="8">
         <Row className="d-flex justify-content-center">
-          {bookmarks.map(bookmark => (
-            <Card key={bookmark.id} className="col-md-5 p-0 m-4">
-              <CardBody className={styles.Card}>
-                <Row>
-                  <Col md="10">
-                    <CardTitle>{bookmark.article.title}</CardTitle>
-                  </Col>
-                  <Col md="2">
+          {bookmarks.map(bookmark => {
+            const note = notes.find(n => n.bookmarkId === bookmark.id);
+            return (
+              <Card key={bookmark.id} className="col-md-5 p-0 m-4">
+                <CardBody className={styles.Card}>
+                  <Row>
+                    <Col md="10">
+                      <CardTitle>{bookmark.article.title}</CardTitle>
+                    </Col>
                     <Link
                       to={`/bookmark/delete/${bookmark.id}`}
                       className={styles.Bookmark}
@@ -57,37 +55,59 @@ class Bookmark extends Component {
                     >
                       X
                     </Link>
-                  </Col>
-                </Row>
-                <CardText className={styles.cardText}>
-                  {bookmark.article.text}
-                </CardText>
-                <img
-                  src="/svg_css/scale-0.svg"
-                  alt="Scale Placeholder"
-                  className={styles.AnImage}
-                />
-                <NavItem
-                  className={('mr-5', styles.loginItem)}
-                  tag={RRNavLink}
-                  to="/:bookmarkId/note/:noteId"
-                  exact
-                >
-                  <img src="/svg_css/pencilEmpty.svg" alt="Notes Icon" />
-                </NavItem>
-              </CardBody>
-              <CardFooter>
-                Published on {bookmark.article.published} by &apos;
-                {bookmark.article.source}
-                &apos;
-              </CardFooter>
-            </Card>
-          ))}
+                  </Row>
+                  <CardText className={styles.cardText}>
+                    {bookmark.article.text}
+                  </CardText>
+                  <img
+                    src="/svg_css/scale-0.svg"
+                    alt="Scale Placeholder"
+                    className={styles.AnImage}
+                  />
+                  {note ? (
+                    <NavItem
+                      className={('mr-5', styles.loginItem)}
+                      tag={RRNavLink}
+                      to={`/bookmark/${bookmark.id}/note/${note.id}`}
+                      exact
+                    >
+                      <img src="/svg_css/pencil.svg" alt="Notes Icon" />
+                    </NavItem>
+                  ) : (
+                    <NavItem
+                      className={('mr-5', styles.loginItem)}
+                      tag={RRNavLink}
+                      to={`/bookmark/${bookmark.id}/note/new`}
+                      exact
+                    >
+                      <img src="/svg_css/pencilEmpty.svg" alt="Notes Icon" />
+                    </NavItem>
+                  )}
+                </CardBody>
+                <CardFooter>
+                  Published on {bookmark.article.published} by &apos;
+                  {bookmark.article.source}
+                  &apos;
+                </CardFooter>
+              </Card>
+            );
+          })}
         </Row>
-        {/* // ? new modal */}
-        <Route path="/:bookmarkId/note/new" exact component={NotesModal} />
-        {/* // ? existing modal */}
-        <Route path="/:bookmarkId/note/:noteId" exact component={NotesModal} />
+        <Switch>
+          {/* switch ensures only one modal will render...  */}
+          {/* // ? new modal */}
+          <Route
+            path="/bookmark/:bookmarkId/note/new"
+            exact
+            component={NotesModal}
+          />
+          {/* // ? existing modal */}
+          <Route
+            path="/bookmark/:bookmarkId/note/:noteId"
+            exact
+            component={NotesModal}
+          />
+        </Switch>
         <Route
           path="/bookmark/delete/:id"
           exact
@@ -103,7 +123,8 @@ class Bookmark extends Component {
 export default container(Bookmark);
 
 Bookmark.defaultProps = {
-  bookmarks: []
+  bookmarks: [],
+  notes: []
 };
 
 Bookmark.propTypes = {

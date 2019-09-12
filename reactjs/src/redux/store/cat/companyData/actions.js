@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-import uuid from 'uuid/v4';
 import API from '../../../../API';
 
 import {

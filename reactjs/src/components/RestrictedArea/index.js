@@ -1,11 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-return-assign */
 import React from 'react';
-
 import PropTypes from 'prop-types';
-
 import { NavLink, Nav, NavItem, Col, Row } from 'reactstrap';
-
 import { Route, NavLink as RRNavLink } from 'react-router-dom';
 
 import PortfolioPanel from './portfolioPanel';

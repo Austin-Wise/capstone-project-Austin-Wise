@@ -22,16 +22,16 @@ class Journal extends Component {
     this.state = {
       ticker: '',
       type: 'Long',
-      buyDate: Date.now,
-      qtyBuy: 0,
-      buyPrice: 0,
-      sellDate: Date.now,
-      qtySold: 0,
-      sellPrice: 0,
-      fees: 0,
+      buyDate: '',
+      qtyBuy: '',
+      buyPrice: '',
+      sellDate: '',
+      qtySold: '',
+      sellPrice: '',
+      fees: '',
       comment: ''
     };
-    this.fetchJournals();
+    props.fetchJournals();
   }
 
   handleInputChange = event => {
@@ -44,6 +44,36 @@ class Journal extends Component {
     // set state to the name and the value.
     this.setState({
       [name]: value
+    });
+  };
+
+  save = event => {
+    // make sure the form doesn't submit with the browser
+    event.preventDefault();
+    const { createJournal } = this.props;
+    const {
+      ticker,
+      type,
+      buyDate,
+      qtyBuy,
+      buyPrice,
+      sellDate,
+      qtySold,
+      sellPrice,
+      fees,
+      comment
+    } = this.state;
+    createJournal({
+      ticker,
+      type,
+      buyDate,
+      qtyBuy,
+      buyPrice,
+      sellDate,
+      qtySold,
+      sellPrice,
+      fees,
+      comment
     });
   };
 
@@ -68,7 +98,7 @@ class Journal extends Component {
           <Container fluid>
             <h1 className="display-3">New Entry</h1>
           </Container>
-          <Form className={styles.Form}>
+          <Form className={styles.Form} onSubmit={this.save}>
             <Row form>
               <Col md="8">
                 <Row form>
@@ -89,7 +119,7 @@ class Journal extends Component {
                   <Col md="6">
                     <Input
                       type="number"
-                      name="qtyBought"
+                      name="qtyBuy"
                       id="qtyBuy"
                       min="0"
                       step="1"
@@ -158,7 +188,7 @@ class Journal extends Component {
                       name="fees"
                       id="fees"
                       placeholder="Fees"
-                      onChange={this.fees}
+                      onChange={this.handleInputChange}
                       value={fees}
                       aria-label="Fees"
                       className={styles.InputItem}
@@ -185,7 +215,7 @@ class Journal extends Component {
                 <Row form>
                   <Col md="6">
                     <Input
-                      type="datetime"
+                      type="date"
                       name="buyDate"
                       id="buyDate"
                       placeholder="Buy Date"
@@ -197,7 +227,7 @@ class Journal extends Component {
                   </Col>
                   <Col md="6">
                     <Input
-                      type="datetime"
+                      type="date"
                       name="sellDate"
                       id="sellDate"
                       placeholder="Sell Date"
@@ -212,7 +242,7 @@ class Journal extends Component {
                   <Col md="12">
                     <Input
                       type="textarea"
-                      name="text"
+                      name="comment"
                       id="comments"
                       placeholder="Comments"
                       onChange={this.handleInputChange}
@@ -302,7 +332,9 @@ Journal.propTypes = {
       comments: PropTypes.string
     })
   ),
-  fetchItems: PropTypes.func.isRequired
+  createJournal: PropTypes.func.isRequired,
+  fetchJournals: PropTypes.func.isRequired,
+  deleteJournal: PropTypes.func.isRequired
 };
 
 Journal.defaultProps = {

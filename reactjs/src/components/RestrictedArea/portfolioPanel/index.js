@@ -26,7 +26,7 @@ class PortfolioPanel extends Component {
   };
 
   render() {
-    const { tickers, deleteTicker, location, match } = this.props;
+    const { tickers, deleteTicker, match } = this.props;
     if (match.url === '/' && tickers[0])
       return <Redirect to={`/news/${tickers[0].symbol}`} />;
     return (
@@ -85,7 +85,7 @@ PortfolioPanel.propTypes = {
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
-      ticker: PropTypes.string,
+      symbol: PropTypes.string,
       ceo: PropTypes.string,
       employees: PropTypes.number,
       industry: PropTypes.string,

@@ -12,6 +12,9 @@ import {
   REQ_NOTES_PENDING,
   REQ_NOTES_SUCCESS,
   REQ_NOTES_ERROR,
+  UPDATE_NOTE_PENDING,
+  UPDATE_NOTE_SUCCESS,
+  UPDATE_NOTE_ERROR,
   DELETE_NOTE_PENDING,
   DELETE_NOTE_SUCCESS,
   DELETE_NOTE_ERROR
@@ -59,8 +62,14 @@ export const fetchNotes = () => ({
   }
 });
 
+export const updateNote = note => ({
+  types: [UPDATE_NOTE_PENDING, UPDATE_NOTE_SUCCESS, UPDATE_NOTE_ERROR],
+  callAPI: () => API.put(`/notes/${note.id}`, note),
+  payload: { id: note.id }
+});
+
 export const deleteNote = id => ({
   types: [DELETE_NOTE_PENDING, DELETE_NOTE_SUCCESS, DELETE_NOTE_ERROR],
-  callAPI: () => API.delete(`/bookmarks/${id}`),
+  callAPI: () => API.delete(`/notes/${id}`),
   payload: { id }
 });

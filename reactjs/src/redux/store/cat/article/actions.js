@@ -43,11 +43,11 @@ export const fetchArticle = id => ({
   payload: { id }
 });
 
-export const fetchArticles = () => ({
+export const fetchArticles = keyword => ({
   // types for this action - "request, success, error"
   types: [REQ_ARTICLES_PENDING, REQ_ARTICLES_SUCCESS, REQ_ARTICLES_ERROR],
   //  a function used to call the api
-  callAPI: () => API.get('/articles'),
+  callAPI: () => API.get(`/articles?ticker=${keyword}`),
   // receives the current app state and returns true if we should call the api
   shouldCallAPI: state => {
     const { loadedAt, isLoading } = state.articles;

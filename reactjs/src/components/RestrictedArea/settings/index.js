@@ -1,5 +1,8 @@
-import { React, Component } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { Component } from 'react';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
+import { Route, Link, NavLink as RRNavLink } from 'react-router-dom';
 
 import {
   Row,
@@ -11,7 +14,7 @@ import {
   Button
 } from 'reactstrap';
 import container from './container';
-
+import DeleteModal from '../../Shared/deleteModal';
 import styles from './styles.module.css';
 
 class Settings extends Component {
@@ -20,8 +23,31 @@ class Settings extends Component {
     props.fetchBlocks();
   }
 
+  handleInputChange = event => {
+    // get the input from the event
+    const { target } = event;
+    // find the value of the input
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    // get the name of the input from it's attribute
+    const { name } = target;
+    // set state to the name and the value. For example, { description: 'hi'}
+    this.setState({
+      [name]: value
+    });
+  };
+
+  save = event => {
+    // make sure the form doesn't submit with the browser
+    event.preventDefault();
+    const { createBlock } = this.props;
+    const { name } = this.state;
+    createBlock({
+      name
+    });
+  };
+
   render() {
-    const { blocks, user } = this.props;
+    const { blocks, user, deleteBlock, match } = this.props;
     return (
       <Col md="8" className={styles.Settings}>
         <div>
@@ -38,19 +64,23 @@ class Settings extends Component {
         <div>
           <Col md="5" className="pl-0">
             <h3>Block List</h3>
-            <Form className="p-0 mb-3">
+            <Form className="p-0 mb-3" onSubmit={this.save}>
               <Row className="p-3 ">
                 <Col md="8" className="">
                   <Input
                     type="text"
-                    name="block"
-                    id="block"
+                    name="name"
+                    id="name"
+                    value={blocks.name}
+                    onChange={this.handleInputChange}
                     placeholder="Block News Agency"
                     className={styles.InputItem}
                   />
                 </Col>
                 <Col md="3" className="p-0">
-                  <Button color="success">Submit</Button>
+                  <Button color="success" type="submit" value="Submit">
+                    Submit
+                  </Button>
                 </Col>
               </Row>
             </Form>
@@ -58,19 +88,25 @@ class Settings extends Component {
               {blocks.map(block => (
                 <ListGroupItem>
                   <p>{block.name}</p>
-                  <button type="button">
-                    <img
-                      src="/svg_css/Delete.svg"
-                      alt="X"
-                      height="24"
-                      width="24"
-                    />
-                  </button>
+                  <Link
+                    to={`/settings/delete_block/${block.id}`}
+                    className={styles.Bookmark}
+                    aria-labelledby="bookmark"
+                  >
+                    X
+                  </Link>
                 </ListGroupItem>
               ))}
             </ListGroup>
           </Col>
         </div>
+        <Route
+          path="/settings/delete_block/:id"
+          exact
+          render={routeProps => (
+            <DeleteModal deleteFunc={deleteBlock} {...routeProps} />
+          )}
+        />
       </Col>
     );
   }
@@ -91,7 +127,9 @@ Settings.propTypes = {
     email: PropTypes.string
   }),
   fetchBlocks: PropTypes.func.isRequired,
-  deleteBlock: PropTypes.func.isRequired
+  deleteBlock: PropTypes.func.isRequired,
+  createBlock: PropTypes.func.isRequired,
+  match: ReactRouterPropTypes.match.isRequired
 };
 
 Settings.defaultProps = {
