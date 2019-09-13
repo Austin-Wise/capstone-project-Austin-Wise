@@ -28,6 +28,18 @@ class NotesModal extends Component {
     history.push('/bookmark');
   };
 
+  deleteNote = async () => {
+    const {
+      deleteNote,
+      history,
+      match: {
+        params: { id }
+      }
+    } = this.props;
+    await deleteNote(id);
+    history.goBack();
+  };
+
   handleInputChange = event => {
     // get the input from the event
     const { target } = event;
@@ -39,7 +51,6 @@ class NotesModal extends Component {
     this.setState({
       [name]: value
     });
-    console.log(name);
   };
 
   save = async event => {
@@ -49,28 +60,28 @@ class NotesModal extends Component {
       createNote,
       updateNote,
       match: {
-        params: { noteId }
+        params: { bookmarkId, id }
       }
     } = this.props;
     const { heading, body } = this.state;
-    if (noteId) {
-      await updateNote({ id: noteId, heading, body });
+    if (id) {
+      await updateNote({ id, heading, body });
     } else {
-      await createNote({ heading, body });
+      await createNote({ bookmarkId, heading, body });
     }
+
     this.toggle();
   };
 
   loadData = async () => {
     const {
       match: {
-        params: { noteId }
+        params: { id }
       },
       fetchNote
     } = this.props;
-    console.log(this.props.match.params);
-    if (!noteId) return;
-    await fetchNote(noteId);
+    if (!id) return;
+    await fetchNote(id);
     // update state with data from updated item
     const { note } = this.props;
     this.setState({ ...note });
@@ -82,7 +93,7 @@ class NotesModal extends Component {
     return (
       <Modal isOpen className={styles.modal}>
         <ModalHeader toggle={this.toggle} className={styles.h1}>
-          New Note
+          {match.params.id ? 'Edit Note' : 'New Note'}
         </ModalHeader>
         <ModalBody>
           <Form id="Note" onSubmit={this.save}>
@@ -109,6 +120,11 @@ class NotesModal extends Component {
           </Form>
         </ModalBody>
         <ModalFooter>
+          {match.params.id && (
+            <Button color="danger" onClick={this.deleteNote}>
+              Delete Note
+            </Button>
+          )}
           <Button color="danger" onClick={this.toggle} className="mr-5">
             Cancel
           </Button>

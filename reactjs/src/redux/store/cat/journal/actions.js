@@ -12,6 +12,9 @@ import {
   REQ_JOURNALS_PENDING,
   REQ_JOURNALS_SUCCESS,
   REQ_JOURNALS_ERROR,
+  UPDATE_JOURNAL_PENDING,
+  UPDATE_JOURNAL_SUCCESS,
+  UPDATE_JOURNAL_ERROR,
   DELETE_JOURNAL_PENDING,
   DELETE_JOURNAL_SUCCESS,
   DELETE_JOURNAL_ERROR
@@ -59,8 +62,14 @@ export const fetchJournals = () => ({
   }
 });
 
+export const updateJournal = journal => ({
+  types: [UPDATE_JOURNAL_PENDING, UPDATE_JOURNAL_SUCCESS, UPDATE_JOURNAL_ERROR],
+  callAPI: () => API.put(`/journals/${journal.id}`, journal),
+  payload: { id: journal.id }
+});
+
 export const deleteJournal = id => ({
   types: [DELETE_JOURNAL_PENDING, DELETE_JOURNAL_SUCCESS, DELETE_JOURNAL_ERROR],
-  callAPI: () => API.delete(`/bookmarks/${id}`),
+  callAPI: () => API.delete(`/journals/${id}`),
   payload: { id }
 });

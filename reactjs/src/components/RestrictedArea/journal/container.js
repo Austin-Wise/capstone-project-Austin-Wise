@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import {
   fetchJournals,
   createJournal,
-  deleteJournal
+  deleteJournal,
+  updateJournal
 } from '../../../redux/store/cat/journal/actions';
 
 function mapStateToProps(state) {
@@ -15,7 +16,12 @@ function mapStateToProps(state) {
 }
 
 // set the actions we need in this component
-const mapDispatchToProps = { fetchJournals, createJournal, deleteJournal };
+const mapDispatchToProps = {
+  fetchJournals,
+  createJournal,
+  deleteJournal,
+  updateJournal
+};
 
 export default connect(
   mapStateToProps,

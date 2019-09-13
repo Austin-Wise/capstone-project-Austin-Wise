@@ -20,16 +20,18 @@ class Journal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticker: '',
-      type: 'Long',
-      buyDate: '',
-      qtyBuy: '',
-      buyPrice: '',
-      sellDate: '',
-      qtySold: '',
-      sellPrice: '',
-      fees: '',
-      comment: ''
+      journal: {
+        ticker: '',
+        type: 'Long',
+        buyDate: '',
+        qtyBuy: '',
+        buyPrice: '',
+        sellDate: '',
+        qtySold: '',
+        sellPrice: '',
+        fees: '',
+        comment: ''
+      }
     };
     props.fetchJournals();
   }
@@ -42,61 +44,47 @@ class Journal extends Component {
     // get the name of the input from it's attribute
     const { name } = target;
     // set state to the name and the value.
+    const { journal } = this.state;
     this.setState({
-      [name]: value
+      journal: { ...journal, [name]: value }
     });
   };
 
   save = event => {
     // make sure the form doesn't submit with the browser
     event.preventDefault();
-    const { createJournal } = this.props;
+    const { journal } = this.state;
+    const { createJournal, updateJournal } = this.props;
+
+    if (journal.id) {
+      updateJournal(journal);
+    } else {
+      createJournal(journal);
+    }
+  };
+
+  deleteJournalFunc = async id => {
     const {
-      ticker,
-      type,
-      buyDate,
-      qtyBuy,
-      buyPrice,
-      sellDate,
-      qtySold,
-      sellPrice,
-      fees,
-      comment
-    } = this.state;
-    createJournal({
-      ticker,
-      type,
-      buyDate,
-      qtyBuy,
-      buyPrice,
-      sellDate,
-      qtySold,
-      sellPrice,
-      fees,
-      comment
-    });
+      deleteJournal,
+      history,
+      match: {
+        params: { id }
+      }
+    } = this.props;
+    await deleteJournal(id);
   };
 
   render() {
     const { journals } = this.props;
     // pull the data from state
-    const {
-      ticker,
-      type,
-      buyDate,
-      qtyBuy,
-      buyPrice,
-      sellDate,
-      qtySold,
-      sellPrice,
-      fees,
-      comment
-    } = this.state;
+    const { journal } = this.state;
     return (
       <Col md="8" className={styles.Section}>
         <Jumbotron className={styles.Jumbo}>
           <Container fluid>
-            <h1 className="display-3">New Entry</h1>
+            <h1 className="display-3">
+              {journal.id ? 'Edit Entry' : 'New Entry'}
+            </h1>
           </Container>
           <Form className={styles.Form} onSubmit={this.save}>
             <Row form>
@@ -108,7 +96,7 @@ class Journal extends Component {
                       name="ticker"
                       id="ticker"
                       onChange={this.handleInputChange}
-                      value={ticker}
+                      value={journal.ticker}
                       aria-label="Ticker Name"
                       placeholder="Ticker"
                       className={styles.InputItem}
@@ -124,7 +112,7 @@ class Journal extends Component {
                       min="0"
                       step="1"
                       onChange={this.handleInputChange}
-                      value={qtyBuy}
+                      value={journal.qtyBuy}
                       aria-label="Buy Quantity"
                       placeholder="QTY Buy"
                       className={styles.InputItem}
@@ -138,7 +126,7 @@ class Journal extends Component {
                       min="0"
                       step="1"
                       onChange={this.handleInputChange}
-                      value={qtySold}
+                      value={journal.qtySold}
                       aria-label="Sell Quantity"
                       placeholder="Qty Sold"
                       className={styles.InputItem}
@@ -156,7 +144,7 @@ class Journal extends Component {
                         name="buyPrice"
                         id="buyPrice"
                         onChange={this.handleInputChange}
-                        value={buyPrice}
+                        value={journal.buyPrice}
                         aria-label="Buy Price"
                         placeholder="Buy Price"
                       />
@@ -172,7 +160,7 @@ class Journal extends Component {
                         name="sellPrice"
                         id="sellPrice"
                         onChange={this.handleInputChange}
-                        value={sellPrice}
+                        value={journal.sellPrice}
                         aria-label="Sell Price"
                         placeholder="Sell Price"
                       />
@@ -189,7 +177,7 @@ class Journal extends Component {
                       id="fees"
                       placeholder="Fees"
                       onChange={this.handleInputChange}
-                      value={fees}
+                      value={journal.fees}
                       aria-label="Fees"
                       className={styles.InputItem}
                     />
@@ -201,7 +189,7 @@ class Journal extends Component {
                       id="tradeType"
                       placeholder="Long / Short"
                       onChange={this.handleInputChange}
-                      value={type}
+                      value={journal.type}
                       aria-label="Trade Type"
                       className={styles.InputItem}
                     >
@@ -220,7 +208,7 @@ class Journal extends Component {
                       id="buyDate"
                       placeholder="Buy Date"
                       onChange={this.handleInputChange}
-                      value={buyDate}
+                      value={journal.buyDate}
                       aria-label="Buy Date"
                       className={styles.InputItem}
                     />
@@ -232,7 +220,7 @@ class Journal extends Component {
                       id="sellDate"
                       placeholder="Sell Date"
                       onChange={this.handleInputChange}
-                      value={sellDate}
+                      value={journal.sellDate}
                       aria-label="Sell Date"
                       className={styles.InputItem}
                     />
@@ -246,7 +234,7 @@ class Journal extends Component {
                       id="comments"
                       placeholder="Comments"
                       onChange={this.handleInputChange}
-                      value={comment}
+                      value={journal.comment}
                       aria-label="Comments"
                       rows="6"
                     />
@@ -277,35 +265,43 @@ class Journal extends Component {
               <td>Sell Price</td>
               <td>Fees</td>
               <td>Gain/Loss</td>
+              <td />
             </tr>
           </thead>
           <tbody>
-            {journals.map(journal => (
+            {journals.map(entry => (
               <tr
-                key={journal.id}
+                key={entry.id}
                 onClick={() => {
-                  this.setState(journal);
+                  this.setState({ journal: entry });
                 }}
               >
-                <td>{journal.ticker}</td>
-                <td>{journal.type}</td>
-                <td>{journal.buyDate}</td>
-                <td>{journal.qtyBuy}</td>
-                <td>{journal.buyPrice}</td>
-                <td>{journal.sellDate}</td>
-                <td>{journal.qtySold}</td>
-                <td>{journal.sellPrice}</td>
-                <td>{journal.fees}</td>
+                <td>{entry.ticker}</td>
+                <td>{entry.type}</td>
+                <td>{entry.buyDate}</td>
+                <td>{entry.qtyBuy}</td>
+                <td>{entry.buyPrice}</td>
+                <td>{entry.sellDate}</td>
+                <td>{entry.qtySold}</td>
+                <td>{entry.sellPrice}</td>
+                <td>{entry.fees}</td>
                 <td>
-                  {(journal.type === 'Long'
-                    ? journal.sellPrice * journal.qtySold -
-                      journal.buyPrice * journal.qtyBuy -
-                      journal.fees
-                    : journal.buyPrice * journal.qtyBuy -
-                      journal.sellPrice * journal.qtySold -
-                      journal.fees
+                  {(entry.type === 'Long'
+                    ? entry.sellPrice * entry.qtySold -
+                      entry.buyPrice * entry.qtyBuy -
+                      entry.fees
+                    : entry.buyPrice * entry.qtyBuy -
+                      entry.sellPrice * entry.qtySold -
+                      entry.fees
                   ).toFixed(2)}
                 </td>
+                <Button
+                  color="danger"
+                  onClick={this.deleteJournalFunc(entry.id)}
+                >
+                  Delete Journal
+                </Button>
+                <td />
               </tr>
             ))}
           </tbody>
@@ -334,7 +330,8 @@ Journal.propTypes = {
   ),
   createJournal: PropTypes.func.isRequired,
   fetchJournals: PropTypes.func.isRequired,
-  deleteJournal: PropTypes.func.isRequired
+  deleteJournal: PropTypes.func.isRequired,
+  updateJournal: PropTypes.func.isRequired
 };
 
 Journal.defaultProps = {

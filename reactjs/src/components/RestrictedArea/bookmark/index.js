@@ -103,7 +103,7 @@ class Bookmark extends Component {
           />
           {/* // ? existing modal */}
           <Route
-            path="/bookmark/:bookmarkId/note/:noteId"
+            path="/bookmark/:bookmarkId/note/:id"
             exact
             component={NotesModal}
           />

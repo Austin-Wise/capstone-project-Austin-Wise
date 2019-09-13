@@ -10,12 +10,12 @@ import {
 function mapStateToProps(state, props) {
   const {
     match: {
-      params: { noteId }
+      params: { id }
     }
   } = props;
   const {
     notes: {
-      byId: { [noteId]: { data: note } = {} }
+      byId: { [id]: { data: note } = {} }
     }
   } = state;
   // turn the array of ids into an array of objects
