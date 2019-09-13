@@ -63,14 +63,8 @@ class Journal extends Component {
     }
   };
 
-  deleteJournalFunc = async id => {
-    const {
-      deleteJournal,
-      history,
-      match: {
-        params: { id }
-      }
-    } = this.props;
+  deleteJournalFunc = id => async () => {
+    const { deleteJournal } = this.props;
     await deleteJournal(id);
   };
 
@@ -86,7 +80,11 @@ class Journal extends Component {
               {journal.id ? 'Edit Entry' : 'New Entry'}
             </h1>
           </Container>
-          <Form className={styles.Form} onSubmit={this.save}>
+          <Form
+            className={styles.Form}
+            onSubmit={this.save}
+            onReset={() => this.setState({ journal: {} })}
+          >
             <Row form>
               <Col md="8">
                 <Row form>
@@ -295,13 +293,14 @@ class Journal extends Component {
                       entry.fees
                   ).toFixed(2)}
                 </td>
-                <Button
-                  color="danger"
-                  onClick={this.deleteJournalFunc(entry.id)}
-                >
-                  Delete Journal
-                </Button>
-                <td />
+                <td>
+                  <button
+                    className={styles.DeleteButton}
+                    onClick={this.deleteJournalFunc(entry.id)}
+                  >
+                    X
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
