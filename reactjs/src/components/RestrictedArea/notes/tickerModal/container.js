@@ -1,8 +1,8 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   fetchTicker,
   createTicker
-} from "../../../redux/store/cat/ticker/actions";
+} from '../../../../redux/store/cat/ticker/actions';
 
 function mapStateToProps(state) {
   const {
