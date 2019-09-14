@@ -12,28 +12,28 @@ import styles from './styles.module.css';
 const items = [
   {
     heading: 'Sentimental Analysis',
-    image: 'svg_css/NaturalLanguageProcessing.svg',
+    image: '/svg_css/NaturalLanguageProcessing.svg',
     body:
       'We analyze the tonality of articles pertaining to your investments using powerful Natural Language tools.',
     extra: true
   },
   {
     heading: 'Real-Time Stock Data',
-    image: 'svg_css/Stock.svg',
+    image: '/svg_css/Stock.svg',
     body:
       'We display live stock data alongside relevant breaking news to better contextualize breaking news.',
     extra: ''
   },
   {
     heading: 'Trading Journal',
-    image: 'svg_css/Data.svg',
+    image: '/svg_css/Data.svg',
     body:
       'We offer a place for you to log your trade history and relevant news sources that may have influenced your trading decisions.',
     extra: ''
   },
   {
     heading: 'Company Overview',
-    image: 'svg_css/Business.svg',
+    image: '/svg_css/Business.svg',
     body:
       'We display detailed company descriptions to allow deeper understanding of the community behind your next hot stock.',
     extra: ''
@@ -50,7 +50,7 @@ class FeatureCarousel extends Component {
     };
   }
 
-  incrementCount(count) {
+  incrementCount = count => () => {
     if (count < items.length - 1) {
       this.setState({
         count: count + 1
@@ -60,9 +60,9 @@ class FeatureCarousel extends Component {
         count: 0
       });
     }
-  }
+  };
 
-  decrementCount(count) {
+  decrementCount = count => () => {
     if (count > 0) {
       this.setState({
         count: count - 1
@@ -72,7 +72,7 @@ class FeatureCarousel extends Component {
         count: items.length - 1
       });
     }
-  }
+  };
 
   render() {
     const { count } = this.state;

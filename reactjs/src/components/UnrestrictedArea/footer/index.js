@@ -46,7 +46,7 @@ class Footer extends React.Component {
           <NavbarBrand tag={RRNavLink} to="/landing" className={styles.logo}>
             <img
               alt="TKRtape Logo"
-              src="/svg_css/Logo.svg"
+              src="/svg_css/Home.svg"
               width="46"
               height="56"
               className="d-inline-block align-top mr-5"

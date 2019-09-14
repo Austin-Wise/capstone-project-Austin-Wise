@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
 import {
   Button,
@@ -16,8 +17,9 @@ import {
 import styles from './styles.module.css';
 
 export default class RegisterModal extends Component {
-  toggle = props => {
-    props.history.push('/');
+  toggle = () => {
+    const { history } = this.props;
+    history.push('/');
   };
 
   render() {
@@ -111,5 +113,6 @@ export default class RegisterModal extends Component {
 }
 
 RegisterModal.propTypes = {
-  className: PropTypes.string.isRequired
+  className: PropTypes.string.isRequired,
+  history: ReactRouterPropTypes.history.isRequired
 };

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+// ?Provider makes the Redux store available to any nested components that have been wrapped in the connect() function.
 
 import Landing from './components/UnrestrictedArea';
 import UserArea from './components/RestrictedArea';
+import store from './redux/store';
 
 class App extends Component {
   constructor(props) {
@@ -12,16 +15,16 @@ class App extends Component {
   }
 
   render() {
-    const loggedIn = true;
+    const loggedIn = false;
     return (
-      <div className="App" id="#override">
+      <Provider store={store}>
         <Router>
           <Switch>
             {!loggedIn && <Route path="/" component={Landing} />}
             {loggedIn && <Route path="/" component={UserArea} />}
           </Switch>
         </Router>
-      </div>
+      </Provider>
     );
   }
 }

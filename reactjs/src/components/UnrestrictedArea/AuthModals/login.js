@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
 import {
   Button,
@@ -14,14 +14,14 @@ import {
 import styles from './styles.module.css';
 
 export default class LoginModal extends Component {
-  toggle = props => {
-    props.history.push('/');
+  toggle = () => {
+    const { history } = this.props;
+    history.push('/');
   };
 
   render() {
-    const { className } = this.props;
     return (
-      <Modal isOpen className={(className, styles.modal)}>
+      <Modal isOpen className={styles.modal}>
         <ModalHeader toggle={this.toggle} className={styles.h1}>
           Login
         </ModalHeader>
@@ -69,5 +69,5 @@ export default class LoginModal extends Component {
 }
 
 LoginModal.propTypes = {
-  className: PropTypes.string.isRequired
+  history: ReactRouterPropTypes.history.isRequired
 };
