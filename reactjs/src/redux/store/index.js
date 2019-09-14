@@ -51,5 +51,3 @@ const middleware = applyMiddleware(thunkMiddleware, callAPI, createLogger());
 export const store = createStore(persistedReducer, middleware);
 
 export const persistor = persistStore(store);
-
-export default store;
