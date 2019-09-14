@@ -3,6 +3,7 @@
   height: 100%;
   border-radius: 5px 0 0 5px;
   padding: 6.4rem 12.8rem;
+  margin: 5vh auto;
 }
 
 .c2a > *:not(:last-child) {
@@ -10,11 +11,11 @@
 }
 
 .c2aBack {
-  height: 95vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background: url(/svg_css/shattered-dark.svg) repeat;
+  min-height: 100vh;
 }
 
 .c2a button,

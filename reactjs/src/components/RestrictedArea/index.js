@@ -1,22 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-return-assign */
 import React from 'react';
-
 import PropTypes from 'prop-types';
-
-import {
-  NavLink,
-  Nav,
-  NavItem,
-  Col,
-  Row,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Input
-} from 'reactstrap';
-
+import { NavLink, Nav, NavItem, Col, Row } from 'reactstrap';
 import { Route, NavLink as RRNavLink } from 'react-router-dom';
 
 import PortfolioPanel from './portfolioPanel';
@@ -26,54 +12,68 @@ import Bookmark from './bookmark';
 import Settings from './settings';
 
 import styles from './styles.module.css';
+import TickerModal from './tickerModal';
 
 export default class UserArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      isOpen: false
     };
-
     this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
     this.setState(prevState => ({
-      modal: !prevState.modal
+      isOpen: !prevState.isOpen
     }));
   }
 
+  // Match url always matches "/", moving the "/" to the end of the array for route wildcards allows for if/else checking on route alternatives
+
   render() {
-    const { className } = this.props;
-    const { modal } = this.state;
+    const { navigation, match } = this.props;
+    const { isOpen } = this.state;
     return (
       <div className="container-fluid">
         <Row>
           <Col md="4" className={styles.Navigation}>
             <Nav tabs className={styles.NavHeader}>
               {navigation.map(link => (
-                <NavItem>
+                <NavItem key={link.name}>
                   <NavLink
                     tag={RRNavLink}
-                    to={link.to}
+                    to={link.path}
                     activeStyle={{
-                      backgroundImage: `/svg_css/${link.name}.svg`,
+                      backgroundImage: `url(/svg_css/${link.name}.svg)`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'contain',
                       height: '32px',
                       width: '32px',
-                      backgroundPosition: 'center'
+                      border: 'none'
                     }}
                     style={{
-                      backgroundImage: `/svg_css/${link.name}Inactive.svg`,
+                      backgroundImage: `url(/svg_css/${link.name}Inactive.svg)`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'contain',
                       height: '32px',
-                      width: '32px',
-                      backgroundPosition: 'center'
+                      width: '32px'
                     }}
                   />
                 </NavItem>
               ))}
             </Nav>
-            <PortfolioPanel />
-            <Nav>
+            <Route
+              path={[
+                '/news/:ticker',
+                '/journal',
+                '/bookmark',
+                '/settings',
+                '/'
+              ]}
+              component={PortfolioPanel}
+            />
+            <Nav className={styles.footer}>
               <NavItem>
                 <NavLink active href="#">
                   Log Out
@@ -90,35 +90,9 @@ export default class UserArea extends React.Component {
               </NavItem>
             </Nav>
           </Col>
-          <div>
-            <Modal
-              isOpen={modal}
-              toggle={this.toggle}
-              className={(className, styles.Modal)}
-            >
-              <ModalHeader className={styles.ModalHeader} toggle={this.toggle}>
-                New Feed
-              </ModalHeader>
-              <ModalBody>
-                <Input
-                  type="text"
-                  id="newFeed"
-                  name="newFeed"
-                  placeholder="Ticker Symbol"
-                />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" onClick={this.toggle}>
-                  Cancel
-                </Button>
-                <Button color="primary" onClick={this.toggle}>
-                  Save
-                </Button>
-              </ModalFooter>
-            </Modal>
-          </div>
-          <Route path="/" component={News} />
-          <Route path="/news" component={News} />
+          <Route path="/" exact component={News} />
+          <Route path="/news/:ticker" component={News} />
+          <Route path="/news/new" component={TickerModal} />
           <Route path="/journal" component={Journal} />
           <Route path="/bookmark" component={Bookmark} />
           <Route path="/settings" component={Settings} />
@@ -129,12 +103,13 @@ export default class UserArea extends React.Component {
 }
 
 UserArea.propTypes = {
-  className: PropTypes.string.isRequired,
-  navigation: PropTypes.shape({
-    name: PropTypes.string,
-    to: PropTypes.string,
-    imgSrc: PropTypes.string
-  })
+  navigation: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      to: PropTypes.string,
+      imgSrc: PropTypes.string
+    })
+  )
 };
 
 UserArea.defaultProps = {

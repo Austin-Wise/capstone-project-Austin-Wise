@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,198 +10,145 @@ import {
   CardText,
   CardFooter,
   Col,
-  Modal,
-  ModalHeader,
-  ModalFooter,
-  Button
+  NavItem
 } from 'reactstrap';
-
+import { Route, Link, NavLink as RRNavLink, Switch } from 'react-router-dom';
+import container from './container';
+import NotesModal from '../notes';
+import DeleteModal from '../../Shared/deleteModal';
 import styles from './styles.module.css';
 
 class Bookmark extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modal: false,
-      notesModal: false
-    };
-
-    this.toggleBookmark = this.toggleBookmark.bind(this);
-    this.toggleNotes = this.toggleNotes.bind(this);
+    this.loadData();
   }
 
-  toggleBookmark() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
-
-  toggleNotes() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
+  loadData = async () => {
+    const { fetchBookmarks, fetchNotes } = this.props;
+    fetchNotes();
+    await fetchBookmarks();
+    const { bookmarks, fetchArticle } = this.props;
+    bookmarks.forEach(bookmark => {
+      fetchArticle(bookmark.articleId);
+    });
+  };
 
   render() {
-    const { news, className } = this.props;
-    const { modal, notesModal } = this.state;
+    const { bookmarks, deleteBookmark, notes } = this.props;
     return (
       <Col md="8">
         <Row className="d-flex justify-content-center">
-          {news.map(article =>
-            article.bookmark ? (
-              <Card className="col-md-5 p-0 m-4">
+          {bookmarks.map(bookmark => {
+            const note = notes.find(n => n.bookmarkId === bookmark.id);
+            return (
+              <Card key={bookmark.id} className="col-md-5 p-0 m-4">
                 <CardBody className={styles.Card}>
                   <Row>
                     <Col md="10">
-                      <CardTitle>{article.title}</CardTitle>
+                      <CardTitle>{bookmark.article.title}</CardTitle>
                     </Col>
-                    <Col md="2">
-                      <button
-                        className={styles.Bookmark}
-                        type="button"
-                        aria-labelledby="bookmark"
-                        onClick={this.toggleBookmark}
-                      />
-                    </Col>
+                    <Link
+                      to={`/bookmark/delete/${bookmark.id}`}
+                      className={styles.Bookmark}
+                      aria-labelledby="bookmark"
+                    >
+                      X
+                    </Link>
                   </Row>
                   <CardText className={styles.cardText}>
-                    {article.text}
+                    {bookmark.article.text}
                   </CardText>
                   <img
                     src="/svg_css/scale-0.svg"
                     alt="Scale Placeholder"
                     className={styles.AnImage}
                   />
-                  <button
-                    className={styles.Notes}
-                    type="button"
-                    aria-labelledby="add note"
-                    onClick={this.toggleNotes}
-                  />
+                  {note ? (
+                    <NavItem
+                      className={('mr-5', styles.loginItem)}
+                      tag={RRNavLink}
+                      to={`/bookmark/${bookmark.id}/note/${note.id}`}
+                      exact
+                    >
+                      <img src="/svg_css/pencil.svg" alt="Notes Icon" />
+                    </NavItem>
+                  ) : (
+                    <NavItem
+                      className={('mr-5', styles.loginItem)}
+                      tag={RRNavLink}
+                      to={`/bookmark/${bookmark.id}/note/new`}
+                      exact
+                    >
+                      <img src="/svg_css/pencilEmpty.svg" alt="Notes Icon" />
+                    </NavItem>
+                  )}
                 </CardBody>
                 <CardFooter>
-                  Published on {article.published} by &apos;{article.source}
+                  Published on {bookmark.article.published} by &apos;
+                  {bookmark.article.source}
                   &apos;
                 </CardFooter>
               </Card>
-            ) : (
-              ''
-            )
+            );
+          })}
+        </Row>
+        <Switch>
+          {/* switch ensures only one modal will render...  */}
+          {/* // ? new modal */}
+          <Route
+            path="/bookmark/:bookmarkId/note/new"
+            exact
+            component={NotesModal}
+          />
+          {/* // ? existing modal */}
+          <Route
+            path="/bookmark/:bookmarkId/note/:id"
+            exact
+            component={NotesModal}
+          />
+        </Switch>
+        <Route
+          path="/bookmark/delete/:id"
+          exact
+          render={routeProps => (
+            <DeleteModal deleteFunc={deleteBookmark} {...routeProps} />
           )}
-        </Row>{' '}
-        <div>
-          <Modal
-            isOpen={modal}
-            toggleBookmark={this.toggleBookmark}
-            className={(className, styles.Modal)}
-          >
-            <ModalHeader
-              className={styles.ModalHeader}
-              toggleBookmark={this.toggleBookmark}
-            >
-              Are you sure?
-            </ModalHeader>
-            <ModalFooter>
-              <Button color="danger" onClick={this.toggleBookmark}>
-                No,Cancel
-              </Button>
-              <Button color="primary" onClick={this.toggleBookmark}>
-                Yes, Delete
-              </Button>{' '}
-            </ModalFooter>
-          </Modal>
-        </div>
-        <div>
-          <Modal
-            isOpen={notesModal}
-            toggleNotes={this.toggleNotes}
-            className={(className, styles.Modal)}
-          >
-            <ModalHeader
-              className={styles.ModalHeader}
-              toggleNotes={this.toggleNotes}
-            >
-              Are you sure?
-            </ModalHeader>
-
-            <ModalFooter>
-              <Button color="danger" onClick={this.toggleNotes}>
-                So
-              </Button>
-              <Button color="primary" onClick={this.toggleNotes}>
-                Yes, Delete
-              </Button>{' '}
-            </ModalFooter>
-          </Modal>
-        </div>
+        />
       </Col>
     );
   }
 }
 
-export default Bookmark;
+export default container(Bookmark);
 
 Bookmark.defaultProps = {
-  news: [
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3',
-      bookmark: false
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3',
-      bookmark: false
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3',
-      bookmark: true
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3',
-      bookmark: true
-    }
-  ]
+  bookmarks: [],
+  notes: []
 };
 
 Bookmark.propTypes = {
-  news: PropTypes.arrayOf(
+  bookmarks: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string,
-      text: PropTypes.string,
-      source: PropTypes.string,
-      published: PropTypes.instanceOf(Date),
-      rating: PropTypes.number,
       id: PropTypes.string,
-      bookmark: PropTypes.bool
+      articleId: PropTypes.string,
+      ticker: PropTypes.string,
+      userId: PropTypes.string,
+      article: PropTypes.shape({
+        title: PropTypes.string,
+        text: PropTypes.string,
+        published: PropTypes.instanceOf(Date),
+        source: PropTypes.string
+      })
     })
   ),
-  className: PropTypes.string.isRequired
+  notes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string
+    })
+  ),
+  fetchBookmarks: PropTypes.func.isRequired,
+  deleteBookmark: PropTypes.func.isRequired,
+  fetchArticle: PropTypes.func.isRequired,
+  fetchNotes: PropTypes.func.isRequired
 };

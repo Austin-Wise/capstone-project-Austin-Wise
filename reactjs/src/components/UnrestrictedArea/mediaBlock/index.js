@@ -20,17 +20,16 @@ import styles from './styles.module.css';
 class MediaBlock extends React.Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false
     };
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
-    this.setState({
-      // eslint-disable-next-line react/no-access-state-in-setstate
-      isOpen: !this.state.isOpen
-    });
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen
+    }));
   }
 
   render() {

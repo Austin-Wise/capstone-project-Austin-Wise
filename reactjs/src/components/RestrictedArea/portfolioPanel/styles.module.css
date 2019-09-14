@@ -1,7 +1,17 @@
+.sectionHeader {
+  padding: 1rem 4rem 4rem 4rem;
+  background-color: var(--color-omega_2);
+}
+
 .portfolioContainer {
   position: absolute;
   left: 7.5rem;
   top: -10rem;
+}
+
+.mainNav {
+  max-width: 400px;
+  flex-grow: 1;
 }
 
 .item,
@@ -14,16 +24,17 @@ item:hover {
   align-items: center;
   color: var(--color-psi_1);
   margin-bottom: 1rem;
-  min-width: 35rem;
+  min-width: 25rem;
+  padding: 5px 10px;
 }
 
 .item h3 {
   font-size: 2.4rem;
+  margin-bottom: 0;
 }
 .item p {
   font-size: 1.8rem;
-  text-align: right;
-  position: relative;
-  left: 3rem;
-  top: 0.5rem;
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 0;
 }

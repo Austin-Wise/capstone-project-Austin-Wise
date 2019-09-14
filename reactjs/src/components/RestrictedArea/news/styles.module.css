@@ -22,7 +22,7 @@ h4 {
   margin-left: auto;
   margin-right: 5rem;
   display: inline-flex;
-  justify-content: end;
+  justify-content: flex-end;
   font-size: 3.2rem;
   margin-top: 2rem;
 }
@@ -45,11 +45,15 @@ h3 {
   line-height: 300%;
 }
 
-.Bookmark {
+.Bookmark,
+.BookmarkInactive {
   background: url(/svg_css/Bookmark.svg) no-repeat;
   width: 36px;
   height: 32px;
   border: none;
+}
+.BookmarkInactive {
+  background: url(/svg_css/BookmarkInactive.svg) no-repeat;
 }
 
 .Card :global .card-title {
