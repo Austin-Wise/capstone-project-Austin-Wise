@@ -15,3 +15,15 @@
 .Section {
   background-color: var(--color-omega_2);
 }
+
+.DeleteButton {
+  color: red;
+}
+
+tr .DeleteButton {
+  opacity: 0;
+}
+
+tr:hover .DeleteButton {
+  opacity: 1;
+}

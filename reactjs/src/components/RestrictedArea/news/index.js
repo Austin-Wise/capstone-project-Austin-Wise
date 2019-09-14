@@ -1,5 +1,7 @@
-import React from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
 import {
   Jumbotron,
@@ -11,38 +13,86 @@ import {
   CardFooter,
   Col
 } from 'reactstrap';
-
+import { Link, Route } from 'react-router-dom';
+import DeleteModal from '../../Shared/deleteModal';
+import container from './container';
 import styles from './styles.module.css';
 
-export default class News extends React.PureComponent {
+class News extends Component {
+  constructor(props) {
+    super(props);
+    this.loadData();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { match } = this.props;
+    if (match.params.ticker !== prevProps.match.params.ticker) {
+      this.loadData();
+    }
+  }
+
+  loadData = () => {
+    const {
+      fetchArticles,
+      fetchCompanyData,
+      fetchBookmarks,
+      createBookmark,
+      match
+    } = this.props;
+    fetchCompanyData(match.params.ticker);
+    fetchArticles(match.params.ticker);
+    fetchBookmarks();
+  };
+
+  createBookmarkFunc = articleId => () => {
+    const {
+      match: {
+        params: { ticker }
+      },
+      createBookmark
+    } = this.props;
+
+    createBookmark({
+      articleId,
+      ticker
+    });
+  };
+
   render() {
-    const { company, news } = this.props;
+    const { companyData, articles, bookmarks, deleteBookmark } = this.props;
     return (
       <Col md="8" className={styles.News}>
         <Jumbotron className={styles.Jumbo}>
           <Row>
             <div className="ml-5">
-              <h2>{company.ticker}</h2>
-              <h3>{company.name}</h3>
+              <h2>{companyData.ticker}</h2>
+              <h3>{companyData.name}</h3>
             </div>
             <h4>
               <span className={styles.dollar}>
-                {company.now > company.close
-                  ? `$${(company.now - company.close).toFixed(2)}`
-                  : (company.now - company.close)
+                {companyData.now > companyData.close &&
+                  `$${(companyData.now - companyData.close).toFixed(2)}`}
+                {companyData.now < companyData.close &&
+                  (companyData.now - companyData.close)
                     .toFixed(2)
                     .replace(/-/g, '-$')}
               </span>
               <span className={styles.percent}>
-                {company.now > company.close
-                  ? `${((company.now / company.close) * 100 - 100).toFixed(2)}`
-                  : ((company.close / company.now) * 100 - 100).toFixed(2)}
+                {companyData.now > companyData.close &&
+                  `${(
+                    (companyData.now / companyData.close) * 100 -
+                    100
+                  ).toFixed(2)}`}
+                {companyData.now < companyData.close &&
+                  ((companyData.close / companyData.now) * 100 - 100).toFixed(
+                    2
+                  )}
                 %
               </span>
               <img
                 className="ml-5"
                 src={
-                  company.now > company.close
+                  companyData.now > companyData.close
                     ? '/svg_css/greenArrow.svg'
                     : '/svg_css/redArrow.svg'
                 }
@@ -60,173 +110,142 @@ export default class News extends React.PureComponent {
             <Col md="4">
               <ul className={styles.CoList}>
                 <li>
-                  CEO:
-                  <span className={styles.coData}>{company.ceo}</span>
+                  CEO:&nbsp;
+                  <span className={styles.coData}>{companyData.ceo}</span>
                 </li>
                 <li>
-                  Employees:
-                  <span className={styles.coData}>{company.employees}</span>
+                  Employees:&nbsp;
+                  <span className={styles.coData}>{companyData.employees}</span>
                 </li>
                 <li>
-                  Industry Group:
-                  <span className={styles.coData}>{company.industry}</span>
+                  Industry Group:&nbsp;
+                  <span className={styles.coData}>{companyData.industry}</span>
                 </li>
                 <li>
-                  Location:
-                  <span className={styles.coData}>{company.location}</span>
-                </li>
-              </ul>
-            </Col>
-            <Col md="4">
-              <ul className={styles.CoList}>
-                <li>
-                  Open:
-                  <span className={styles.coData}>{company.open}</span>
-                </li>
-                <li>
-                  High:
-                  <span className={styles.coData}>{company.high}</span>
-                </li>
-                <li>
-                  Low:
-                  <span className={styles.coData}>{company.low}</span>
-                </li>
-                <li>
-                  Close:
-                  <span className={styles.coData}>{company.close}</span>
-                </li>
-                <li>
-                  Volume:
-                  <span className={styles.coData}>{company.volume}</span>
+                  Location:&nbsp;
+                  <span className={styles.coData}>{companyData.location}</span>
                 </li>
               </ul>
             </Col>
             <Col md="4">
               <ul className={styles.CoList}>
                 <li>
-                  Adj. Open:
-                  <span className={styles.coData}>{company.adjOpen}</span>
+                  Open:&nbsp;
+                  <span className={styles.coData}>{companyData.open}</span>
                 </li>
                 <li>
-                  Adj. High:
-                  <span className={styles.coData}>{company.adjHigh}</span>
+                  High:&nbsp;
+                  <span className={styles.coData}>{companyData.high}</span>
                 </li>
                 <li>
-                  Adj. Low:
-                  <span className={styles.coData}>{company.adjLow}</span>
+                  Low:&nbsp;
+                  <span className={styles.coData}>{companyData.low}</span>
                 </li>
                 <li>
-                  Adj. Close:
-                  <span className={styles.coData}>{company.adjClose}</span>
+                  Close:&nbsp;
+                  <span className={styles.coData}>{companyData.close}</span>
                 </li>
                 <li>
-                  Adj. Volume:
-                  <span className={styles.coData}>{company.adjVolume}</span>
+                  Volume:&nbsp;
+                  <span className={styles.coData}>{companyData.volume}</span>
+                </li>
+              </ul>
+            </Col>
+            <Col md="4">
+              <ul className={styles.CoList}>
+                <li>
+                  Adj. Open:&nbsp;
+                  <span className={styles.coData}>{companyData.adjOpen}</span>
+                </li>
+                <li>
+                  Adj. High:&nbsp;
+                  <span className={styles.coData}>{companyData.adjHigh}</span>
+                </li>
+                <li>
+                  Adj. Low:&nbsp;
+                  <span className={styles.coData}>{companyData.adjLow}</span>
+                </li>
+                <li>
+                  Adj. Close:&nbsp;
+                  <span className={styles.coData}>{companyData.adjClose}</span>
+                </li>
+                <li>
+                  Adj. Volume:&nbsp;
+                  <span className={styles.coData}>{companyData.adjVolume}</span>
                 </li>
               </ul>
             </Col>
           </Row>
         </Jumbotron>
         <Row className="d-flex justify-content-center">
-          {news.map(article => (
-            <Card className="col-md-5 p-0 m-4">
-              <CardBody className={styles.Card}>
-                <Row>
-                  <Col md="10">
-                    <CardTitle>{article.title}</CardTitle>
-                  </Col>
-                  <Col md="2">
-                    <button
-                      type="button"
-                      className={styles.Bookmark}
-                      aria-labelledby="Bookmark"
-                    />
-                  </Col>
-                </Row>
-                <CardText className={styles.cardText}>{article.text}</CardText>
-                <img
-                  src="/svg_css/scale-0.svg"
-                  alt="Scale Placeholder"
-                  className={styles.AnImage}
-                />
-              </CardBody>
-              <CardFooter>
-                Published on {article.published} by &apos;{article.source}&apos;
-              </CardFooter>
-            </Card>
-          ))}
+          {articles.map(article => {
+            const bookmark = bookmarks.find(
+              mark => mark.articleId === article.id
+            );
+            return (
+              <Card key={article.id} className="col-md-5 p-0 m-4">
+                <CardBody className={styles.Card}>
+                  <Row>
+                    <Col md="10">
+                      <CardTitle>{article.title}</CardTitle>
+                    </Col>
+                    <Col md="2">
+                      {bookmark ? (
+                        <Link
+                          to={`/news/deleteBookmark/${bookmark.id}`}
+                          className={styles.Bookmark}
+                          aria-labelledby="Bookmark Active"
+                        >
+                          X
+                        </Link>
+                      ) : (
+                        <button
+                          type="button"
+                          className={styles.BookmarkInactive}
+                          aria-labelledby="Bookmark Inactive"
+                          onClick={this.createBookmarkFunc(article.id)}
+                        />
+                      )}
+                    </Col>
+                  </Row>
+                  <CardText className={styles.cardText}>
+                    {article.text}
+                  </CardText>
+                  <img
+                    src="/svg_css/scale-0.svg"
+                    alt="Scale Placeholder"
+                    className={styles.AnImage}
+                  />
+                </CardBody>
+                <CardFooter>
+                  Published on {article.published} by &apos;{article.source}
+                  &apos;
+                </CardFooter>
+              </Card>
+            );
+          })}
         </Row>
+        <Route
+          path="/news/deleteBookmark/:id"
+          exact
+          render={routeProps => (
+            <DeleteModal deleteFunc={deleteBookmark} {...routeProps} />
+          )}
+        />
       </Col>
     );
   }
 }
 
+export default container(News);
+
 News.defaultProps = {
-  company: {
-    name: 'Alphabet Inc Class A',
-    ticker: 'GOOGL',
-    ceo: 'Larry Page',
-    employees: 98771,
-    industry: 'Software and Data',
-    location: 'Mountain View, CA',
-    open: 1185.17,
-    high: 1195.67,
-    low: 1150.0,
-    close: 1153.58,
-    volume: 1508729,
-    adjOpen: 1185.17,
-    adjHigh: 1195.67,
-    adjLow: 1150.0,
-    adjClose: 1153.58,
-    adjVolume: 1508729,
-    now: 1195.67
-  },
-  news: [
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3'
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3'
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3'
-    },
-    {
-      title:
-        'Google’s report on massive iPhone security flaw doubles as dig against Apple’s privacy stance',
-      text:
-        'The research is interesting and comprehensive, but the impact of the flaws on most iPhone users may not be huge. Also, Google is using the compiled research to publicly needle Apple, following Apple’s campaign to differentiate its products on privacy and security.',
-      source: 'CNBC',
-      published: '22/05/2001',
-      rating: -0.2,
-      id: '291m2fq3'
-    }
-  ]
+  companyData: {},
+  news: []
 };
 
 News.propTypes = {
-  company: PropTypes.shape({
+  companyData: PropTypes.shape({
     name: PropTypes.string,
     ticker: PropTypes.string,
     ceo: PropTypes.string,
@@ -254,5 +273,13 @@ News.propTypes = {
       rating: PropTypes.number,
       id: PropTypes.string
     })
-  )
+  ),
+  match: ReactRouterPropTypes.match.isRequired,
+  articles: PropTypes.func.isRequired,
+  bookmarks: PropTypes.func.isRequired,
+  deleteBookmark: PropTypes.func.isRequired,
+  fetchArticles: PropTypes.func.isRequired,
+  fetchCompanyData: PropTypes.func.isRequired,
+  fetchBookmarks: PropTypes.func.isRequired,
+  createBookmark: PropTypes.func.isRequired
 };
