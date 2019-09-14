@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
+
 import {
   Jumbotron,
   Row,
@@ -68,19 +70,21 @@ class News extends Component {
             </div>
             <h4>
               <span className={styles.dollar}>
-                {companyData.now > companyData.close
-                  ? `$${(companyData.now - companyData.close).toFixed(2)}`
-                  : (companyData.now - companyData.close)
+                {companyData.now > companyData.close &&
+                  `$${(companyData.now - companyData.close).toFixed(2)}`}
+                {companyData.now < companyData.close &&
+                  (companyData.now - companyData.close)
                     .toFixed(2)
                     .replace(/-/g, '-$')}
               </span>
               <span className={styles.percent}>
-                {companyData.now > companyData.close
-                  ? `${(
+                {companyData.now > companyData.close &&
+                  `${(
                     (companyData.now / companyData.close) * 100 -
-                      100
-                  ).toFixed(2)}`
-                  : ((companyData.close / companyData.now) * 100 - 100).toFixed(
+                    100
+                  ).toFixed(2)}`}
+                {companyData.now < companyData.close &&
+                  ((companyData.close / companyData.now) * 100 - 100).toFixed(
                     2
                   )}
                 %
