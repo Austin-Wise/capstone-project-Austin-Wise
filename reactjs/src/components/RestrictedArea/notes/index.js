@@ -155,7 +155,8 @@ NotesModal.propTypes = {
   fetchNote: PropTypes.func.isRequired,
   createNote: PropTypes.func.isRequired,
   updateNote: PropTypes.func.isRequired,
-  deleteNote: PropTypes.func.isRequired
+  deleteNote: PropTypes.func.isRequired,
+  match: ReactRouterPropTypes.match.isRequired
 };
 
 NotesModal.defaultProps = {

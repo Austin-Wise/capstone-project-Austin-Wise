@@ -49,14 +49,7 @@ export const fetchArticles = keyword => ({
   //  a function used to call the api
   callAPI: () => API.get(`/articles?ticker=${keyword}`),
   // receives the current app state and returns true if we should call the api
-  shouldCallAPI: state => {
-    const { loadedAt, isLoading } = state.articles;
-    // if article items are currently loading don't call again
-    if (isLoading) return false;
-    const isCached = Date.now() - loadedAt < CACHE_TIME;
-    // if we don't have the article item or it's beyond the cache timeout make the api call
-    return !loadedAt || !isCached;
-  }
+  shouldCallAPI: () => true
 });
 
 export const deleteArticle = id => ({

@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   render() {
-    const loggedIn = true;
+    const loggedIn = false;
     return (
       <Provider store={store}>
         <Router>

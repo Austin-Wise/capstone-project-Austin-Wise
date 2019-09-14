@@ -297,6 +297,7 @@ class Journal extends Component {
                   <button
                     className={styles.DeleteButton}
                     onClick={this.deleteJournalFunc(entry.id)}
+                    type="button"
                   >
                     X
                   </button>

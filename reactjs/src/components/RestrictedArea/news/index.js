@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -10,14 +11,22 @@ import {
   CardFooter,
   Col
 } from 'reactstrap';
+import { Link, Route } from 'react-router-dom';
+import DeleteModal from '../../Shared/deleteModal';
 import container from './container';
-
 import styles from './styles.module.css';
 
 class News extends Component {
   constructor(props) {
     super(props);
     this.loadData();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { match } = this.props;
+    if (match.params.ticker !== prevProps.match.params.ticker) {
+      this.loadData();
+    }
   }
 
   loadData = () => {
@@ -33,9 +42,22 @@ class News extends Component {
     fetchBookmarks();
   };
 
+  createBookmarkFunc = articleId => () => {
+    const {
+      match: {
+        params: { ticker }
+      },
+      createBookmark
+    } = this.props;
+
+    createBookmark({
+      articleId,
+      ticker
+    });
+  };
+
   render() {
-    const { companyData, articles, bookmarks } = this.props;
-    console.log(bookmarks);
+    const { companyData, articles, bookmarks, deleteBookmark } = this.props;
     return (
       <Col md="8" className={styles.News}>
         <Jumbotron className={styles.Jumbo}>
@@ -152,42 +174,60 @@ class News extends Component {
           </Row>
         </Jumbotron>
         <Row className="d-flex justify-content-center">
-          {articles.map(article => (
-            <Card key={article.id} className="col-md-5 p-0 m-4">
-              <CardBody className={styles.Card}>
-                <Row>
-                  <Col md="10">
-                    <CardTitle>{article.title}</CardTitle>
-                  </Col>
-                  <Col md="2">
-                    {bookmarks.find(mark => mark.articleId === article.id) ? (
-                      <button
-                        type="button"
-                        className={styles.Bookmark}
-                        aria-labelledby="Bookmark Active"
-                      />
-                    ) : (
-                      <button
-                        type="button"
-                        className={styles.BookmarkInactive}
-                        aria-labelledby="Bookmark Inactive"
-                      />
-                    )}
-                  </Col>
-                </Row>
-                <CardText className={styles.cardText}>{article.text}</CardText>
-                <img
-                  src="/svg_css/scale-0.svg"
-                  alt="Scale Placeholder"
-                  className={styles.AnImage}
-                />
-              </CardBody>
-              <CardFooter>
-                Published on {article.published} by &apos;{article.source}&apos;
-              </CardFooter>
-            </Card>
-          ))}
+          {articles.map(article => {
+            const bookmark = bookmarks.find(
+              mark => mark.articleId === article.id
+            );
+            return (
+              <Card key={article.id} className="col-md-5 p-0 m-4">
+                <CardBody className={styles.Card}>
+                  <Row>
+                    <Col md="10">
+                      <CardTitle>{article.title}</CardTitle>
+                    </Col>
+                    <Col md="2">
+                      {bookmark ? (
+                        <Link
+                          to={`/news/deleteBookmark/${bookmark.id}`}
+                          className={styles.Bookmark}
+                          aria-labelledby="Bookmark Active"
+                        >
+                          X
+                        </Link>
+                      ) : (
+                        <button
+                          type="button"
+                          className={styles.BookmarkInactive}
+                          aria-labelledby="Bookmark Inactive"
+                          onClick={this.createBookmarkFunc(article.id)}
+                        />
+                      )}
+                    </Col>
+                  </Row>
+                  <CardText className={styles.cardText}>
+                    {article.text}
+                  </CardText>
+                  <img
+                    src="/svg_css/scale-0.svg"
+                    alt="Scale Placeholder"
+                    className={styles.AnImage}
+                  />
+                </CardBody>
+                <CardFooter>
+                  Published on {article.published} by &apos;{article.source}
+                  &apos;
+                </CardFooter>
+              </Card>
+            );
+          })}
         </Row>
+        <Route
+          path="/news/deleteBookmark/:id"
+          exact
+          render={routeProps => (
+            <DeleteModal deleteFunc={deleteBookmark} {...routeProps} />
+          )}
+        />
       </Col>
     );
   }
@@ -229,5 +269,13 @@ News.propTypes = {
       rating: PropTypes.number,
       id: PropTypes.string
     })
-  )
+  ),
+  match: ReactRouterPropTypes.match.isRequired,
+  articles: PropTypes.func.isRequired,
+  bookmarks: PropTypes.func.isRequired,
+  deleteBookmark: PropTypes.func.isRequired,
+  fetchArticles: PropTypes.func.isRequired,
+  fetchCompanyData: PropTypes.func.isRequired,
+  fetchBookmarks: PropTypes.func.isRequired,
+  createBookmark: PropTypes.func.isRequired
 };

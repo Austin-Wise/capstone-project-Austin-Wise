@@ -142,7 +142,13 @@ Bookmark.propTypes = {
       })
     })
   ),
+  notes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string
+    })
+  ),
   fetchBookmarks: PropTypes.func.isRequired,
   deleteBookmark: PropTypes.func.isRequired,
-  fetchArticle: PropTypes.func.isRequired
+  fetchArticle: PropTypes.func.isRequired,
+  fetchNotes: PropTypes.func.isRequired
 };
