@@ -1,7 +1,10 @@
+// setting up a logger
+const log = require('debug')('api:logging');
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
-const port = process.env.PORT || 5000;
+const app = require('./app');
+// set the port to either the one passed from the environment variables or 4000
+const port = process.env.PORT || 4000;
 
 // const homeRoute = require('./reactjs/src/App');
 
@@ -24,4 +27,5 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// spin up the server and log what port it is running on
+app.listen(port, () => log(`API listening on port ${port}!`));
