@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 // ? morgan-debug logs every request made to the server (makes debugging easier)
 const morganDebug = require('morgan-debug');
 // ? routes
+
+const userRouter = require('./routes/users.js');
 const articleRouter = require('./routes/articles.js');
 const blockRouter = require('./routes/blocks');
 const bookmarkRouter = require('./routes/bookmarks');
@@ -24,6 +26,7 @@ app.use(morganDebug('api:request', 'dev'));
 
 // ? Using /api/ so it doesn't conflict with front-end stuff.
 // ? setup the app to use the router at /api/news, journal, etc.
+app.use('/api/users', userRouter);
 app.use('/api/articles', articleRouter);
 app.use('/api/blocks', blockRouter);
 app.use('/api/bookmarks', bookmarkRouter);
