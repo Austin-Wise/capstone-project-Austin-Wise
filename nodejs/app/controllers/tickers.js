@@ -1,55 +1,94 @@
-// load in the tickers model
-const { Tickers } = require('../models');
-// get all the tickers
-exports.getContent = (req, res) => {
+// load in the notes model
+const { Notes, Sequelize } = require('../models');
+const { throwIf, throwError, sendError } = require('../utils/errorHandling');
+// get all the notes
+exports.getContent = async (req, res) => {
   // run the find all function on the model
-  const tickers = Tickers.findAll();
-  // respond with json of the tickers array
-  res.json(tickers);
+  try {
+    const notes = await Notes.findAll().then(
+      throwIf(rows => rows.length === 0, 204, 'no results', 'No Results Found'),
+      throwError(500, 'sequelize error')
+    );
+    // respond with json of the notes array
+    res.json(notes);
+  } catch (e) {
+    sendError(res)(e);
+  }
 };
 
-// find one ticker by id
-exports.getOneById = (req, res) => {
+// find one note by id
+exports.getOneById = async (req, res) => {
   // get the id from the route params
   const { id } = req.params;
-  // search our ticker model for the ticker
-  const ticker = Tickers.findByPk(id);
-  // if no ticker is found
-  if (!ticker) {
-    // return a 404
-    res.sendStatus(404);
-    return;
+  try {
+    // search our note model for the note
+    const note = await Notes.findByPk(id).then(
+      // first argument - if SQL Query worked correctly
+      throwIf(row => !row, 404, 'not found', 'Note Not Found'),
+      // second argument - if it failed
+      throwError(500, 'sequelize error')
+      // ? Only accepts 2 arguments
+    );
+    // if the note is found send it back.
+    res.status(200).json(note);
+  } catch (e) {
+    sendError(res)(e);
   }
-
-  // if the ticker is found send it back.
-  res.json(ticker);
 };
-// add a new ticker
-exports.createTicker = (req, res) => {
-  // get the ticker, title, text, source, published and rating values from the request body
-  const { userId, symbol } = req.body;
+
+// add a new note
+exports.createNote = async (req, res) => {
+  // get the heading, body, and bookmarkId from the request body
+  const { heading, body, bookmarkId } = req.body;
   // create the item and save the new id
-  const id = Tickers.create({
-    userId,
-    symbol
-  });
-  // send the new id back to the request
-  res.json({ id });
+  try {
+    const id = await Notes.create({
+      heading,
+      body,
+      bookmarkId,
+      // 'catch' catches errors specific to validation. These are presets created within the models (isAlpha, len, etc..)
+      // Catch first required, Captures type, second provides error code.
+    })
+      .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
+      .catch(throwError(500, 'sequelize error'));
+    // send the new id back to the request
+    res.status(200).json({ id });
+  } catch (e) {
+    sendError(res)(e);
+  }
 };
 
-// update an existing ticker
-exports.updateTicker = (req, res) => {
+// update an existing note
+exports.updateNote = async (req, res) => {
   const { id } = req.params;
-  const updatedTickers = Tickers.update(req.body, id);
-  res.json(updatedTickers);
+  try {
+    const updatedNotes = await Notes.update(req.body, id)
+      .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
+      .catch(throwError(500, 'sequelize error'));
+    res.json(updatedNotes);
+  } catch (e) {
+    sendError(res)(e);
+  }
 };
 
-// delete an ticker
-exports.removeTicker = (req, res) => {
+// delete an note
+exports.removeNote = async (req, res) => {
   // get the id from the route
   const { id } = req.params;
-  // remove the ticker
-  Tickers.destroy(id);
-  // send a good status code
-  res.sendStatus(200);
+  // remove the note
+  try {
+    await Notes.destroy(id).then(
+      // first argument - if SQL Query worked correctly
+      throwIf(numRows => !numRows, 404, 'not found', 'Note Not Found'),
+      // second argument - if it failed
+      throwError(500, 'sequelize error')
+      // ? Only accepts 2 arguments
+    );
+    // if the note is found send it back.
+    // send a good status code
+    // sendStatus stops at sendStatus, whereas status allows chaining
+    res.sendStatus(202);
+  } catch (e) {
+    sendError(res)(e);
+  }
 };

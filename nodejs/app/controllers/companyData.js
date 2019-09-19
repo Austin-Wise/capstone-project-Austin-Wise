@@ -1,19 +1,64 @@
-// load in the companyData model
-const { CompanyData } = require('../models');
-
-// find one companyData by id
-exports.getOneById = (req, res) => {
-  // get the id from the route params
-  const { id } = req.params;
-  // search our companyData model for the companyData
-  const companyData = CompanyData.findByPk(id);
-  // if no companyData is found
-  if (!companyData) {
-    // return a 404
-    res.sendStatus(404);
-    return;
-  }
-
-  // if the companyData is found send it back.
-  res.json(companyData);
+module.export = {
+  companyData: [
+    {
+      id: 'GOOGL',
+      name: 'Alphabet Inc Class A',
+      ticker: 'GOOGL',
+      ceo: 'Larry Page',
+      employees: 98771,
+      industry: 'Software and Data',
+      location: 'Mountain View, CA',
+      open: 1185.17,
+      high: 1195.67,
+      low: 1150,
+      close: 1153.58,
+      volume: 1508729,
+      adjOpen: 1185.17,
+      adjHigh: 1195.67,
+      adjLow: 1150,
+      adjClose: 1153.58,
+      adjVolume: 1508729,
+      now: 1195.67,
+    },
+    {
+      id: 'AAPL',
+      name: 'Apple, Inc.',
+      ticker: 'AAPL',
+      ceo: 'Tim Cook',
+      employees: 132923,
+      industry: 'Computing Systems',
+      location: 'Cupertino, CA',
+      open: 1185.17,
+      high: 1195.67,
+      low: 1150,
+      close: 1153.58,
+      volume: 1508729,
+      adjOpen: 1185.17,
+      adjHigh: 1195.67,
+      adjLow: 1150,
+      adjClose: 1153.58,
+      adjVolume: 1508729,
+      now: 1010.67,
+    },
+    {
+      id: 'PUR',
+      name: 'PurAqua',
+      ticker: 'PUR',
+      ceo: 'Posseidon',
+      employees: 1,
+      industry: 'Beverage',
+      location: 'Aegean Sea, Euboea',
+      open: 2.17,
+      high: 2.31,
+      low: 2.03,
+      close: 2.19,
+      volume: 153873,
+      adjOpen: 1185.17,
+      adjHigh: 1195.67,
+      adjLow: 1150,
+      adjClose: 1153.58,
+      adjVolume: 1508729,
+      now: 1135.67,
+    },
+  ],
 };

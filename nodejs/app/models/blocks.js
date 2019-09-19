@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Blocks = sequelize.define(
     'Blocks',
@@ -8,23 +7,23 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.UUID,
         validate: {
-          isUUID: { args: 4, msg: 'Id not valid, please try again' }
-        }
+          isUUID: { args: 4, msg: 'Id not valid, please try again' },
+        },
       },
       name: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         validate: {
           isAlphanumeric: {
             args: true,
-            msg: 'Keyword cannot contain special characters.'
+            msg: 'Keyword cannot contain special characters.',
           },
           notNull: { args: true, msg: 'Keyword input required.' },
           len: {
             args: [2, 20],
-            msg: 'Keyword must be between 2 and 20 characters long.'
-          }
-        }
-      }
+            msg: 'Keyword must be between 2 and 20 characters long.',
+          },
+        },
+      },
     },
     {}
   );

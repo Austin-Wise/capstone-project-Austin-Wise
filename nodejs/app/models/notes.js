@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Notes = sequelize.define(
     'Notes',
@@ -8,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.UUID,
         validate: {
-          isUUID: { args: 4, msg: 'Id not valid, please try again' }
-        }
+          isUUID: { args: 4, msg: 'Id not valid, please try again' },
+        },
       },
       heading: {
         type: DataTypes.STRING,
@@ -17,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
           notNull: { args: true, msg: 'Heading value is required' },
           len: {
             args: [2, 50],
-            msg: 'Heading must be between 2 and 50 characters in length'
-          }
-        }
+            msg: 'Heading must be between 2 and 50 characters in length',
+          },
+        },
       },
       body: {
         type: DataTypes.STRING,
@@ -27,10 +26,10 @@ module.exports = (sequelize, DataTypes) => {
           notNull: { args: true, msg: 'Body value is required' },
           len: {
             args: [2, 255],
-            msg: 'Body must be between 2 and 255 characters in length'
-          }
-        }
-      }
+            msg: 'Body must be between 2 and 255 characters in length',
+          },
+        },
+      },
     },
     {}
   );
