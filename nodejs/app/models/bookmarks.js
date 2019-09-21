@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Bookmarks = sequelize.define(
     'Bookmarks',
@@ -8,36 +7,37 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.UUID,
         validate: {
-          isUUID: { args: 4, msg: 'Id not valid, please try again' }
-        }
+          isUUID: { args: 4, msg: 'Id not valid, please try again' },
+        },
       },
       articleId: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
-          notNull: true
-        }
+          notNull: true,
+        },
       },
       ticker: {
         type: DataTypes.STRING,
         notNull: {
           args: true,
-          msg: 'Ticker Symbol value is required.'
+          msg: 'Ticker Symbol value is required.',
         },
         isAlpha: {
           args: true,
-          msg: 'Ticker Symbol must only contain letters.'
+          msg: 'Ticker Symbol must only contain letters.',
         },
         len: {
           args: [1, 6],
-          msg: 'Ticker Symbol must be be between 1 and 6 letters in length.'
-        }
-      }
+          msg: 'Ticker Symbol must be be between 1 and 6 letters in length.',
+        },
+      },
     },
     {}
   );
   Bookmarks.associate = models => {
     Bookmarks.belongsTo(models.Users, {
-      foreignKey: 'userId'
+      foreignKey: 'userId',
     });
     Bookmarks.hasOne(models.Notes, { foreignKey: 'bookmarkId' });
   };

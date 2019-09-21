@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = require('./app');
 // set the port to either the one passed from the environment variables or 4000
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 // const homeRoute = require('./reactjs/src/App');
 

@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Journals', {
@@ -6,55 +5,56 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        defaultValue: Sequelize.UUIDV4,
       },
       ticker: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       type: {
-        type: Sequelize.ENUM('Long', 'Short')
+        type: Sequelize.ENUM('Long', 'Short'),
       },
       buyDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       sellDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       qtyBuy: {
-        type: Sequelize.INTEGER
-      },
-      sellDate: {
-        type: Sequelize.INTEGER
-      },
-      qtyBuy: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       qtySold: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       buyPrice: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL,
       },
       sellPrice: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL,
       },
       fees: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL,
       },
       comment: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT,
+      },
+      userId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: queryInterface => {
     return queryInterface.dropTable('Journals');
-  }
+  },
 };

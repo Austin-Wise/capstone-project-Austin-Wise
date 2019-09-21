@@ -8,8 +8,10 @@ router.get('/', journalCtrl.getContent);
 // GET /journals/:id
 router.get('/:id', journalCtrl.getOneById);
 // POST /journals
-router.post('/', journalCtrl.createBlock);
+router.post('/', journalCtrl.createJournal);
 // PUT /journals/:id
-router.put('/:id', journalCtrl.updateBlock);
+router.put('/:id', journalCtrl.updateJournal);
+// DELETE /journals/:id
+router.delete('/:id', journalCtrl.removeJournal);
 // export the route from this file
 module.exports = router;

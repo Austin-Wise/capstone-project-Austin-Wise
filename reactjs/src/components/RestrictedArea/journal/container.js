@@ -4,12 +4,12 @@ import {
   fetchJournals,
   createJournal,
   deleteJournal,
-  updateJournal
+  updateJournal,
 } from '../../../redux/store/cat/journal/actions';
 
 function mapStateToProps(state) {
   const {
-    journals: { byId, allIds }
+    journals: { byId, allIds },
   } = state;
   // turn the array of ids into an array of objects
   return { journals: allIds.map(id => byId[id].data || {}) };
@@ -20,7 +20,7 @@ const mapDispatchToProps = {
   fetchJournals,
   createJournal,
   deleteJournal,
-  updateJournal
+  updateJournal,
 };
 
 export default connect(

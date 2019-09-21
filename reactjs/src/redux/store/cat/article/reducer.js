@@ -10,9 +10,6 @@ import {
   REQ_ARTICLES_PENDING,
   REQ_ARTICLES_SUCCESS,
   REQ_ARTICLES_ERROR,
-  DELETE_ARTICLE_PENDING,
-  DELETE_ARTICLE_SUCCESS,
-  DELETE_ARTICLE_ERROR
 } from '../../actionTypes';
 
 const initialState = {
@@ -25,7 +22,7 @@ const initialState = {
   // tracking if the state is loading
   isLoading: false,
   // any errors loading all the data
-  error: null
+  error: null,
 };
 
 function articlePending(state, action) {
@@ -37,9 +34,9 @@ function articlePending(state, action) {
       [action.payload.id]: {
         ...state.byId[action.payload.id],
         isLoading: true,
-        error: null
-      }
-    }
+        error: null,
+      },
+    },
   };
 }
 
@@ -53,10 +50,10 @@ function articleSuccess(state, action) {
         isLoading: false,
         error: null,
         loadedAt: Date.now(),
-        data: action.data
-      }
+        data: action.data,
+      },
     },
-    allIds: [...new Set([...state.allIds, action.payload.id])]
+    allIds: [...new Set([...state.allIds, action.payload.id])],
   };
 }
 
@@ -69,9 +66,9 @@ function articleError(state, action) {
       [action.payload.id]: {
         ...state.byId[action.payload.id],
         isLoading: false,
-        error: action.err
-      }
-    }
+        error: action.err,
+      },
+    },
   };
 }
 
@@ -80,7 +77,7 @@ function articlesPending(state, action) {
   return {
     ...state,
     isLoading: true,
-    error: null
+    error: null,
   };
 }
 
@@ -102,15 +99,15 @@ function articlesSuccess(state, action) {
             data: article,
             isLoading: false,
             loadedAt: Date.now(),
-            error: null
-          }
+            error: null,
+          },
         }),
         {}
-      )
+      ),
     },
     allIds: [
-      ...new Set([...state.allIds, ...action.data.map(article => article.id)])
-    ]
+      ...new Set([...state.allIds, ...action.data.map(article => article.id)]),
+    ],
   };
 }
 
@@ -119,17 +116,7 @@ function articlesError(state, action) {
   return {
     ...state,
     isLoading: false,
-    error: action.err
-  };
-}
-
-function deleteArticleSuccess(state, action) {
-  // clear loading and error, update cache time, add blocks
-  const { [action.payload.id]: deletedArticle, ...withoutArticle } = state.byId;
-  return {
-    ...state,
-    byId: withoutArticle,
-    allIds: state.allIds.filter(id => id !== action.payload.id)
+    error: action.err,
   };
 }
 
@@ -143,7 +130,4 @@ export default createReducer(initialState, {
   [REQ_ARTICLES_PENDING]: articlesPending,
   [REQ_ARTICLES_SUCCESS]: articlesSuccess,
   [REQ_ARTICLES_ERROR]: articlesError,
-  [DELETE_ARTICLE_PENDING]: articlePending,
-  [DELETE_ARTICLE_SUCCESS]: deleteArticleSuccess,
-  [DELETE_ARTICLE_ERROR]: articleError
 });

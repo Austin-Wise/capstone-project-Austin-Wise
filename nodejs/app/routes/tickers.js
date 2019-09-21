@@ -11,5 +11,7 @@ router.get('/:id', tickerCtrl.getOneById);
 router.post('/', tickerCtrl.createTicker);
 // PUT /tickers/:id
 router.put('/:id', tickerCtrl.updateTicker);
+// DELETE /tickers/:id
+router.delete('/:id', tickerCtrl.removeTicker);
 // export the route from this file
 module.exports = router;

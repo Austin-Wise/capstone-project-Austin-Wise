@@ -1,6 +1,7 @@
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 const { Users, Sequelize } = require('../models');
 const { throwIf, throwError, sendError } = require('../utils/errorHandling');
-const crypto = require('crypto');
 const mailer = require('../utils/mailer');
 
 exports.forgotPassword = async (req, res) => {
@@ -16,23 +17,23 @@ exports.forgotPassword = async (req, res) => {
     // reset_expires: 24 hours (in ms)
     user.update({
       reset_token: token,
-      reset_expires: Date.now() + 86400000
+      reset_expires: Date.now() + 86400000,
     });
 
     const data = {
       to: user.email,
       from: 'tkrtape@yourcode.app',
       template: 'forgot',
-      subject: 'Pssword Reset',
+      subject: 'Password Reset',
       ctx: {
         url: `http://localhost:3000/auth/reset_token?token=${token}`,
-        name: user.name.split(' ')[0]
-      }
+        name: user.name.split(' ')[0],
+      },
     };
     // TODO: Do I use first and last or just name
     await mailer.sendMail(data).catch(throwError(500, 'mail error'));
     res.json({
-      message: 'Check your email for further instructions'
+      message: 'Check your email for further instructions',
     });
   } catch (e) {
     sendError(res)(e);
@@ -46,9 +47,9 @@ exports.resetPassword = async (req, res) => {
       where: {
         reset_token: token,
         reset_expires: {
-          [Sequelize.Op.gt]: Date.now()
-        }
-      }
+          [Sequelize.Op.gt]: Date.now(),
+        },
+      },
     }).then(
       throwIf(
         r => !r,
@@ -67,7 +68,7 @@ exports.resetPassword = async (req, res) => {
     user.save();
 
     res.json({
-      message: 'Password Reset'
+      message: 'Password Reset',
     });
 
     const data = {
@@ -76,8 +77,8 @@ exports.resetPassword = async (req, res) => {
       template: 'reset',
       subject: 'Password Reset Confirmation',
       ctx: {
-        name: user.name.split(' ')[0]
-      }
+        name: user.name.split(' ')[0],
+      },
     };
 
     mailer.sendMail(data).catch(throwError(500, 'mail error'));
