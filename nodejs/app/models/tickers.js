@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Tickers = sequelize.define(
     'Tickers',
@@ -8,24 +7,24 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.UUID,
         validate: {
-          isUUID: { args: 4, msg: 'Id not valid, please try again' }
-        }
+          isUUID: { args: 4, msg: 'Id not valid, please try again' },
+        },
       },
       symbol: {
         type: DataTypes.STRING,
         notNull: {
           args: true,
-          msg: 'Ticker Symbol value is required.'
+          msg: 'Ticker Symbol value is required.',
         },
         isAlpha: {
           args: true,
-          msg: 'Ticker Symbol must only contain letters.'
+          msg: 'Ticker Symbol must only contain letters.',
         },
         len: {
           args: [1, 6],
-          msg: 'Ticker Symbol must be be between 1 and 6 letters in length.'
-        }
-      }
+          msg: 'Ticker Symbol must be be between 1 and 6 letters in length.',
+        },
+      },
     },
     {}
   );

@@ -34,12 +34,12 @@ const rootReducer = combineReducers({
   notes,
   tickers,
   articles,
-  companyData
+  companyData,
 });
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

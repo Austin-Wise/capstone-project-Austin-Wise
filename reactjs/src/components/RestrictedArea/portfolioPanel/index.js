@@ -52,11 +52,7 @@ class PortfolioPanel extends Component {
                       ? '/svg_css/greenArrow.svg'
                       : '/svg_css/redArrow.svg'
                   }
-                  alt="{
-                (ticker.now > ticker.close)
-                    ? 'green arrow'
-                    : 'red arrow'
-                }"
+                  alt={ticker.now > ticker.close ? 'green arrow' : 'red arrow'}
                   height="27.29px"
                   width="32px"
                 />
@@ -99,16 +95,16 @@ PortfolioPanel.propTypes = {
       adjlow: PropTypes.number,
       adjclose: PropTypes.number,
       adjVolume: PropTypes.number,
-      now: PropTypes.number
+      now: PropTypes.number,
     })
   ),
   history: ReactRouterPropTypes.history.isRequired,
   fetchTickers: PropTypes.func.isRequired,
   deleteTicker: PropTypes.func.isRequired,
   fetchCompanyData: PropTypes.func.isRequired,
-  match: ReactRouterPropTypes.match.isRequired
+  match: ReactRouterPropTypes.match.isRequired,
 };
 
 PortfolioPanel.defaultProps = {
-  tickers: []
+  tickers: [],
 };

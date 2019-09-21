@@ -17,7 +17,7 @@ import {
   UPDATE_JOURNAL_ERROR,
   DELETE_JOURNAL_PENDING,
   DELETE_JOURNAL_SUCCESS,
-  DELETE_JOURNAL_ERROR
+  DELETE_JOURNAL_ERROR,
 } from '../../actionTypes';
 
 // cache data for 5 minutes
@@ -29,7 +29,7 @@ export const createJournal = journal => {
   return {
     types: [ADD_JOURNAL_PENDING, ADD_JOURNAL_SUCCESS, ADD_JOURNAL_ERROR],
     callAPI: () => API.post('/journals', { ...journal, id }),
-    payload: { id }
+    payload: { id },
   };
 };
 
@@ -43,7 +43,7 @@ export const fetchJournal = id => ({
     const isCached = Date.now() - loadedAt < CACHE_TIME;
     return !loadedAt || !isCached;
   },
-  payload: { id }
+  payload: { id },
 });
 
 export const fetchJournals = () => ({
@@ -59,17 +59,17 @@ export const fetchJournals = () => ({
     const isCached = Date.now() - loadedAt < CACHE_TIME;
     // if we don't have the journal item or it's beyond the cache timeout make the api call
     return !loadedAt || !isCached;
-  }
+  },
 });
 
 export const updateJournal = journal => ({
   types: [UPDATE_JOURNAL_PENDING, UPDATE_JOURNAL_SUCCESS, UPDATE_JOURNAL_ERROR],
   callAPI: () => API.put(`/journals/${journal.id}`, journal),
-  payload: { id: journal.id }
+  payload: { id: journal.id },
 });
 
 export const deleteJournal = id => ({
   types: [DELETE_JOURNAL_PENDING, DELETE_JOURNAL_SUCCESS, DELETE_JOURNAL_ERROR],
   callAPI: () => API.delete(`/journals/${id}`),
-  payload: { id }
+  payload: { id },
 });

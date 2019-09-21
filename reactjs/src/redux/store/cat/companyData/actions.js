@@ -5,9 +5,6 @@ import {
   REQ_COMPANYDATA_PENDING,
   REQ_COMPANYDATA_SUCCESS,
   REQ_COMPANYDATA_ERROR,
-  DELETE_COMPANYDATA_PENDING,
-  DELETE_COMPANYDATA_SUCCESS,
-  DELETE_COMPANYDATA_ERROR
 } from '../../actionTypes';
 
 // cache data for 5 minutes
@@ -17,7 +14,7 @@ export const fetchCompanyData = id => ({
   types: [
     REQ_COMPANYDATA_PENDING,
     REQ_COMPANYDATA_SUCCESS,
-    REQ_COMPANYDATA_ERROR
+    REQ_COMPANYDATA_ERROR,
   ],
   callAPI: () => API.get(`/companyData/${id}`),
   shouldCallAPI: state => {
@@ -27,15 +24,5 @@ export const fetchCompanyData = id => ({
     const isCached = Date.now() - loadedAt < CACHE_TIME;
     return !loadedAt || !isCached;
   },
-  payload: { id }
-});
-
-export const deleteCompanyData = id => ({
-  types: [
-    DELETE_COMPANYDATA_PENDING,
-    DELETE_COMPANYDATA_SUCCESS,
-    DELETE_COMPANYDATA_ERROR
-  ],
-  callAPI: () => API.delete(`/companyDatas/${id}`),
-  payload: { id }
+  payload: { id },
 });

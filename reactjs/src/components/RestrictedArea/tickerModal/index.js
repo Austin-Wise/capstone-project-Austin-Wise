@@ -9,7 +9,7 @@ import {
   ModalBody,
   ModalFooter,
   Form,
-  Input
+  Input,
 } from 'reactstrap';
 import container from './container';
 import styles from './styles.module.css';
@@ -17,9 +17,8 @@ import styles from './styles.module.css';
 class TickerModal extends Component {
   constructor(props) {
     super(props);
-    props.fetchTicker();
     this.state = {
-      symbol: ''
+      symbol: '',
     };
   }
 
@@ -32,7 +31,7 @@ class TickerModal extends Component {
     const { name } = target;
     // set state to the name and the value. For example, { description: 'hi'}
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -95,5 +94,5 @@ export default container(TickerModal);
 TickerModal.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
   fetchTicker: PropTypes.func.isRequired,
-  createTicker: PropTypes.func.isRequired
+  createTicker: PropTypes.func.isRequired,
 };

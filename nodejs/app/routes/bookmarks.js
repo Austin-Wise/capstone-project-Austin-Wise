@@ -11,5 +11,7 @@ router.get('/:id', bookmarkCtrl.getOneById);
 router.post('/', bookmarkCtrl.createBookmark);
 // PUT /bookmarks/:id
 router.put('/:id', bookmarkCtrl.updateBookmark);
+// DELETE /bookmarks/:id
+router.delete('/:id', bookmarkCtrl.removeBookmark);
 // export the route from this file
 module.exports = router;

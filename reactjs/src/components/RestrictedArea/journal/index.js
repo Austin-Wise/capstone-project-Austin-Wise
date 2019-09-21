@@ -11,28 +11,28 @@ import {
   InputGroupAddon,
   InputGroup,
   Container,
-  Button
+  Button,
 } from 'reactstrap';
 import container from './container';
 import styles from './styles.module.css';
 
+const journalClear = {
+  ticker: '',
+  type: 'Long',
+  buyDate: '',
+  qtyBuy: '',
+  buyPrice: '',
+  sellDate: '',
+  qtySold: '',
+  sellPrice: '',
+  fees: '',
+  comment: '',
+};
+
 class Journal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      journal: {
-        ticker: '',
-        type: 'Long',
-        buyDate: '',
-        qtyBuy: '',
-        buyPrice: '',
-        sellDate: '',
-        qtySold: '',
-        sellPrice: '',
-        fees: '',
-        comment: ''
-      }
-    };
+    this.state = { journal: journalClear };
     props.fetchJournals();
   }
 
@@ -46,7 +46,7 @@ class Journal extends Component {
     // set state to the name and the value.
     const { journal } = this.state;
     this.setState({
-      journal: { ...journal, [name]: value }
+      journal: { ...journal, [name]: value },
     });
   };
 
@@ -63,8 +63,12 @@ class Journal extends Component {
     }
   };
 
-  deleteJournalFunc = id => async () => {
+  deleteJournalFunc = id => async event => {
+    console.log(this);
     const { deleteJournal } = this.props;
+    event.stopPropagation();
+    // stopPropagation stops event bubbling
+    this.setState({ journal: journalClear });
     await deleteJournal(id);
   };
 
@@ -318,22 +322,22 @@ Journal.propTypes = {
     PropTypes.shape({
       ticker: PropTypes.string,
       type: PropTypes.oneOf(['Long', 'Short']),
-      buyDate: PropTypes.instanceOf(Date),
+      buyDate: PropTypes.string,
       qtyBuy: PropTypes.number,
       buyPrice: PropTypes.number,
-      sellDate: PropTypes.instanceOf(Date),
+      sellDate: PropTypes.string,
       qtySold: PropTypes.number,
       sellPrice: PropTypes.number,
       fees: PropTypes.number,
-      comments: PropTypes.string
+      comments: PropTypes.string,
     })
   ),
   createJournal: PropTypes.func.isRequired,
   fetchJournals: PropTypes.func.isRequired,
   deleteJournal: PropTypes.func.isRequired,
-  updateJournal: PropTypes.func.isRequired
+  updateJournal: PropTypes.func.isRequired,
 };
 
 Journal.defaultProps = {
-  journals: []
+  journals: [],
 };
