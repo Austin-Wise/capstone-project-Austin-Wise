@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       heading: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notNull: { args: true, msg: 'Heading value is required' },
           len: {
@@ -22,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       body: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notNull: { args: true, msg: 'Body value is required' },
           len: {

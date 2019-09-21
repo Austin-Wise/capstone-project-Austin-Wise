@@ -11,9 +11,9 @@ import {
   CardBody,
   CardText,
   CardFooter,
-  Col
+  Col,
 } from 'reactstrap';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Redirect } from 'react-router-dom';
 import DeleteModal from '../../Shared/deleteModal';
 import container from './container';
 import styles from './styles.module.css';
@@ -37,8 +37,9 @@ class News extends Component {
       fetchCompanyData,
       fetchBookmarks,
       createBookmark,
-      match
+      match,
     } = this.props;
+    if (!match.params.ticker || match.params.ticker === 'new') return;
     fetchCompanyData(match.params.ticker);
     fetchArticles(match.params.ticker);
     fetchBookmarks();
@@ -47,19 +48,36 @@ class News extends Component {
   createBookmarkFunc = articleId => () => {
     const {
       match: {
-        params: { ticker }
+        params: { ticker },
       },
-      createBookmark
+      createBookmark,
     } = this.props;
 
     createBookmark({
       articleId,
-      ticker
+      ticker,
     });
   };
 
   render() {
-    const { companyData, articles, bookmarks, deleteBookmark } = this.props;
+    const {
+      companyData,
+      articles,
+      bookmarks,
+      deleteBookmark,
+      ticker,
+      match,
+    } = this.props;
+    if (
+      !ticker.symbol &&
+      match.params.ticker &&
+      match.params.ticker !== 'new'
+    ) {
+      return <Redirect to="/news" />;
+    }
+    if (match.params.ticker === 'new') {
+      return null;
+    }
     return (
       <Col md="8" className={styles.News}>
         <Jumbotron className={styles.Jumbo}>
@@ -96,11 +114,11 @@ class News extends Component {
                     ? '/svg_css/greenArrow.svg'
                     : '/svg_css/redArrow.svg'
                 }
-                alt="{
-                (item.now > item.close)
+                alt={
+                  companyData.now > companyData.close
                     ? 'green arrow'
                     : 'red arrow'
-                }"
+                }
                 height="27.29px"
                 width="32px"
               />
@@ -192,7 +210,7 @@ class News extends Component {
                     <Col md="2">
                       {bookmark ? (
                         <Link
-                          to={`/news/deleteBookmark/${bookmark.id}`}
+                          to={`/news/${match.params.ticker}/deleteBookmark/${bookmark.id}`}
                           className={styles.Bookmark}
                           aria-labelledby="Bookmark Active"
                         >
@@ -226,7 +244,7 @@ class News extends Component {
           })}
         </Row>
         <Route
-          path="/news/deleteBookmark/:id"
+          path="/news/:ticker/deleteBookmark/:id"
           exact
           render={routeProps => (
             <DeleteModal deleteFunc={deleteBookmark} {...routeProps} />
@@ -241,7 +259,8 @@ export default container(News);
 
 News.defaultProps = {
   companyData: {},
-  news: []
+  news: [],
+  ticker: {},
 };
 
 News.propTypes = {
@@ -262,7 +281,7 @@ News.propTypes = {
     adjLow: PropTypes.number,
     adjClose: PropTypes.number,
     adjVolume: PropTypes.number,
-    now: PropTypes.number
+    now: PropTypes.number,
   }),
   news: PropTypes.arrayOf(
     PropTypes.shape({
@@ -271,9 +290,12 @@ News.propTypes = {
       source: PropTypes.string,
       published: PropTypes.instanceOf(Date),
       rating: PropTypes.number,
-      id: PropTypes.string
+      id: PropTypes.string,
     })
   ),
+  ticker: PropTypes.shape({
+    symbol: PropTypes.string,
+  }),
   match: ReactRouterPropTypes.match.isRequired,
   articles: PropTypes.func.isRequired,
   bookmarks: PropTypes.func.isRequired,
@@ -281,5 +303,5 @@ News.propTypes = {
   fetchArticles: PropTypes.func.isRequired,
   fetchCompanyData: PropTypes.func.isRequired,
   fetchBookmarks: PropTypes.func.isRequired,
-  createBookmark: PropTypes.func.isRequired
+  createBookmark: PropTypes.func.isRequired,
 };

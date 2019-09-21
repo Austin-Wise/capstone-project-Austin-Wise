@@ -11,7 +11,9 @@ module.exports = {
           updatedAt: Sequelize.literal('NOW()'),
         },
       ],
-      {}
+      {
+        updateOnDuplicate: true,
+      }
     );
   },
 

@@ -5,8 +5,7 @@ const { throwIf, throwError, sendError } = require('../utils/errorHandling');
 exports.getContent = async (req, res) => {
   // run the find all function on the model
   try {
-    const notes = await Notes.findAll().then(
-      throwIf(rows => rows.length === 0, 204, 'no results', 'No Results Found'),
+    const notes = await Notes.findAll().catch(
       throwError(500, 'sequelize error')
     );
     // respond with json of the notes array
@@ -42,7 +41,7 @@ exports.createNote = async (req, res) => {
   const { heading, body, bookmarkId } = req.body;
   // create the item and save the new id
   try {
-    const id = await Notes.create({
+    const note = await Notes.create({
       heading,
       body,
       bookmarkId,
@@ -52,7 +51,7 @@ exports.createNote = async (req, res) => {
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(throwError(500, 'sequelize error'));
     // send the new id back to the request
-    res.status(200).json({ id });
+    res.status(200).json(note);
   } catch (e) {
     sendError(res)(e);
   }
@@ -77,7 +76,7 @@ exports.removeNote = async (req, res) => {
   const { id } = req.params;
   // remove the note
   try {
-    await Notes.destroy(id).then(
+    await Notes.destroy({ where: { id } }).then(
       // first argument - if SQL Query worked correctly
       throwIf(numRows => !numRows, 404, 'not found', 'Note Not Found'),
       // second argument - if it failed

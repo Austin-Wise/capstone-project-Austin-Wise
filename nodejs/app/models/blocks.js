@@ -12,10 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           isAlphanumeric: {
             args: true,
-            msg: 'Keyword cannot contain special characters.',
+            msg: 'Keyword cannot contain special characters (including space).',
           },
           notNull: { args: true, msg: 'Keyword input required.' },
           len: {
@@ -29,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Blocks.associate = models => {
     // associations can be defined here
-    Blocks.belongsTo(models.Users, { foreignKey: 'decisionId' });
+    Blocks.belongsTo(models.Users, { foreignKey: 'userId' });
   };
   return Blocks;
 };

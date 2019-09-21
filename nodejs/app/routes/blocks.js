@@ -11,5 +11,7 @@ router.get('/:id', blockCtrl.getOneById);
 router.post('/', blockCtrl.createBlock);
 // PUT /blocks/:id
 router.put('/:id', blockCtrl.updateBlock);
+// DELETE /blocks/:id
+router.delete('/:id', blockCtrl.removeBlock);
 // export the route from this file
 module.exports = router;

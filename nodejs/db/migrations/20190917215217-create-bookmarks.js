@@ -13,6 +13,13 @@ module.exports = {
       ticker: {
         type: Sequelize.STRING,
       },
+      userId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -22,26 +22,27 @@ module.exports = {
       qtyBuy: {
         type: Sequelize.INTEGER,
       },
-      sellDate: {
-        type: Sequelize.INTEGER,
-      },
-      qtyBuy: {
-        type: Sequelize.INTEGER,
-      },
       qtySold: {
         type: Sequelize.INTEGER,
       },
       buyPrice: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
       },
       sellPrice: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
       },
       fees: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
       },
       comment: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
+      },
+      userId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,

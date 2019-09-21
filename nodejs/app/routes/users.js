@@ -11,5 +11,7 @@ router.get('/:id', userCtrl.getOneById);
 router.post('/', userCtrl.createUser);
 // PUT /users/:id
 router.put('/:id', userCtrl.updateUser);
+// DELETE /users/:id
+router.delete('/:id', userCtrl.removeUser);
 // export the route from this file
 module.exports = router;

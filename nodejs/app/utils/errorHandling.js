@@ -17,7 +17,8 @@ exports.sendSuccess = (res, message) => data => {
 };
 
 exports.sendError = (res, status, message) => error => {
-  res.status(status || error.status || 500).json({
+  console.log(error);
+  res.status(status || error.status || error.code || 500).json({
     type: 'error',
     message: message || error.message,
     error,

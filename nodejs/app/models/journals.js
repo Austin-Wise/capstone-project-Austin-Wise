@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       ticker: {
         type: DataTypes.STRING,
+        allowNull: false,
         notNull: {
           args: true,
           msg: 'Ticker Symbol value is required.',
@@ -27,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       type: {
         type: DataTypes.ENUM('Long', 'Short'),
+        allowNull: false,
         validate: {
           isIn: {
             args: [['Long', 'Short']],
@@ -54,8 +56,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         validate: {
           min: {
-            args: 0,
-            msg: 'Quantity Buy must be a positive number.',
+            args: 1,
+            msg: 'Quantity Buy must be a whole number.',
           },
           isNumeric: {
             args: true,
@@ -68,8 +70,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         validate: {
           min: {
-            args: 0,
-            msg: 'Quantity Sold must be a positive number.',
+            args: 1,
+            msg: 'Quantity Sold must be a whole.',
           },
           isNumeric: {
             args: true,
@@ -78,11 +80,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       buyPrice: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: true,
         validate: {
           min: {
-            args: 0,
+            args: 0.0001,
             msg: 'Buy Price must be a positive number.',
           },
           isNumeric: {
@@ -96,11 +98,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       sellPrice: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: true,
         validate: {
           min: {
-            args: 0,
+            args: 0.0001,
             msg: 'Sell Price must be a positive number.',
           },
           isNumeric: {
@@ -114,11 +116,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       fees: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: true,
         validate: {
           min: {
-            args: 0,
+            args: 0.0001,
             msg: 'Fees value must be a positive number.',
           },
           isNumeric: {

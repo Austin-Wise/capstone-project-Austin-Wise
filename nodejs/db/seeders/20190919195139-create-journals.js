@@ -7,10 +7,10 @@ module.exports = {
           id: 'b13f0ff6-9025-4f30-8a09-40545beadedb',
           ticker: 'AAPL',
           type: 'Long',
-          buyDate: '22/05/2001',
+          buyDate: '05/22/2001',
           qtyBuy: 20,
           buyPrice: 210.2,
-          sellDate: '22/05/2001',
+          sellDate: '05/22/2001',
           qtySold: 20,
           sellPrice: 214.11,
           fees: 3,
@@ -23,10 +23,10 @@ module.exports = {
           id: '254ec712-6e39-4da0-a680-09e459e27d76',
           ticker: 'GOOGL',
           type: 'Short',
-          buyDate: '22/05/2003',
+          buyDate: '05/22/2003',
           qtyBuy: 20,
           buyPrice: 240.2,
-          sellDate: '22/05/2006',
+          sellDate: '05/22/2006',
           qtySold: 20,
           sellPrice: 104.11,
           fees: 3,
@@ -36,7 +36,7 @@ module.exports = {
           updatedAt: Sequelize.literal('NOW()'),
         },
       ],
-      {}
+      { updateOnDuplicate: true }
     );
   },
 

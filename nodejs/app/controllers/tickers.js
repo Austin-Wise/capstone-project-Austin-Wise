@@ -1,90 +1,92 @@
 // load in the notes model
-const { Notes, Sequelize } = require('../models');
+// load in the tickers model
+const { Tickers, Sequelize } = require('../models');
 const { throwIf, throwError, sendError } = require('../utils/errorHandling');
-// get all the notes
+// get all the tickers
 exports.getContent = async (req, res) => {
   // run the find all function on the model
   try {
-    const notes = await Notes.findAll().then(
-      throwIf(rows => rows.length === 0, 204, 'no results', 'No Results Found'),
+    const tickers = await Tickers.findAll().catch(
       throwError(500, 'sequelize error')
     );
-    // respond with json of the notes array
-    res.json(notes);
+    // respond with json of the tickers array
+    res.json(tickers);
   } catch (e) {
     sendError(res)(e);
   }
 };
 
-// find one note by id
+// find one ticker by id
 exports.getOneById = async (req, res) => {
   // get the id from the route params
   const { id } = req.params;
   try {
-    // search our note model for the note
-    const note = await Notes.findByPk(id).then(
+    // search our ticker model for the ticker
+    const ticker = await Tickers.findByPk(id).then(
       // first argument - if SQL Query worked correctly
-      throwIf(row => !row, 404, 'not found', 'Note Not Found'),
+      throwIf(row => !row, 404, 'not found', 'Ticker Not Found'),
       // second argument - if it failed
       throwError(500, 'sequelize error')
       // ? Only accepts 2 arguments
     );
-    // if the note is found send it back.
-    res.status(200).json(note);
+    // if the ticker is found send it back.
+    res.status(200).json(ticker);
   } catch (e) {
     sendError(res)(e);
   }
 };
 
-// add a new note
-exports.createNote = async (req, res) => {
+// add a new ticker
+exports.createTicker = async (req, res) => {
   // get the heading, body, and bookmarkId from the request body
-  const { heading, body, bookmarkId } = req.body;
+  const { id, symbol } = req.body;
   // create the item and save the new id
   try {
-    const id = await Notes.create({
-      heading,
-      body,
-      bookmarkId,
+    const ticker = await Tickers.create({
+      id,
+      symbol,
       // 'catch' catches errors specific to validation. These are presets created within the models (isAlpha, len, etc..)
       // Catch first required, Captures type, second provides error code.
     })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(throwError(500, 'sequelize error'));
     // send the new id back to the request
-    res.status(200).json({ id });
+    res.status(200).json(ticker);
   } catch (e) {
     sendError(res)(e);
   }
 };
 
-// update an existing note
-exports.updateNote = async (req, res) => {
+// update an existing ticker
+exports.updateTicker = async (req, res) => {
   const { id } = req.params;
   try {
-    const updatedNotes = await Notes.update(req.body, id)
+    const updatedTickers = await Tickers.update(req.body, id)
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(throwError(500, 'sequelize error'));
-    res.json(updatedNotes);
+    res.json(updatedTickers);
   } catch (e) {
     sendError(res)(e);
   }
 };
 
 // delete an note
-exports.removeNote = async (req, res) => {
+// delete an ticker
+exports.removeTicker = async (req, res) => {
   // get the id from the route
   const { id } = req.params;
   // remove the note
+  // remove the ticker
   try {
-    await Notes.destroy(id).then(
+    await Tickers.destroy({ where: { id } }).then(
       // first argument - if SQL Query worked correctly
-      throwIf(numRows => !numRows, 404, 'not found', 'Note Not Found'),
+      throwIf(numRows => !numRows, 404, 'not found', 'Ticker Not Found'),
       // second argument - if it failed
       throwError(500, 'sequelize error')
       // ? Only accepts 2 arguments
     );
     // if the note is found send it back.
+    // if the ticker is found send it back.
     // send a good status code
     // sendStatus stops at sendStatus, whereas status allows chaining
     res.sendStatus(202);

@@ -5,8 +5,7 @@ const { throwIf, throwError, sendError } = require('../utils/errorHandling');
 exports.getContent = async (req, res) => {
   // run the find all function on the model
   try {
-    const journals = await Journals.findAll().then(
-      throwIf(rows => rows.length === 0, 204, 'no results', 'No Results Found'),
+    const journals = await Journals.findAll().catch(
       throwError(500, 'sequelize error')
     );
     // respond with json of the journals array
@@ -38,8 +37,12 @@ exports.getOneById = async (req, res) => {
 
 // add a new journal
 exports.createJournal = async (req, res) => {
+  Object.keys(req.body).forEach(key => {
+    if (req.body[key] === '') delete req.body[key];
+  });
   // get the ticker, type, buyDate, qtyBuy, buyPrice, sellDate, qtySold, sellPrice, fees, comment, and userId from the request body
   const {
+    id,
     ticker,
     type,
     buyDate,
@@ -54,7 +57,8 @@ exports.createJournal = async (req, res) => {
   } = req.body;
   // create the item and save the new id
   try {
-    const id = await Journals.create({
+    const journal = await Journals.create({
+      id,
       ticker,
       type,
       buyDate,
@@ -72,20 +76,25 @@ exports.createJournal = async (req, res) => {
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(throwError(500, 'sequelize error'));
     // send the new id back to the request
-    res.status(200).json({ id });
+    res.status(200).json(journal);
   } catch (e) {
     sendError(res)(e);
   }
 };
 
 // update an existing journal
+// Returning true -> returns all values of updated rows
+// [,[updatedJournal]] grabs updated item at index 0 within the array of updated rows index 1.
 exports.updateJournal = async (req, res) => {
   const { id } = req.params;
   try {
-    const updatedJournals = await Journals.update(req.body, id)
+    const [, [updatedJournal]] = await Journals.update(req.body, {
+      where: { id },
+      returning: true,
+    })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(throwError(500, 'sequelize error'));
-    res.json(updatedJournals);
+    res.json(updatedJournal);
   } catch (e) {
     sendError(res)(e);
   }
@@ -97,7 +106,7 @@ exports.removeJournal = async (req, res) => {
   const { id } = req.params;
   // remove the journal
   try {
-    await Journals.destroy(id).then(
+    await Journals.destroy({ where: { id } }).then(
       // first argument - if SQL Query worked correctly
       throwIf(numRows => !numRows, 404, 'not found', 'Journal Not Found'),
       // second argument - if it failed

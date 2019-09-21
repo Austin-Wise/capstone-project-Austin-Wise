@@ -28,16 +28,17 @@ exports.getOneById = (req, res) => {
 // add a new user
 exports.createUser = (req, res) => {
   // get the firstName, lastName, email, and password values from the request body
-  const { firstName, lastName, email, password } = req.body;
+  const { id, firstName, lastName, email, password } = req.body;
   // create the item and save the new id
-  const id = Users.create({
+  const user = Users.create({
+    id,
     firstName,
     lastName,
     email,
     password,
   });
   // send the new id back to the request
-  res.json({ id });
+  res.json(user);
 };
 
 // update an existing user
@@ -52,7 +53,7 @@ exports.removeUser = (req, res) => {
   // get the id from the route
   const { id } = req.params;
   // remove the user
-  Users.destroy(id);
+  Users.destroy.destroy({ where: { id } });
   // send a good status code
   res.sendStatus(200);
 };

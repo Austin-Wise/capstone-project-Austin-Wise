@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db-update": "sequelize db:migrate; sequelize db:seed:all;",
+    "db-wrecked": "sequelize db:migrate:undo:all; sequelize db:migrate; sequelize db:seed:all;",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "keywords": [],

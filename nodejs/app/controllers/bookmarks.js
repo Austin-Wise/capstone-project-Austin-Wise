@@ -1,13 +1,12 @@
 // load in the articles model
-const { Bookmarks, Sequelize } = require('../models');
+const { Bookmarks, Notes, Sequelize } = require('../models');
 const { throwIf, throwError, sendError } = require('../utils/errorHandling');
 
 // get all the bookmarks
 exports.getContent = async (req, res) => {
   // run the find all function on the model
   try {
-    const bookmarks = await Bookmarks.findAll().then(
-      throwIf(rows => rows.length === 0, 204, 'no results', 'No Results Found'),
+    const bookmarks = await Bookmarks.findAll().catch(
       throwError(500, 'sequelize error')
     );
     // respond with json of the bookmarks array
@@ -40,10 +39,11 @@ exports.getOneById = async (req, res) => {
 // add a new bookmark
 exports.createBookmark = async (req, res) => {
   // get the articleId, ticker and userId values from the request body
-  const { articleId, ticker, userId } = req.body;
+  const { id, articleId, ticker, userId } = req.body;
   // create the item and save the new id
   try {
-    const id = await Bookmarks.create({
+    const bookmark = await Bookmarks.create({
+      id,
       articleId,
       ticker,
       userId,
@@ -53,7 +53,7 @@ exports.createBookmark = async (req, res) => {
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(throwError(500, 'sequelize error'));
     // send the new id back to the request
-    res.status(200).json({ id });
+    res.status(200).json(bookmark);
   } catch (e) {
     sendError(res)(e);
   }
@@ -78,7 +78,10 @@ exports.removeBookmark = async (req, res) => {
   const { id } = req.params;
   // remove th bookmark
   try {
-    await Bookmarks.destroy(id).then(
+    await Notes.destroy({ where: { bookmarkId: id } }).catch(
+      throwError(500, 'sequelize error')
+    );
+    await Bookmarks.destroy({ where: { id } }).then(
       // first argument - if SQL Query worked correctly
       throwIf(numRows => !numRows, 404, 'not found', 'Bookmark Not Found'),
       // second argument - if it failed

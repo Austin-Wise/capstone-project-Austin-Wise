@@ -11,7 +11,7 @@ import {
   ListGroupItem,
   Form,
   Input,
-  Button
+  Button,
 } from 'reactstrap';
 import container from './container';
 import DeleteModal from '../../Shared/deleteModal';
@@ -21,6 +21,7 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     props.fetchBlocks();
+    this.state = {};
   }
 
   handleInputChange = event => {
@@ -32,7 +33,7 @@ class Settings extends Component {
     const { name } = target;
     // set state to the name and the value. For example, { description: 'hi'}
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -42,12 +43,14 @@ class Settings extends Component {
     const { createBlock } = this.props;
     const { name } = this.state;
     createBlock({
-      name
+      name,
     });
+    this.setState({ name: '' });
   };
 
   render() {
     const { blocks, user, deleteBlock, match } = this.props;
+    const { name } = this.state;
     return (
       <Col md="8" className={styles.Settings}>
         <div>
@@ -71,7 +74,7 @@ class Settings extends Component {
                     type="text"
                     name="name"
                     id="name"
-                    value={blocks.name}
+                    value={name}
                     onChange={this.handleInputChange}
                     placeholder="Block News Agency"
                     className={styles.InputItem}
@@ -118,21 +121,21 @@ Settings.propTypes = {
   blocks: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      name: PropTypes.string
+      name: PropTypes.string,
     })
   ),
   user: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
-    email: PropTypes.string
+    email: PropTypes.string,
   }),
   fetchBlocks: PropTypes.func.isRequired,
   deleteBlock: PropTypes.func.isRequired,
   createBlock: PropTypes.func.isRequired,
-  match: ReactRouterPropTypes.match.isRequired
+  match: ReactRouterPropTypes.match.isRequired,
 };
 
 Settings.defaultProps = {
   blocks: [],
-  user: {}
+  user: {},
 };

@@ -11,7 +11,21 @@ module.exports = {
         type: Sequelize.STRING,
       },
       body: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
+      },
+      bookmarkId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Bookmarks',
+          key: 'id',
+        },
+      },
+      userId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,

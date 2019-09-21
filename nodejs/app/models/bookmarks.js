@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       articleId: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notNull: true,
         },
