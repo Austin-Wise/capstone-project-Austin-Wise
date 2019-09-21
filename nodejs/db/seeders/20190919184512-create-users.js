@@ -13,7 +13,10 @@ module.exports = {
           updatedAt: Sequelize.literal('NOW()'),
         },
       ],
-      { updateOnDuplicate: true }
+      {
+        updateOnDuplicate: ['firstName', 'lastName', 'email', 'password'],
+        upsertKeys: ['id'],
+      }
     );
   },
 
