@@ -12,7 +12,8 @@ module.exports = {
         },
       ],
       {
-        updateOnDuplicate: true,
+        updateOnDuplicate: ['userId', 'symbol'],
+        upsertKeys: ['id'],
       }
     );
   },

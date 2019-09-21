@@ -36,7 +36,21 @@ module.exports = {
           updatedAt: Sequelize.literal('NOW()'),
         },
       ],
-      { updateOnDuplicate: true }
+      {
+        updateOnDuplicate: [
+          'ticker',
+          'type',
+          'buyDate',
+          'qtyBuy',
+          'buyPrice',
+          'sellDate',
+          'qtySold',
+          'sellPrice',
+          'fees',
+          'comment',
+        ],
+        upsertKeys: ['id'],
+      }
     );
   },
 
