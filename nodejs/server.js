@@ -15,7 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Put CRUD routes here
 
 // Only for production builds on Heroku
-if (process.env.NODE_ENV === 'production') {
+if (
+  process.env.NODE_ENV === 'production' ||
+  process.env.NODE_ENV === 'staging'
+) {
   // Express will serve up assets
   // like main.js and main.css
   app.use(express.static('../reactjs/build'));
