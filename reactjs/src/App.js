@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
+import { connect, Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import PropTypes from 'prop-types';
 import { PersistGate } from 'redux-persist/integration/react';
 // ? Provider makes the Redux store available to any nested components that have been wrapped in the connect() function.
 import { store, persistor } from './redux/store';
@@ -15,31 +15,35 @@ class App extends Component {
   }
 
   render() {
-    const loggedIn = true;
     return (
       <Provider store={store}>
         {/* <PersistGate loading={null} persistor={persistor}> */}
-        <Router>
-          <Switch>
-            {!loggedIn && <Route path="/" component={Landing} />}
-            {loggedIn && (
-              <Route
-                path={[
-                  '/news/:ticker',
-                  '/journal',
-                  '/bookmark',
-                  '/settings',
-                  '/',
-                ]}
-                component={UserArea}
-              />
-            )}
-          </Switch>
-        </Router>
+        <MyRoutes />
         {/* </PersistGate> */}
       </Provider>
     );
   }
 }
 
+function Routes({ loggedIn }) {
+  return (
+    <Router>
+      <Switch>
+        {!loggedIn && <Route path="/" component={Landing} />}
+        {loggedIn && (
+          <Route
+            path={['/news/:ticker', '/journal', '/bookmark', '/settings', '/']}
+            component={UserArea}
+          />
+        )}
+      </Switch>
+    </Router>
+  );
+}
+const MyRoutes = connect(state => ({ loggedIn: state.auth.loggedIn }))(Routes);
+
 export default App;
+
+App.propTypes = {
+  loggedIn: PropTypes.func.isRequired,
+};

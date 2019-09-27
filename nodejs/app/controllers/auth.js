@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const { Users, Sequelize } = require('../models');
@@ -27,10 +28,9 @@ exports.forgotPassword = async (req, res) => {
       subject: 'Password Reset',
       ctx: {
         url: `http://localhost:3000/auth/reset_token?token=${token}`,
-        name: user.name.split(' ')[0],
+        name: user.firstName,
       },
     };
-    // TODO: Do I use first and last or just name
     await mailer.sendMail(data).catch(throwError(500, 'mail error'));
     res.json({
       message: 'Check your email for further instructions',
@@ -85,4 +85,57 @@ exports.resetPassword = async (req, res) => {
   } catch (e) {
     sendError(res)(e);
   }
+};
+
+exports.signUp = async (req, res) => {
+  const { firstName, lastName, email, password, rePassword } = req.body;
+  try {
+    if (rePassword !== password) {
+      throw new Error('Passwords do not match');
+    } else {
+      const passwordHashed = await bcrypt.hash(password, 10);
+      console.log(passwordHashed);
+      const userRecord = await Users.create({
+        firstName,
+        lastName,
+        email,
+        password: passwordHashed,
+      });
+      res.status(200).json({ token: this.generateToken(userRecord) });
+    }
+  } catch (e) {
+    sendError(res)(e);
+  }
+};
+
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const userRecord = await Users.findOne({ where: { email } });
+    console.log(userRecord);
+    if (!userRecord) {
+      throw new Error('User not found');
+    } else {
+      const correctPassword = await bcrypt.compare(
+        password,
+        userRecord.password
+      );
+      if (!correctPassword) {
+        throw new Error('Incorrect Password');
+      }
+    }
+    res.status(200).json({ token: this.generateToken(userRecord) });
+  } catch (e) {
+    sendError(res)(e);
+  }
+};
+
+exports.generateToken = user => {
+  const data = {
+    id: user.id,
+  };
+  const signature = process.env.SIGNATURE;
+  const expiration = '6h';
+
+  return jwt.sign({ data }, signature, { expiresIn: expiration });
 };

@@ -37,13 +37,13 @@ exports.getOneById = async (req, res) => {
 // add a new block
 exports.createBlock = async (req, res) => {
   // get the ticker, title, text, source, published and rating values from the request body
-  const { id, name, userId } = req.body;
+  const { id, name } = req.body;
   // create the item and save the new id
   try {
     const block = await Blocks.create({
       id,
       name,
-      userId,
+      userId: req.token.id,
       // 'catch' catches errors specific to validation. These are presets created within the models (isAlpha, len, etc..)
       // Catch first required, Captures type, second provides error code.
     })

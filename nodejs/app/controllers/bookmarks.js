@@ -39,14 +39,18 @@ exports.getOneById = async (req, res) => {
 // add a new bookmark
 exports.createBookmark = async (req, res) => {
   // get the articleId, ticker and userId values from the request body
-  const { id, articleId, ticker, userId } = req.body;
+  const { id, articleId, headline, source, url, summary, ticker } = req.body;
   // create the item and save the new id
   try {
     const bookmark = await Bookmarks.create({
       id,
       articleId,
+      headline,
+      source,
+      url,
+      summary,
       ticker,
-      userId,
+      userId: req.token.id,
       // 'catch' catches errors specific to validation. These are presets created within the models (isAlpha, len, etc..)
       // Catch first required, Captures type, second provides error code.
     })

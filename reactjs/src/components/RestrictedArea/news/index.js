@@ -87,35 +87,20 @@ class News extends Component {
               <h3>{companyData.name}</h3>
             </div>
             <h4>
-              <span className={styles.dollar}>
-                {companyData.now > companyData.close &&
-                  `$${(companyData.now - companyData.close).toFixed(2)}`}
-                {companyData.now < companyData.close &&
-                  (companyData.now - companyData.close)
-                    .toFixed(2)
-                    .replace(/-/g, '-$')}
-              </span>
-              <span className={styles.percent}>
-                {companyData.now > companyData.close &&
-                  `${(
-                    (companyData.now / companyData.close) * 100 -
-                    100
-                  ).toFixed(2)}`}
-                {companyData.now < companyData.close &&
-                  ((companyData.close / companyData.now) * 100 - 100).toFixed(
-                    2
-                  )}
-                %
-              </span>
+              <span className={styles.dollar}>{companyData.price}</span>
+              <span className={styles.dollar}>{companyData.dayChange}</span>
+              <span className={styles.percent}>{companyData.chgPct}%</span>
               <img
                 className="ml-5"
                 src={
-                  companyData.now > companyData.close
+                  companyData.dayChange &&
+                  companyData.dayChange.indexOf('-') === -1
                     ? '/svg_css/greenArrow.svg'
                     : '/svg_css/redArrow.svg'
                 }
                 alt={
-                  companyData.now > companyData.close
+                  companyData.dayChange &&
+                  companyData.dayChange.indexOf('-') === -1
                     ? 'green arrow'
                     : 'red arrow'
                 }
@@ -172,24 +157,24 @@ class News extends Component {
             <Col md="4">
               <ul className={styles.CoList}>
                 <li>
-                  Adj. Open:&nbsp;
-                  <span className={styles.coData}>{companyData.adjOpen}</span>
+                  Stock Exchange:&nbsp;
+                  <span className={styles.coData}>{companyData.exchange}</span>
                 </li>
                 <li>
-                  Adj. High:&nbsp;
-                  <span className={styles.coData}>{companyData.adjHigh}</span>
+                  52-Week High:&nbsp;
+                  <span className={styles.coData}>{companyData.yearHigh}</span>
                 </li>
                 <li>
-                  Adj. Low:&nbsp;
-                  <span className={styles.coData}>{companyData.adjLow}</span>
+                  52-Week Low:&nbsp;
+                  <span className={styles.coData}>{companyData.yearLow}</span>
                 </li>
                 <li>
-                  Adj. Close:&nbsp;
-                  <span className={styles.coData}>{companyData.adjClose}</span>
+                  Shares:&nbsp;
+                  <span className={styles.coData}>{companyData.shares}</span>
                 </li>
                 <li>
-                  Adj. Volume:&nbsp;
-                  <span className={styles.coData}>{companyData.adjVolume}</span>
+                  Market Cap:&nbsp;
+                  <span className={styles.coData}>{companyData.mktCap}</span>
                 </li>
               </ul>
             </Col>
@@ -271,17 +256,19 @@ News.propTypes = {
     employees: PropTypes.number,
     industry: PropTypes.string,
     location: PropTypes.string,
-    open: PropTypes.number,
-    high: PropTypes.number,
-    low: PropTypes.number,
-    close: PropTypes.number,
-    volume: PropTypes.number,
-    adjOpen: PropTypes.number,
-    adjHigh: PropTypes.number,
-    adjLow: PropTypes.number,
-    adjClose: PropTypes.number,
-    adjVolume: PropTypes.number,
-    now: PropTypes.number,
+    open: PropTypes.string,
+    high: PropTypes.string,
+    low: PropTypes.string,
+    close: PropTypes.string,
+    volume: PropTypes.string,
+    exchange: PropTypes.string,
+    yearHigh: PropTypes.string,
+    yearLow: PropTypes.string,
+    shares: PropTypes.string,
+    mktCap: PropTypes.string,
+    chgPct: PropTypes.string,
+    dayChange: PropTypes.string,
+    price: PropTypes.string,
   }),
   news: PropTypes.arrayOf(
     PropTypes.shape({

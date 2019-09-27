@@ -1,5 +1,50 @@
+const axios = require('axios');
 const { sendError } = require('../utils/errorHandling');
 
+const getData = async (ticker, res) => {
+  const newsUrl =
+    `https://cloud.iexapis.com/stable/stock/${ticker}/news` +
+    `?token=${process.env.IEXKEY}`;
+  const quoteUrl =
+    `https://api.worldtradingdata.com/api/v1/stock?symbol=${ticker}` +
+    `&api_token=${process.env.WTDKEY}`;
+
+  try {
+    const newsResponse = await axios.get(newsUrl);
+    const { data: newsData } = newsResponse;
+    // const {
+    //   data: {
+    //     data: [quoteData],
+    //   },
+    // } = quoteResponse;
+    const data = {
+      dateTime: newsData.datetime,
+      headline: newsData.headline,
+      source: newsData.source,
+      url: newsData.url,
+      summary: newsData.summary,
+      related: newsData.related.split(','),
+      image: newsData.image,
+      lang: newsData.lang,
+    };
+    return data;
+  } catch (e) {
+    sendError(res)(e);
+  }
+};
+
+// find one companyData entry by id
+exports.getOneById = async (req, res) => {
+  // get the id from the route params
+  const { id } = req.params;
+  try {
+    const companyData = await getData(id, res);
+    // if the data is found send it back.
+    res.status(200).json(companyData);
+  } catch (e) {
+    sendError(res)(e);
+  }
+};
 const data = [
   {
     id: 'b9f9e99a-8b91-4dde-93b8-a2dcc1d3a215',

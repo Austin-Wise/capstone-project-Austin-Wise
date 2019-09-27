@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, Nav, NavItem, Col, Row } from 'reactstrap';
 import { Route, NavLink as RRNavLink } from 'react-router-dom';
-
+import container from './container';
 import PortfolioPanel from './portfolioPanel';
 import News from './news';
 import Journal from './journal';
@@ -14,7 +14,7 @@ import Settings from './settings';
 import styles from './styles.module.css';
 import TickerModal from './tickerModal';
 
-export default class UserArea extends React.Component {
+class UserArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +32,7 @@ export default class UserArea extends React.Component {
   // Match url always matches "/", moving the "/" to the end of the array for route wildcards allows for if/else checking on route alternatives
 
   render() {
-    const { navigation, match } = this.props;
+    const { navigation, match, logout } = this.props;
     const { isOpen } = this.state;
     return (
       <div className="container-fluid">
@@ -81,8 +81,10 @@ export default class UserArea extends React.Component {
             />
             <Nav className={styles.footer}>
               <NavItem>
-                <NavLink active href="#">
-                  Log Out
+                <NavLink active href="">
+                  <button type="button" onClick={logout}>
+                    Log Out
+                  </button>
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -107,6 +109,7 @@ export default class UserArea extends React.Component {
     );
   }
 }
+export default container(UserArea);
 
 UserArea.propTypes = {
   navigation: PropTypes.arrayOf(

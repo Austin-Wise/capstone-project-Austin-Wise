@@ -1,75 +1,59 @@
+const axios = require('axios');
 const { sendError } = require('../utils/errorHandling');
 
-const data = [
-  {
-    id: 'GOOGL',
-    name: 'Alphabet Inc Class A',
-    ticker: 'GOOGL',
-    ceo: 'Larry Page',
-    employees: 98771,
-    industry: 'Software and Data',
-    location: 'Mountain View, CA',
-    open: 1185.17,
-    high: 1195.67,
-    low: 1150,
-    close: 1153.58,
-    volume: 1508729,
-    adjOpen: 1185.17,
-    adjHigh: 1195.67,
-    adjLow: 1150,
-    adjClose: 1153.58,
-    adjVolume: 1508729,
-    now: 1195.67,
-  },
-  {
-    id: 'AAPL',
-    name: 'Apple, Inc.',
-    ticker: 'AAPL',
-    ceo: 'Tim Cook',
-    employees: 132923,
-    industry: 'Computing Systems',
-    location: 'Cupertino, CA',
-    open: 1185.17,
-    high: 1195.67,
-    low: 1150,
-    close: 1153.58,
-    volume: 1508729,
-    adjOpen: 1185.17,
-    adjHigh: 1195.67,
-    adjLow: 1150,
-    adjClose: 1153.58,
-    adjVolume: 1508729,
-    now: 1010.67,
-  },
-  {
-    id: 'PUR',
-    name: 'PurAqua',
-    ticker: 'PUR',
-    ceo: 'Posseidon',
-    employees: 1,
-    industry: 'Beverage',
-    location: 'Aegean Sea, Euboea',
-    open: 2.17,
-    high: 2.31,
-    low: 2.03,
-    close: 2.19,
-    volume: 153873,
-    adjOpen: 1185.17,
-    adjHigh: 1195.67,
-    adjLow: 1150,
-    adjClose: 1153.58,
-    adjVolume: 1508729,
-    now: 1135.67,
-  },
-];
+const getData = async (ticker, res) => {
+  const companyUrl =
+    `https://cloud.iexapis.com/stable/stock/${ticker}/company` +
+    `?token=${process.env.IEXKEY}`;
+  const quoteUrl =
+    `https://api.worldtradingdata.com/api/v1/stock?symbol=${ticker}` +
+    `&api_token=${process.env.WTDKEY}`;
+
+  try {
+    const companyResponse = await axios.get(companyUrl);
+    const quoteResponse = await axios.get(quoteUrl);
+    const { data: companyData } = companyResponse;
+    const {
+      data: {
+        data: [quoteData],
+      },
+    } = quoteResponse;
+    const data = {
+      id: companyData.symbol,
+      name: companyData.companyName,
+      ticker: companyData.symbol,
+      ceo: companyData.CEO,
+      employees: companyData.employees,
+      industry: companyData.sector,
+      location: `${companyData.city}, ${companyData.state}`,
+      open: quoteData.price_open,
+      high: quoteData.day_high,
+      low: quoteData.day_low,
+      close: quoteData.close_yesterday,
+      volume: quoteData.volume,
+      yearHigh: quoteData['52_week_high'],
+      yearLow: quoteData['52_week_low'],
+      exchange: quoteData.stock_exchange_short,
+      shares: quoteData.shares,
+      mktCap: quoteData.market_cap,
+      price: quoteData.price,
+      chgPct: quoteData.change_pct,
+      dayChange: quoteData.day_change,
+    };
+    return data;
+  } catch (e) {
+    sendError(res)(e);
+  }
+};
+
+// price contains marketOpen, marketClose, marketHigh, marketLow, marketAverage, marketVolume,
 
 // find one companyData entry by id
 exports.getOneById = async (req, res) => {
   // get the id from the route params
   const { id } = req.params;
   try {
-    // search our companyData for the object
-    const companyData = data.find(doorknob => id === doorknob.id);
+    const companyData = await getData(id, res);
     // if the data is found send it back.
     res.status(200).json(companyData);
   } catch (e) {

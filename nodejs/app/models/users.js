@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notNull: { args: true, msg: 'Last name is required' },
           is: {
-            args: [/^[A-Za-z\s\-]+$/],
+            args: [/^[A-Za-z\s-]+$/],
             msg: 'Last name may only contain letters, hyphens, and spaces.',
           },
           len: {
@@ -58,8 +58,8 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notNull: { args: true, msg: 'Password is required' },
           len: {
-            args: [6, 50],
-            msg: 'Email must be between 6 and 50 characters in length',
+            args: [6, 250],
+            msg: 'Password must be more than 6 characters long',
           },
         },
       },

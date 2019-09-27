@@ -12,7 +12,7 @@ import {
   REQ_BLOCKS_ERROR,
   DELETE_BLOCK_PENDING,
   DELETE_BLOCK_SUCCESS,
-  DELETE_BLOCK_ERROR
+  DELETE_BLOCK_ERROR,
 } from '../../actionTypes';
 
 const initialState = {
@@ -25,7 +25,7 @@ const initialState = {
   // tracking if the state is loading
   isLoading: false,
   // any errors loading all the data
-  error: null
+  error: null,
 };
 
 function blockPending(state, action) {
@@ -37,9 +37,9 @@ function blockPending(state, action) {
       [action.payload.id]: {
         ...state.byId[action.payload.id],
         isLoading: true,
-        error: null
-      }
-    }
+        error: null,
+      },
+    },
   };
 }
 
@@ -55,11 +55,11 @@ function blockSuccess(state, action) {
         loadedAt: Date.now(),
         data: {
           ...action.data,
-          id: action.payload.id
-        }
-      }
+          id: action.payload.id,
+        },
+      },
     },
-    allIds: [...new Set([...state.allIds, action.payload.id])]
+    allIds: [...new Set([...state.allIds, action.payload.id])],
   };
 }
 
@@ -72,9 +72,9 @@ function blockError(state, action) {
       [action.payload.id]: {
         ...state.byId[action.payload.id],
         isLoading: false,
-        error: action.err
-      }
-    }
+        error: action.err,
+      },
+    },
   };
 }
 function blocksPending(state, action) {
@@ -82,7 +82,7 @@ function blocksPending(state, action) {
   return {
     ...state,
     isLoading: true,
-    error: null
+    error: null,
   };
 }
 
@@ -104,15 +104,15 @@ function blocksSuccess(state, action) {
             data: block,
             isLoading: false,
             loadedAt: Date.now(),
-            error: null
-          }
+            error: null,
+          },
         }),
         {}
-      )
+      ),
     },
     allIds: [
-      ...new Set([...state.allIds, ...action.data.map(block => block.id)])
-    ]
+      ...new Set([...state.allIds, ...action.data.map(block => block.id)]),
+    ],
   };
 }
 
@@ -121,7 +121,7 @@ function blocksError(state, action) {
   return {
     ...state,
     isLoading: false,
-    error: action.err
+    error: action.err,
   };
 }
 
@@ -131,7 +131,7 @@ function deleteBlockSuccess(state, action) {
   return {
     ...state,
     byId: withoutBlock,
-    allIds: state.allIds.filter(id => id !== action.payload.id)
+    allIds: state.allIds.filter(id => id !== action.payload.id),
   };
 }
 
@@ -147,5 +147,5 @@ export default createReducer(initialState, {
   [REQ_BLOCKS_ERROR]: blocksError,
   [DELETE_BLOCK_PENDING]: blockPending,
   [DELETE_BLOCK_SUCCESS]: deleteBlockSuccess,
-  [DELETE_BLOCK_ERROR]: blockError
+  [DELETE_BLOCK_ERROR]: blockError,
 });

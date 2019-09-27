@@ -12,7 +12,7 @@ import {
   REQ_BOOKMARKS_ERROR,
   DELETE_BOOKMARK_PENDING,
   DELETE_BOOKMARK_SUCCESS,
-  DELETE_BOOKMARK_ERROR
+  DELETE_BOOKMARK_ERROR,
 } from '../../actionTypes';
 
 const initialState = {
@@ -25,7 +25,7 @@ const initialState = {
   // tracking if the state is loading
   isLoading: false,
   // any errors loading all the data
-  error: null
+  error: null,
 };
 
 function bookmarkPending(state, action) {
@@ -37,9 +37,9 @@ function bookmarkPending(state, action) {
       [action.payload.id]: {
         ...state.byId[action.payload.id],
         isLoading: true,
-        error: null
-      }
-    }
+        error: null,
+      },
+    },
   };
 }
 
@@ -55,11 +55,11 @@ function bookmarkSuccess(state, action) {
         loadedAt: Date.now(),
         data: {
           ...action.data,
-          id: action.payload.id
-        }
-      }
+          id: action.payload.id,
+        },
+      },
     },
-    allIds: [...new Set([...state.allIds, action.payload.id])]
+    allIds: [...new Set([...state.allIds, action.payload.id])],
   };
 }
 
@@ -72,9 +72,9 @@ function bookmarkError(state, action) {
       [action.payload.id]: {
         ...state.byId[action.payload.id],
         isLoading: false,
-        error: action.err
-      }
-    }
+        error: action.err,
+      },
+    },
   };
 }
 function bookmarksPending(state, action) {
@@ -82,7 +82,7 @@ function bookmarksPending(state, action) {
   return {
     ...state,
     isLoading: true,
-    error: null
+    error: null,
   };
 }
 
@@ -104,15 +104,18 @@ function bookmarksSuccess(state, action) {
             data: bookmark,
             isLoading: false,
             loadedAt: Date.now(),
-            error: null
-          }
+            error: null,
+          },
         }),
         {}
-      )
+      ),
     },
     allIds: [
-      ...new Set([...state.allIds, ...action.data.map(bookmark => bookmark.id)])
-    ]
+      ...new Set([
+        ...state.allIds,
+        ...action.data.map(bookmark => bookmark.id),
+      ]),
+    ],
   };
 }
 
@@ -121,7 +124,7 @@ function bookmarksError(state, action) {
   return {
     ...state,
     isLoading: false,
-    error: action.err
+    error: action.err,
   };
 }
 
@@ -134,7 +137,7 @@ function deleteBookmarkSuccess(state, action) {
   return {
     ...state,
     byId: withoutBookmark,
-    allIds: state.allIds.filter(id => id !== action.payload.id)
+    allIds: state.allIds.filter(id => id !== action.payload.id),
   };
 }
 
@@ -150,5 +153,5 @@ export default createReducer(initialState, {
   [REQ_BOOKMARKS_ERROR]: bookmarksError,
   [DELETE_BOOKMARK_PENDING]: bookmarkPending,
   [DELETE_BOOKMARK_SUCCESS]: deleteBookmarkSuccess,
-  [DELETE_BOOKMARK_ERROR]: bookmarkError
+  [DELETE_BOOKMARK_ERROR]: bookmarkError,
 });
