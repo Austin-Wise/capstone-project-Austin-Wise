@@ -4,23 +4,23 @@ import {
   fetchNote,
   deleteNote,
   createNote,
-  updateNote
+  updateNote,
 } from '../../../redux/store/cat/note/actions';
 
 function mapStateToProps(state, props) {
   const {
     match: {
-      params: { id }
-    }
+      params: { id },
+    },
   } = props;
   const {
     notes: {
-      byId: { [id]: { data: note } = {} }
-    }
+      byId: { [id]: { data: note } = {} },
+    },
   } = state;
   // turn the array of ids into an array of objects
   return {
-    note
+    note,
   };
 }
 

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       articleId: {
-        type: DataTypes.STRING,
+        type: DataTypes.BIGINT,
         allowNull: false,
         validate: {
           notNull: true,
@@ -30,6 +30,34 @@ module.exports = (sequelize, DataTypes) => {
         len: {
           args: [1, 6],
           msg: 'Ticker Symbol must be be between 1 and 6 letters in length.',
+        },
+      },
+      headline: {
+        type: DataTypes.STRING,
+        notNull: {
+          args: true,
+          msg: 'Article must have headline.',
+        },
+      },
+      source: {
+        type: DataTypes.STRING,
+        notNull: {
+          args: true,
+          msg: 'Article must have source',
+        },
+      },
+      url: {
+        type: DataTypes.STRING,
+        notNull: {
+          args: true,
+          msg: 'Article must have URL',
+        },
+      },
+      summary: {
+        type: DataTypes.TEXT,
+        notNull: {
+          args: true,
+          msg: 'Article must have summary statement',
         },
       },
     },
