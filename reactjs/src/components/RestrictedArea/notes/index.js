@@ -8,7 +8,7 @@ import {
   ModalBody,
   ModalFooter,
   Form,
-  Input
+  Input,
 } from 'reactstrap';
 import container from './container';
 import styles from './styles.module.css';
@@ -18,7 +18,7 @@ class NotesModal extends Component {
     super(props);
     this.state = {
       heading: '',
-      body: ''
+      body: '',
     };
     this.loadData();
   }
@@ -33,8 +33,8 @@ class NotesModal extends Component {
       deleteNote,
       history,
       match: {
-        params: { id }
-      }
+        params: { id },
+      },
     } = this.props;
     await deleteNote(id);
     history.goBack();
@@ -49,7 +49,7 @@ class NotesModal extends Component {
     const { name } = target;
     // set state to the name and the value.
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -60,8 +60,8 @@ class NotesModal extends Component {
       createNote,
       updateNote,
       match: {
-        params: { bookmarkId, id }
-      }
+        params: { bookmarkId, id },
+      },
     } = this.props;
     const { heading, body } = this.state;
     if (id) {
@@ -76,9 +76,9 @@ class NotesModal extends Component {
   loadData = async () => {
     const {
       match: {
-        params: { id }
+        params: { id },
       },
-      fetchNote
+      fetchNote,
     } = this.props;
     if (!id) return;
     await fetchNote(id);
@@ -149,16 +149,16 @@ export default container(NotesModal);
 NotesModal.propTypes = {
   note: PropTypes.shape({
     header: PropTypes.string,
-    body: PropTypes.string
+    body: PropTypes.string,
   }),
   history: ReactRouterPropTypes.history.isRequired,
   fetchNote: PropTypes.func.isRequired,
   createNote: PropTypes.func.isRequired,
   updateNote: PropTypes.func.isRequired,
   deleteNote: PropTypes.func.isRequired,
-  match: ReactRouterPropTypes.match.isRequired
+  match: ReactRouterPropTypes.match.isRequired,
 };
 
 NotesModal.defaultProps = {
-  note: Object
+  note: {},
 };

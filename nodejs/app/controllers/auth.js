@@ -17,8 +17,8 @@ exports.forgotPassword = async (req, res) => {
 
     // reset_expires: 24 hours (in ms)
     user.update({
-      reset_token: token,
-      reset_expires: Date.now() + 86400000,
+      token,
+      expires: Date.now() + 86400000,
     });
 
     const data = {
@@ -27,12 +27,12 @@ exports.forgotPassword = async (req, res) => {
       template: 'forgot',
       subject: 'Password Reset',
       ctx: {
-        url: `http://localhost:3000/auth/reset_token?token=${token}`,
+        url: `http://localhost:3000/auth/reset?token=${token}`,
         name: user.firstName,
       },
     };
     await mailer.sendMail(data).catch(throwError(500, 'mail error'));
-    res.json({
+    res.status(200).json({
       message: 'Check your email for further instructions',
     });
   } catch (e) {
@@ -42,11 +42,11 @@ exports.forgotPassword = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   try {
-    const { token, newPassword, verifyPassword } = req.body;
+    const { token, password, rePassword } = req.body;
     const user = await Users.findOne({
       where: {
-        reset_token: token,
-        reset_expires: {
+        token,
+        expires: {
           [Sequelize.Op.gt]: Date.now(),
         },
       },
@@ -59,17 +59,15 @@ exports.resetPassword = async (req, res) => {
       ),
       throwError(500, 'sequelize error')
     );
-    if (newPassword !== verifyPassword) {
+    if (password !== rePassword) {
       throwError(422, 'Passwords do not match');
     }
-    user.password = bcrypt.hashSync(newPassword, 10);
-    user.reset_token = undefined;
-    user.reset_expires = undefined;
+    user.password = await bcrypt.hash(password, 10);
+    user.token = undefined;
+    user.expires = undefined;
     user.save();
 
-    res.json({
-      message: 'Password Reset',
-    });
+    res.json({ token: this.generateToken(user) });
 
     const data = {
       to: user.email,
@@ -94,7 +92,6 @@ exports.signUp = async (req, res) => {
       throw new Error('Passwords do not match');
     } else {
       const passwordHashed = await bcrypt.hash(password, 10);
-      console.log(passwordHashed);
       const userRecord = await Users.create({
         firstName,
         lastName,

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
-import { Route, Link } from 'react-router-dom';
+import queryString from 'query-string';
+
 import {
   Button,
   Modal,
@@ -12,16 +13,15 @@ import {
   FormGroup,
   Input,
 } from 'reactstrap';
-import ResetEmail from '../resetEmail';
-import container from './container';
 import styles from '../styles.module.css';
+import container from './container';
 
-class LoginModal extends Component {
+class ResetPass extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
       password: '',
+      rePassword: '',
     };
   }
 
@@ -45,72 +45,77 @@ class LoginModal extends Component {
 
   save = event => {
     event.preventDefault();
-    const { email, password } = this.state;
-    const { login } = this.props;
-    login({ email, password });
+    const { password, rePassword } = this.state;
+    const {
+      resetPassword,
+      location: { search },
+    } = this.props;
+    const query = queryString.parse(search);
+    const { token } = query;
+
+    resetPassword({ token, password, rePassword });
     this.toggle();
   };
 
   render() {
-    const { email, password } = this.state;
+    const { password, rePassword } = this.state;
+
     return (
-      <Modal isOpen className={styles.modal}>
+      <Modal isOpen className={styles.modal} contentClassName={styles.modal}>
         <ModalHeader toggle={this.toggle} className={styles.h1}>
-          Login
+          Reset Password
         </ModalHeader>
         <ModalBody>
-          <Form id="Login" onSubmit={this.save}>
+          <Form id="ResetPassword">
             <FormGroup>
               <Input
-                type="email"
-                name="email"
-                id="Email"
-                value={email}
+                type="password"
+                name="password"
+                value={password}
                 onChange={this.handleInputChange}
-                placeholder="Email"
-                aria-label="Email"
+                id="password"
+                placeholder="Password"
+                aria-label="Password"
                 className={styles.input}
               />
             </FormGroup>
             <FormGroup>
               <Input
                 type="password"
-                name="password"
-                id="Password"
-                value={password}
+                name="rePassword"
+                value={rePassword}
                 onChange={this.handleInputChange}
-                placeholder="Password"
-                aria-label="Password"
+                id="rePassword"
+                placeholder="Re-Enter Password"
+                aria-label="Re-Enter Password"
                 className={styles.input}
               />
             </FormGroup>
-
-            <Link to="/login/reset">Forgot Password</Link>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={this.toggle} className="mr-5">
+          <Button color="danger" onClick={this.toggle}>
             Cancel
           </Button>
           <Button
             color="primary"
             type="submit"
-            form="Login"
+            form="ResetPassword"
             value="Submit"
             onClick={this.save}
           >
             Confirm
           </Button>
         </ModalFooter>
-        <Route path="/login/reset" exact component={ResetEmail} />
       </Modal>
     );
   }
 }
 
-export default container(LoginModal);
+export default container(ResetPass);
 
-LoginModal.propTypes = {
+ResetPass.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
-  login: PropTypes.func.isRequired,
+  location: ReactRouterPropTypes.history.isRequired,
+  resetPassword: PropTypes.func.isRequired,
 };

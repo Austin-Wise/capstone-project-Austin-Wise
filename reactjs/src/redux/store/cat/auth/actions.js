@@ -4,6 +4,9 @@ import {
   LOGIN_PENDING,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
+  FORGOT_PENDING,
+  FORGOT_ERROR,
+  FORGOT_SUCCESS,
   LOGOUT,
 } from '../../actionTypes';
 
@@ -25,3 +28,13 @@ export const logout = () => {
   delete localStorage.authToken;
   return { type: LOGOUT };
 };
+
+export const forgotPassword = credentials => ({
+  types: [FORGOT_PENDING, FORGOT_ERROR, FORGOT_SUCCESS],
+  callAPI: () => API.post('/auth/forgot', credentials),
+});
+
+export const resetPassword = credentials => ({
+  types: [LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_ERROR],
+  callAPI: () => API.put('/auth/reset', credentials),
+});

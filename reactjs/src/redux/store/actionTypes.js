@@ -24,6 +24,11 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
+// ? FORGOT
+export const FORGOT_PENDING = 'FORGOT_PENDING';
+export const FORGOT_ERROR = 'FORGOT_ERROR';
+export const FORGOT_SUCCESS = 'FORGOT_SUCCESS';
+
 // ? TICKER
 export const REQ_TICKER_PENDING = 'REQ_TICKER_PENDING';
 export const REQ_TICKER_SUCCESS = 'REQ_TICKER_SUCCESS';

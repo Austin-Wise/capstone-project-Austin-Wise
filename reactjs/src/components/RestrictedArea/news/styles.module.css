@@ -9,6 +9,10 @@
   margin: 0 8rem;
 }
 
+.dollar {
+  margin-right: 5rem;
+}
+
 .News h2,
 h4 {
   font-family: futura-pt-bold, sans-serif;
@@ -46,11 +50,15 @@ h3 {
 }
 
 .Bookmark,
-.BookmarkInactive {
+.BookmarkInactive,
+.Bookmark:active,
+.Bookmark:hover {
   background: url(/svg_css/Bookmark.svg) no-repeat;
   width: 36px;
   height: 32px;
   border: none;
+  color: transparent;
+  display: inline-block;
 }
 .BookmarkInactive {
   background: url(/svg_css/BookmarkInactive.svg) no-repeat;

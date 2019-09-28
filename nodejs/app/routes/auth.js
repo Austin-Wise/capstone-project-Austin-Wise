@@ -6,10 +6,10 @@ const authCtrl = require('../controllers/auth');
 // POST /auth/login
 router.post('/login', authCtrl.login);
 // GET /auth/:id
-router.get('/:id', authCtrl.forgotPassword);
+router.post('/forgot', authCtrl.forgotPassword);
+// PUT /auth/:id
+router.put('/reset', authCtrl.resetPassword);
 // POST /auth
 router.post('/', authCtrl.signUp);
-// PUT /auth/:id
-router.put('/:id', authCtrl.resetPassword);
 // export the route from this file
 module.exports = router;

@@ -63,6 +63,14 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      token: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      expires: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
     },
     {}
   );
