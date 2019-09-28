@@ -10,7 +10,7 @@ import {
   CardText,
   CardFooter,
   Col,
-  NavItem
+  NavItem,
 } from 'reactstrap';
 import { Route, Link, NavLink as RRNavLink, Switch } from 'react-router-dom';
 import container from './container';
@@ -46,7 +46,7 @@ class Bookmark extends Component {
                 <CardBody className={styles.Card}>
                   <Row>
                     <Col md="10">
-                      <CardTitle>{bookmark.article.title}</CardTitle>
+                      <CardTitle>{bookmark.headline}</CardTitle>
                     </Col>
                     <Link
                       to={`/bookmark/delete/${bookmark.id}`}
@@ -57,7 +57,7 @@ class Bookmark extends Component {
                     </Link>
                   </Row>
                   <CardText className={styles.cardText}>
-                    {bookmark.article.text}
+                    {bookmark.summary}
                   </CardText>
                   <img
                     src="/svg_css/scale-0.svg"
@@ -85,8 +85,8 @@ class Bookmark extends Component {
                   )}
                 </CardBody>
                 <CardFooter>
-                  Published on {bookmark.article.published} by &apos;
-                  {bookmark.article.source}
+                  Published on {bookmark.articleId} by &apos;
+                  {bookmark.source}
                   &apos;
                 </CardFooter>
               </Card>
@@ -124,7 +124,7 @@ export default container(Bookmark);
 
 Bookmark.defaultProps = {
   bookmarks: [],
-  notes: []
+  notes: [],
 };
 
 Bookmark.propTypes = {
@@ -134,21 +134,22 @@ Bookmark.propTypes = {
       articleId: PropTypes.string,
       ticker: PropTypes.string,
       userId: PropTypes.string,
-      article: PropTypes.shape({
-        title: PropTypes.string,
-        text: PropTypes.string,
-        published: PropTypes.instanceOf(Date),
-        source: PropTypes.string
-      })
+      headline: PropTypes.string,
+      source: PropTypes.string,
+      url: PropTypes.string,
+      summary: PropTypes.string,
+      related: PropTypes.string,
+      image: PropTypes.string,
+      lang: PropTypes.string,
     })
   ),
   notes: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string
+      id: PropTypes.string,
     })
   ),
   fetchBookmarks: PropTypes.func.isRequired,
   deleteBookmark: PropTypes.func.isRequired,
   fetchArticle: PropTypes.func.isRequired,
-  fetchNotes: PropTypes.func.isRequired
+  fetchNotes: PropTypes.func.isRequired,
 };

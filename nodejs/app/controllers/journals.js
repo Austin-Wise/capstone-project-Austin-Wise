@@ -53,7 +53,6 @@ exports.createJournal = async (req, res) => {
     sellPrice,
     fees,
     comment,
-    userId,
   } = req.body;
   // create the item and save the new id
   try {
@@ -69,7 +68,7 @@ exports.createJournal = async (req, res) => {
       sellPrice,
       fees,
       comment,
-      userId,
+      userId: req.token.id,
       // 'catch' catches errors specific to validation. These are presets created within the models (isAlpha, len, etc..)
       // Catch first required, Captures type, second provides error code.
     })

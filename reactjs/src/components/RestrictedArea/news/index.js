@@ -36,7 +36,6 @@ class News extends Component {
       fetchArticles,
       fetchCompanyData,
       fetchBookmarks,
-      createBookmark,
       match,
     } = this.props;
     if (!match.params.ticker || match.params.ticker === 'new') return;
@@ -51,11 +50,20 @@ class News extends Component {
         params: { ticker },
       },
       createBookmark,
+      articles,
     } = this.props;
+    const article = articles.find(a => a.id === articleId);
 
     createBookmark({
       articleId,
       ticker,
+      headline: article.headline,
+      source: article.source,
+      url: article.url,
+      summary: article.summary,
+      related: article.related,
+      image: article.image,
+      lang: article.lang,
     });
   };
 
@@ -68,6 +76,7 @@ class News extends Component {
       ticker,
       match,
     } = this.props;
+
     if (
       !ticker.symbol &&
       match.params.ticker &&
@@ -78,6 +87,7 @@ class News extends Component {
     if (match.params.ticker === 'new') {
       return null;
     }
+
     return (
       <Col md="8" className={styles.News}>
         <Jumbotron className={styles.Jumbo}>
@@ -87,35 +97,20 @@ class News extends Component {
               <h3>{companyData.name}</h3>
             </div>
             <h4>
-              <span className={styles.dollar}>
-                {companyData.now > companyData.close &&
-                  `$${(companyData.now - companyData.close).toFixed(2)}`}
-                {companyData.now < companyData.close &&
-                  (companyData.now - companyData.close)
-                    .toFixed(2)
-                    .replace(/-/g, '-$')}
-              </span>
-              <span className={styles.percent}>
-                {companyData.now > companyData.close &&
-                  `${(
-                    (companyData.now / companyData.close) * 100 -
-                    100
-                  ).toFixed(2)}`}
-                {companyData.now < companyData.close &&
-                  ((companyData.close / companyData.now) * 100 - 100).toFixed(
-                    2
-                  )}
-                %
-              </span>
+              <span className={styles.dollar}>{companyData.price}</span>
+              <span className={styles.dollar}>{companyData.dayChange}</span>
+              <span className={styles.percent}>{companyData.chgPct}%</span>
               <img
                 className="ml-5"
                 src={
-                  companyData.now > companyData.close
+                  companyData.dayChange &&
+                  companyData.dayChange.indexOf('-') === -1
                     ? '/svg_css/greenArrow.svg'
                     : '/svg_css/redArrow.svg'
                 }
                 alt={
-                  companyData.now > companyData.close
+                  companyData.dayChange &&
+                  companyData.dayChange.indexOf('-') === -1
                     ? 'green arrow'
                     : 'red arrow'
                 }
@@ -172,24 +167,24 @@ class News extends Component {
             <Col md="4">
               <ul className={styles.CoList}>
                 <li>
-                  Adj. Open:&nbsp;
-                  <span className={styles.coData}>{companyData.adjOpen}</span>
+                  Stock Exchange:&nbsp;
+                  <span className={styles.coData}>{companyData.exchange}</span>
                 </li>
                 <li>
-                  Adj. High:&nbsp;
-                  <span className={styles.coData}>{companyData.adjHigh}</span>
+                  52-Week High:&nbsp;
+                  <span className={styles.coData}>{companyData.yearHigh}</span>
                 </li>
                 <li>
-                  Adj. Low:&nbsp;
-                  <span className={styles.coData}>{companyData.adjLow}</span>
+                  52-Week Low:&nbsp;
+                  <span className={styles.coData}>{companyData.yearLow}</span>
                 </li>
                 <li>
-                  Adj. Close:&nbsp;
-                  <span className={styles.coData}>{companyData.adjClose}</span>
+                  Shares:&nbsp;
+                  <span className={styles.coData}>{companyData.shares}</span>
                 </li>
                 <li>
-                  Adj. Volume:&nbsp;
-                  <span className={styles.coData}>{companyData.adjVolume}</span>
+                  Market Cap:&nbsp;
+                  <span className={styles.coData}>{companyData.mktCap}</span>
                 </li>
               </ul>
             </Col>
@@ -198,14 +193,18 @@ class News extends Component {
         <Row className="d-flex justify-content-center">
           {articles.map(article => {
             const bookmark = bookmarks.find(
-              mark => mark.articleId === article.id
+              mark => mark.articleId === article.id.toString()
             );
+            const date = new Date(article.id);
+            const DateString = `${date.getMonth()}-${date.getDate()}-${date.getFullYear()}`;
             return (
               <Card key={article.id} className="col-md-5 p-0 m-4">
                 <CardBody className={styles.Card}>
                   <Row>
                     <Col md="10">
-                      <CardTitle>{article.title}</CardTitle>
+                      <CardTitle onClick={() => window.open(article.url)}>
+                        {article.headline}
+                      </CardTitle>
                     </Col>
                     <Col md="2">
                       {bookmark ? (
@@ -227,7 +226,7 @@ class News extends Component {
                     </Col>
                   </Row>
                   <CardText className={styles.cardText}>
-                    {article.text}
+                    {article.summary}
                   </CardText>
                   <img
                     src="/svg_css/scale-0.svg"
@@ -236,7 +235,7 @@ class News extends Component {
                   />
                 </CardBody>
                 <CardFooter>
-                  Published on {article.published} by &apos;{article.source}
+                  Published on {DateString} by &apos;{article.source}
                   &apos;
                 </CardFooter>
               </Card>
@@ -261,6 +260,7 @@ News.defaultProps = {
   companyData: {},
   news: [],
   ticker: {},
+  articles: [],
 };
 
 News.propTypes = {
@@ -271,33 +271,37 @@ News.propTypes = {
     employees: PropTypes.number,
     industry: PropTypes.string,
     location: PropTypes.string,
-    open: PropTypes.number,
-    high: PropTypes.number,
-    low: PropTypes.number,
-    close: PropTypes.number,
-    volume: PropTypes.number,
-    adjOpen: PropTypes.number,
-    adjHigh: PropTypes.number,
-    adjLow: PropTypes.number,
-    adjClose: PropTypes.number,
-    adjVolume: PropTypes.number,
-    now: PropTypes.number,
+    open: PropTypes.string,
+    high: PropTypes.string,
+    low: PropTypes.string,
+    close: PropTypes.string,
+    volume: PropTypes.string,
+    exchange: PropTypes.string,
+    yearHigh: PropTypes.string,
+    yearLow: PropTypes.string,
+    shares: PropTypes.string,
+    mktCap: PropTypes.string,
+    chgPct: PropTypes.string,
+    dayChange: PropTypes.string,
+    price: PropTypes.string,
   }),
   news: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string,
-      text: PropTypes.string,
-      source: PropTypes.string,
-      published: PropTypes.instanceOf(Date),
-      rating: PropTypes.number,
       id: PropTypes.string,
+      headline: PropTypes.string,
+      source: PropTypes.string,
+      url: PropTypes.string,
+      summary: PropTypes.string,
+      related: PropTypes.string,
+      image: PropTypes.string,
+      lang: PropTypes.string,
     })
   ),
   ticker: PropTypes.shape({
     symbol: PropTypes.string,
   }),
   match: ReactRouterPropTypes.match.isRequired,
-  articles: PropTypes.func.isRequired,
+  articles: PropTypes.arrayOf(PropTypes.object),
   bookmarks: PropTypes.func.isRequired,
   deleteBookmark: PropTypes.func.isRequired,
   fetchArticles: PropTypes.func.isRequired,

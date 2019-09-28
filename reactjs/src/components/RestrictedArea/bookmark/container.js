@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import {
   fetchBookmarks,
-  deleteBookmark
+  deleteBookmark,
 } from '../../../redux/store/cat/bookmark/actions';
 import { fetchArticle } from '../../../redux/store/cat/article/actions';
 import { fetchNotes } from '../../../redux/store/cat/note/actions';
@@ -11,15 +11,15 @@ function mapStateToProps(state) {
   const {
     bookmarks: { byId, allIds },
     articles: { byId: articles },
-    notes: { byId: notes, allIds: notesIds }
+    notes: { byId: notes, allIds: notesIds },
   } = state;
   // turn the array of ids into an array of objects
   return {
     bookmarks: allIds.map(id => ({
       ...byId[id].data,
-      article: (articles[byId[id].data.articleId] || {}).data || {}
+      article: (articles[byId[id].data.articleId] || {}).data || {},
     })),
-    notes: notesIds.map(id => notes[id].data)
+    notes: notesIds.map(id => notes[id].data),
   };
 }
 
@@ -28,7 +28,7 @@ const mapDispatchToProps = {
   fetchBookmarks,
   fetchArticle,
   deleteBookmark,
-  fetchNotes
+  fetchNotes,
 };
 
 export default connect(

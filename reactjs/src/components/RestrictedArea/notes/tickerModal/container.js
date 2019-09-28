@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import {
   fetchTicker,
-  createTicker
+  createTicker,
 } from '../../../../redux/store/cat/ticker/actions';
 
 function mapStateToProps(state) {
   const {
-    tickers: { byId, allIds }
+    tickers: { byId, allIds },
   } = state;
   // turn the array of ids into an array of objects
   return { tickers: allIds.map(id => byId[id].data) };

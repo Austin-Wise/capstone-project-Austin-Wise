@@ -1,14 +1,6 @@
 // load in the users model
 const { Users } = require('../models');
 
-// get all the users
-exports.getContent = (req, res) => {
-  // run the find all function on the model
-  const users = Users.findAll();
-  // respond with json of the users array
-  res.json(users);
-};
-
 // find one user by id
 exports.getOneById = (req, res) => {
   // get the id from the route params
@@ -46,14 +38,4 @@ exports.updateUser = (req, res) => {
   const { id } = req.params;
   const updatedUsers = Users.update(req.body, id);
   res.json(updatedUsers);
-};
-
-// delete an user
-exports.removeUser = (req, res) => {
-  // get the id from the route
-  const { id } = req.params;
-  // remove the user
-  Users.destroy.destroy({ where: { id } });
-  // send a good status code
-  res.sendStatus(200);
 };

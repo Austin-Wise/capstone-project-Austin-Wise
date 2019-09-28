@@ -11,5 +11,7 @@ router.get('/:id', noteCtrl.getOneById);
 router.post('/', noteCtrl.createNote);
 // PUT /notes/:id
 router.put('/:id', noteCtrl.updateNote);
+// DELETE /notes/:id
+router.delete('/:id', noteCtrl.removeNote);
 // export the route from this file
 module.exports = router;

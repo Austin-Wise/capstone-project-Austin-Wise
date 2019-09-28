@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import {
   fetchBlocks,
   deleteBlock,
-  createBlock
+  createBlock,
 } from '../../../redux/store/cat/block/actions';
 
 function mapStateToProps(state) {
   const {
-    blocks: { byId, allIds }
+    blocks: { byId, allIds },
   } = state;
   // turn the array of ids into an array of objects
   return { blocks: allIds.map(id => byId[id].data) };

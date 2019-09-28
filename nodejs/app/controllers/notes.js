@@ -38,10 +38,11 @@ exports.getOneById = async (req, res) => {
 // add a new note
 exports.createNote = async (req, res) => {
   // get the heading, body, and bookmarkId from the request body
-  const { heading, body, bookmarkId } = req.body;
+  const { id, heading, body, bookmarkId } = req.body;
   // create the item and save the new id
   try {
     const note = await Notes.create({
+      id,
       heading,
       body,
       bookmarkId,

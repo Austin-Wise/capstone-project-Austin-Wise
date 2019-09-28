@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
-import { Route, Link, NavLink as RRNavLink } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import {
   Row,
