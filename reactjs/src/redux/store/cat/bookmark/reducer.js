@@ -36,7 +36,7 @@ function bookmarkPending(state, action) {
       ...state.byId,
       [action.payload.id]: {
         ...state.byId[action.payload.id],
-        isLoading: true,
+        isLoading: Date.now(),
         error: null,
       },
     },

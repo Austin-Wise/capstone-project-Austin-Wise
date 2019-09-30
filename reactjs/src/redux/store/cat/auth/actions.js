@@ -26,6 +26,7 @@ export const signUp = credentials => {
 
 export const logout = () => {
   delete localStorage.authToken;
+
   return { type: LOGOUT };
 };
 

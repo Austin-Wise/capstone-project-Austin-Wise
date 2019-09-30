@@ -109,7 +109,6 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const userRecord = await Users.findOne({ where: { email } });
-    console.log(userRecord);
     if (!userRecord) {
       throw new Error('User not found');
     } else {
@@ -134,5 +133,5 @@ exports.generateToken = user => {
   const signature = process.env.SIGNATURE;
   const expiration = '6h';
 
-  return jwt.sign({ data }, signature, { expiresIn: expiration });
+  return jwt.sign(data, signature, { expiresIn: expiration });
 };

@@ -29,6 +29,10 @@ export const FORGOT_PENDING = 'FORGOT_PENDING';
 export const FORGOT_ERROR = 'FORGOT_ERROR';
 export const FORGOT_SUCCESS = 'FORGOT_SUCCESS';
 
+// ? ALERT
+export const ADD_ALERT = 'ADD_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+
 // ? TICKER
 export const REQ_TICKER_PENDING = 'REQ_TICKER_PENDING';
 export const REQ_TICKER_SUCCESS = 'REQ_TICKER_SUCCESS';

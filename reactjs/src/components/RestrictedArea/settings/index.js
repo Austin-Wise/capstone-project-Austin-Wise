@@ -12,6 +12,7 @@ import {
   Form,
   Input,
   Button,
+  Spinner,
 } from 'reactstrap';
 import container from './container';
 import DeleteModal from '../../Shared/deleteModal';
@@ -20,9 +21,22 @@ import styles from './styles.module.css';
 class Settings extends Component {
   constructor(props) {
     super(props);
-    props.fetchBlocks();
+    this.loadData();
     this.state = {};
   }
+
+  loadData = async () => {
+    const {
+      match: {
+        params: { id },
+      },
+      fetchBlocks,
+      fetchUser,
+    } = this.props;
+    if (!id) return;
+    await fetchBlocks();
+    await fetchUser(id);
+  };
 
   handleInputChange = event => {
     // get the input from the event
@@ -49,13 +63,13 @@ class Settings extends Component {
   };
 
   render() {
-    const { blocks, user, deleteBlock, match } = this.props;
+    const { blocks, user, deleteBlock, isLoading } = this.props;
     const { name } = this.state;
     return (
       <Col md="8" className={styles.Settings}>
         <div>
           <h3>Name</h3>
-          <span className="mb-4 ml-4">{user.name}</span>
+          <span className="mb-4 ml-4">{user.firstName}</span>
           <h3 className="mt-4">Email</h3>
           <span className="mb-4 ml-4">{user.email}</span>
         </div>
@@ -87,19 +101,25 @@ class Settings extends Component {
                 </Col>
               </Row>
             </Form>
+
             <ListGroup>
-              {blocks.map(block => (
-                <ListGroupItem>
-                  <p>{block.name}</p>
-                  <Link
-                    to={`/settings/delete_block/${block.id}`}
-                    className={styles.Bookmark}
-                    aria-labelledby="bookmark"
-                  >
-                    X
-                  </Link>
-                </ListGroupItem>
-              ))}
+              {isLoading > Date.now() + 500 && <Spinner color="warning" />}
+              {blocks.length === 0 ? (
+                <h1>Nothing Saved Yet</h1>
+              ) : (
+                blocks.map(block => (
+                  <ListGroupItem>
+                    <p>{block.name}</p>
+                    <Link
+                      to={`/settings/delete_block/${block.id}`}
+                      className={styles.Bookmark}
+                      aria-labelledby="bookmark"
+                    >
+                      X
+                    </Link>
+                  </ListGroupItem>
+                ))
+              )}
             </ListGroup>
           </Col>
         </div>
@@ -126,10 +146,12 @@ Settings.propTypes = {
   ),
   user: PropTypes.shape({
     id: PropTypes.string,
-    name: PropTypes.string,
+    firstName: PropTypes.string,
     email: PropTypes.string,
   }),
+  isLoading: PropTypes.bool,
   fetchBlocks: PropTypes.func.isRequired,
+  fetchUser: PropTypes.func.isRequired,
   deleteBlock: PropTypes.func.isRequired,
   createBlock: PropTypes.func.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
@@ -138,4 +160,5 @@ Settings.propTypes = {
 Settings.defaultProps = {
   blocks: [],
   user: {},
+  isLoading: Date.now(),
 };

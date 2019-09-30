@@ -12,6 +12,7 @@ import {
   CardText,
   CardFooter,
   Col,
+  Spinner,
 } from 'reactstrap';
 import { Link, Route, Redirect } from 'react-router-dom';
 import DeleteModal from '../../Shared/deleteModal';
@@ -21,12 +22,17 @@ import styles from './styles.module.css';
 class News extends Component {
   constructor(props) {
     super(props);
-    this.loadData();
+    const { match } = props;
+    if (match.params.ticker && match.params.ticker !== 'new') this.loadData();
   }
 
   componentDidUpdate(prevProps) {
     const { match } = this.props;
-    if (match.params.ticker !== prevProps.match.params.ticker) {
+    if (
+      match.params.ticker !== prevProps.match.params.ticker &&
+      match.params.ticker &&
+      match.params.ticker !== 'new'
+    ) {
       this.loadData();
     }
   }
@@ -75,14 +81,21 @@ class News extends Component {
       deleteBookmark,
       ticker,
       match,
+      isLoading,
     } = this.props;
-
+    if (match.params.ticker === undefined) {
+      return (
+        <>
+          <h1>A Blank state</h1>
+        </>
+      );
+    }
     if (
       !ticker.symbol &&
       match.params.ticker &&
       match.params.ticker !== 'new'
     ) {
-      return <Redirect to="/news" />;
+      return <Redirect to="/" />;
     }
     if (match.params.ticker === 'new') {
       return null;
@@ -191,6 +204,7 @@ class News extends Component {
           </Row>
         </Jumbotron>
         <Row className="d-flex justify-content-center">
+          {isLoading > Date.now() + 500 && <Spinner color="warning" />}
           {articles.map(article => {
             const bookmark = bookmarks.find(
               mark => mark.articleId === article.id.toString()
@@ -261,6 +275,7 @@ News.defaultProps = {
   news: [],
   ticker: {},
   articles: [],
+  isLoading: Date.now(),
 };
 
 News.propTypes = {
@@ -300,6 +315,7 @@ News.propTypes = {
   ticker: PropTypes.shape({
     symbol: PropTypes.string,
   }),
+  isLoading: PropTypes.bool,
   match: ReactRouterPropTypes.match.isRequired,
   articles: PropTypes.arrayOf(PropTypes.object),
   bookmarks: PropTypes.func.isRequired,

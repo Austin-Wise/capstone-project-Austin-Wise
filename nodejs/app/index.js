@@ -42,13 +42,11 @@ app.use('/api/auth', authRouter);
 // ? four params are required to mark this as a error handling middleware
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  console.log(err.name);
   if (err.name === 'UnauthorizedError') {
     res.status(401).send('invalid token...');
     return;
   }
   error('ERROR FOUND:', err);
-  console.log(err);
   res.sendStatus(500);
 });
 
