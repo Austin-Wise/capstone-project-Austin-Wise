@@ -13,17 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       ticker: {
         type: DataTypes.STRING,
         allowNull: false,
-        notNull: {
-          args: true,
-          msg: 'Ticker Symbol value is required.',
-        },
-        isAlpha: {
-          args: true,
-          msg: 'Ticker Symbol must only contain letters.',
-        },
-        len: {
-          args: [1, 6],
-          msg: 'Ticker Symbol must be be between 1 and 6 letters in length.',
+        validate: {
+          notNull: { args: true, msg: 'Ticker Symbol value is required.' },
+          isAlpha: {
+            args: true,
+            msg: 'Ticker Symbol must only contain letters.',
+          },
+          len: {
+            args: [1, 6],
+            msg: 'Ticker Symbol must be be between 1 and 6 letters in length.',
+          },
         },
       },
       type: {
@@ -40,9 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       buyDate: {
         type: DataTypes.DATE,
         allowNull: true,
-        validate: {
-          isDate: { args: true, msg: '"Buy Date" must be a date.' },
-        },
+        validate: { isDate: { args: true, msg: '"Buy Date" must be a date.' } },
       },
       sellDate: {
         type: DataTypes.DATE,
@@ -55,14 +52,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: true,
         validate: {
-          min: {
-            args: 1,
-            msg: 'Quantity Buy must be a whole number.',
-          },
-          isNumeric: {
-            args: true,
-            msg: 'Quantity Buy must be numeric.',
-          },
+          min: { args: 1, msg: 'Quantity Buy must be a whole number.' },
+          isNumeric: { args: true, msg: 'Quantity Buy must be numeric.' },
         },
       },
       qtySold: {

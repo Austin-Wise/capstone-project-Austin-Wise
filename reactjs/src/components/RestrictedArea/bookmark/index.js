@@ -28,14 +28,31 @@ class Bookmark extends Component {
     const { fetchBookmarks, fetchNotes } = this.props;
     fetchNotes();
     await fetchBookmarks();
-    const { bookmarks, fetchArticle } = this.props;
-    bookmarks.forEach(bookmark => {
-      fetchArticle(bookmark.articleId);
-    });
   };
 
   render() {
-    const { bookmarks, deleteBookmark, notes } = this.props;
+    const { bookmarks, deleteBookmark, notes, isLoading } = this.props;
+    if (!isLoading && bookmarks.length === 0) {
+      return (
+        <>
+          <h1>Nothing Saved Yet</h1>
+          <p>
+            Press the <span className="" /> button to save articles for future
+            reading.
+          </p>
+          <ul>
+            <li>
+              <span className={styles.Bookmark} />
+              Indicates Saved Articles
+            </li>
+            <li>
+              <span className={styles.unBookmark} />
+              Indicates Unsaved Articles
+            </li>
+          </ul>
+        </>
+      );
+    }
     return (
       <Col md="8">
         <Row className="d-flex justify-content-center">
@@ -125,6 +142,7 @@ export default container(Bookmark);
 Bookmark.defaultProps = {
   bookmarks: [],
   notes: [],
+  isLoading: false,
 };
 
 Bookmark.propTypes = {
@@ -152,4 +170,5 @@ Bookmark.propTypes = {
   deleteBookmark: PropTypes.func.isRequired,
   fetchArticle: PropTypes.func.isRequired,
   fetchNotes: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 };

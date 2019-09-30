@@ -6,9 +6,9 @@ const { throwIf, throwError, sendError } = require('../utils/errorHandling');
 exports.getContent = async (req, res) => {
   // run the find all function on the model
   try {
-    const tickers = await Tickers.findAll().catch(
-      throwError(500, 'sequelize error')
-    );
+    const tickers = await Tickers.findAll({
+      where: { userId: req.token.id },
+    }).catch(throwError(500, 'sequelize error'));
     // respond with json of the tickers array
     res.json(tickers);
   } catch (e) {

@@ -57,7 +57,7 @@ export default function callAPIMiddleware({ dispatch, getState }) {
       dispatch({
         ...props,
         type: failureType,
-        err,
+        err: err.response.data,
       });
     }
   };

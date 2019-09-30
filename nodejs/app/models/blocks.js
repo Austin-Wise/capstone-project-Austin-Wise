@@ -14,10 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isAlphanumeric: {
-            args: true,
-            msg: 'Keyword cannot contain special characters (including space).',
-          },
           notNull: { args: true, msg: 'Keyword input required.' },
           len: {
             args: [2, 20],

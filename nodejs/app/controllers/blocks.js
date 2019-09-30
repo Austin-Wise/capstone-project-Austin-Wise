@@ -4,9 +4,9 @@ const { throwIf, throwError, sendError } = require('../utils/errorHandling');
 // get all the blocks
 exports.getContent = async (req, res) => {
   try {
-    const blocks = await Blocks.findAll().catch(
-      throwError(500, 'sequelize error')
-    );
+    const blocks = await Blocks.findAll({
+      where: { userId: req.token.id },
+    }).catch(throwError(500, 'sequelize error'));
     // respond with json of the blocks array
     res.json(blocks);
   } catch (e) {
