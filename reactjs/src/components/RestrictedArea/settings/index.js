@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
-import { Route, Link, NavLink as RRNavLink } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import {
   Row,
@@ -11,7 +11,8 @@ import {
   ListGroupItem,
   Form,
   Input,
-  Button
+  Button,
+  Spinner,
 } from 'reactstrap';
 import container from './container';
 import DeleteModal from '../../Shared/deleteModal';
@@ -20,8 +21,22 @@ import styles from './styles.module.css';
 class Settings extends Component {
   constructor(props) {
     super(props);
-    props.fetchBlocks();
+    this.loadData();
+    this.state = {};
   }
+
+  loadData = async () => {
+    const {
+      match: {
+        params: { id },
+      },
+      fetchBlocks,
+      fetchUser,
+    } = this.props;
+    if (!id) return;
+    await fetchBlocks();
+    await fetchUser(id);
+  };
 
   handleInputChange = event => {
     // get the input from the event
@@ -32,7 +47,7 @@ class Settings extends Component {
     const { name } = target;
     // set state to the name and the value. For example, { description: 'hi'}
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -42,17 +57,19 @@ class Settings extends Component {
     const { createBlock } = this.props;
     const { name } = this.state;
     createBlock({
-      name
+      name,
     });
+    this.setState({ name: '' });
   };
 
   render() {
-    const { blocks, user, deleteBlock, match } = this.props;
+    const { blocks, user, deleteBlock, isLoading } = this.props;
+    const { name } = this.state;
     return (
       <Col md="8" className={styles.Settings}>
         <div>
           <h3>Name</h3>
-          <span className="mb-4 ml-4">{user.name}</span>
+          <span className="mb-4 ml-4">{user.firstName}</span>
           <h3 className="mt-4">Email</h3>
           <span className="mb-4 ml-4">{user.email}</span>
         </div>
@@ -71,7 +88,7 @@ class Settings extends Component {
                     type="text"
                     name="name"
                     id="name"
-                    value={blocks.name}
+                    value={name}
                     onChange={this.handleInputChange}
                     placeholder="Block News Agency"
                     className={styles.InputItem}
@@ -84,19 +101,25 @@ class Settings extends Component {
                 </Col>
               </Row>
             </Form>
+
             <ListGroup>
-              {blocks.map(block => (
-                <ListGroupItem>
-                  <p>{block.name}</p>
-                  <Link
-                    to={`/settings/delete_block/${block.id}`}
-                    className={styles.Bookmark}
-                    aria-labelledby="bookmark"
-                  >
-                    X
-                  </Link>
-                </ListGroupItem>
-              ))}
+              {isLoading && <Spinner color="warning" />}
+              {blocks.length === 0 ? (
+                <h1>Nothing Saved Yet</h1>
+              ) : (
+                blocks.map(block => (
+                  <ListGroupItem>
+                    <p>{block.name}</p>
+                    <Link
+                      to={`/settings/delete_block/${block.id}`}
+                      className={styles.Bookmark}
+                      aria-labelledby="bookmark"
+                    >
+                      X
+                    </Link>
+                  </ListGroupItem>
+                ))
+              )}
             </ListGroup>
           </Col>
         </div>
@@ -118,21 +141,23 @@ Settings.propTypes = {
   blocks: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      name: PropTypes.string
+      name: PropTypes.string,
     })
   ),
   user: PropTypes.shape({
     id: PropTypes.string,
-    name: PropTypes.string,
-    email: PropTypes.string
+    firstName: PropTypes.string,
+    email: PropTypes.string,
   }),
+  isLoading: PropTypes.bool.isRequired,
   fetchBlocks: PropTypes.func.isRequired,
+  fetchUser: PropTypes.func.isRequired,
   deleteBlock: PropTypes.func.isRequired,
   createBlock: PropTypes.func.isRequired,
-  match: ReactRouterPropTypes.match.isRequired
+  match: ReactRouterPropTypes.match.isRequired,
 };
 
 Settings.defaultProps = {
   blocks: [],
-  user: {}
+  user: {},
 };

@@ -39,24 +39,18 @@ class PortfolioPanel extends Component {
             <NavLink tag={RRNavLink} exact to={`/news/${ticker.symbol}`}>
               <div className={styles.item}>
                 <h3>{ticker.symbol}</h3>
-                <p>
-                  {ticker.now > ticker.close
-                    ? `$${(ticker.now - ticker.close).toFixed(2)}`
-                    : (ticker.now - ticker.close)
-                      .toFixed(2)
-                      .replace(/-/g, '-$')}
-                </p>
+                <p>{ticker.dayChange}</p>
                 <img
                   src={
-                    ticker.now > ticker.close
+                    ticker.dayChange && ticker.dayChange.indexOf('-') === -1
                       ? '/svg_css/greenArrow.svg'
                       : '/svg_css/redArrow.svg'
                   }
-                  alt="{
-                (ticker.now > ticker.close)
-                    ? 'green arrow'
-                    : 'red arrow'
-                }"
+                  alt={
+                    ticker.dayChange && ticker.dayChange.indexOf('-') === -1
+                      ? 'green arrow'
+                      : 'red arrow'
+                  }
                   height="27.29px"
                   width="32px"
                 />
@@ -84,31 +78,17 @@ PortfolioPanel.propTypes = {
   tickers: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      name: PropTypes.string,
+      dayChange: PropTypes.string,
       symbol: PropTypes.string,
-      ceo: PropTypes.string,
-      employees: PropTypes.number,
-      industry: PropTypes.string,
-      location: PropTypes.string,
-      open: PropTypes.number,
-      high: PropTypes.number,
-      low: PropTypes.number,
-      volume: PropTypes.number,
-      adjopen: PropTypes.number,
-      adjhigh: PropTypes.number,
-      adjlow: PropTypes.number,
-      adjclose: PropTypes.number,
-      adjVolume: PropTypes.number,
-      now: PropTypes.number
     })
   ),
   history: ReactRouterPropTypes.history.isRequired,
   fetchTickers: PropTypes.func.isRequired,
   deleteTicker: PropTypes.func.isRequired,
   fetchCompanyData: PropTypes.func.isRequired,
-  match: ReactRouterPropTypes.match.isRequired
+  match: ReactRouterPropTypes.match.isRequired,
 };
 
 PortfolioPanel.defaultProps = {
-  tickers: []
+  tickers: [],
 };

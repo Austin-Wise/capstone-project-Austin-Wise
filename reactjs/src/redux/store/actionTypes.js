@@ -1,8 +1,37 @@
 // ? Defining different types of actions that impact state.
 // ? Using data- and error-handling to ensure data is only
 // ? loaded when needed.
+// ? USER
+export const REQ_USER_PENDING = 'REQ_USER_PENDING';
+export const REQ_USER_SUCCESS = 'REQ_USER_SUCCESS';
+export const REQ_USER_ERROR = 'REQ_USER_ERROR';
 
-// ! WAIT FOR USERS
+export const ADD_USER_PENDING = 'ADD_USER_PENDING';
+export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS';
+export const ADD_USER_ERROR = 'ADD_USER_ERROR';
+
+export const UPDATE_USER_PENDING = 'UPDATE_USER_PENDING';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_ERROR = 'UPDATE_USER_ERROR';
+
+export const DELETE_USER_PENDING = 'DELETE_USER_PENDING';
+export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
+export const DELETE_USER_ERROR = 'DELETE_USER_ERROR';
+
+// ? LOGIN
+export const LOGIN_PENDING = 'LOGIN_PENDING';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT = 'LOGOUT';
+
+// ? FORGOT
+export const FORGOT_PENDING = 'FORGOT_PENDING';
+export const FORGOT_ERROR = 'FORGOT_ERROR';
+export const FORGOT_SUCCESS = 'FORGOT_SUCCESS';
+
+// ? ALERT
+export const ADD_ALERT = 'ADD_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
 
 // ? TICKER
 export const REQ_TICKER_PENDING = 'REQ_TICKER_PENDING';

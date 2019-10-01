@@ -11,29 +11,31 @@ import {
   InputGroupAddon,
   InputGroup,
   Container,
-  Button
+  Button,
+  Spinner,
 } from 'reactstrap';
 import container from './container';
 import styles from './styles.module.css';
 
+const journalClear = {
+  ticker: '',
+  type: 'Long',
+  buyDate: '',
+  qtyBuy: '',
+  buyPrice: '',
+  sellDate: '',
+  qtySold: '',
+  sellPrice: '',
+  fees: '',
+  comment: '',
+};
+
 class Journal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      journal: {
-        ticker: '',
-        type: 'Long',
-        buyDate: '',
-        qtyBuy: '',
-        buyPrice: '',
-        sellDate: '',
-        qtySold: '',
-        sellPrice: '',
-        fees: '',
-        comment: ''
-      }
-    };
-    props.fetchJournals();
+    const { fetchJournals } = props;
+    this.state = { journal: journalClear };
+    fetchJournals();
   }
 
   handleInputChange = event => {
@@ -46,7 +48,7 @@ class Journal extends Component {
     // set state to the name and the value.
     const { journal } = this.state;
     this.setState({
-      journal: { ...journal, [name]: value }
+      journal: { ...journal, [name]: value },
     });
   };
 
@@ -63,13 +65,16 @@ class Journal extends Component {
     }
   };
 
-  deleteJournalFunc = id => async () => {
+  deleteJournalFunc = id => async event => {
     const { deleteJournal } = this.props;
+    event.stopPropagation();
+    // stopPropagation stops event bubbling
+    this.setState({ journal: journalClear });
     await deleteJournal(id);
   };
 
   render() {
-    const { journals } = this.props;
+    const { journals, isLoading } = this.props;
     // pull the data from state
     const { journal } = this.state;
     return (
@@ -267,6 +272,7 @@ class Journal extends Component {
             </tr>
           </thead>
           <tbody>
+            {' '}
             {journals.map(entry => (
               <tr
                 key={entry.id}
@@ -306,6 +312,8 @@ class Journal extends Component {
             ))}
           </tbody>
         </Table>
+        {isLoading && <Spinner color="warning" />}
+        {journals.length === 0 ? <h1>Nothing Saved Yet</h1> : {}}
       </Col>
     );
   }
@@ -313,27 +321,27 @@ class Journal extends Component {
 
 export default container(Journal);
 
+Journal.defaultProps = {
+  journals: [],
+};
 Journal.propTypes = {
   journals: PropTypes.arrayOf(
     PropTypes.shape({
       ticker: PropTypes.string,
       type: PropTypes.oneOf(['Long', 'Short']),
-      buyDate: PropTypes.instanceOf(Date),
+      buyDate: PropTypes.string,
       qtyBuy: PropTypes.number,
       buyPrice: PropTypes.number,
-      sellDate: PropTypes.instanceOf(Date),
+      sellDate: PropTypes.string,
       qtySold: PropTypes.number,
       sellPrice: PropTypes.number,
       fees: PropTypes.number,
-      comments: PropTypes.string
+      comments: PropTypes.string,
     })
   ),
   createJournal: PropTypes.func.isRequired,
   fetchJournals: PropTypes.func.isRequired,
   deleteJournal: PropTypes.func.isRequired,
-  updateJournal: PropTypes.func.isRequired
-};
-
-Journal.defaultProps = {
-  journals: []
+  updateJournal: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };

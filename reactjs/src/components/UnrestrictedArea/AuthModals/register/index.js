@@ -12,24 +12,54 @@ import {
   FormGroup,
   Input,
   Row,
-  Col
+  Col,
 } from 'reactstrap';
-import styles from './styles.module.css';
+import styles from '../styles.module.css';
+import container from './container';
 
-export default class RegisterModal extends Component {
+class RegisterModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      rePassword: '',
+    };
+  }
+
   toggle = () => {
     const { history } = this.props;
     history.push('/');
   };
 
+  handleInputChange = event => {
+    // get the input from the event
+    const { target } = event;
+    // find the value of the input
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    // get the name of the input from it's attribute
+    const { name } = target;
+    // set state to the name and the value. For example, { description: 'hi'}
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  save = event => {
+    event.preventDefault();
+    const { firstName, lastName, email, password, rePassword } = this.state;
+    const { signUp } = this.props;
+    signUp({ firstName, lastName, email, password, rePassword });
+    this.toggle();
+  };
+
   render() {
-    const { className } = this.props;
+    const { firstName, lastName, email, password, rePassword } = this.state;
+
     return (
-      <Modal
-        isOpen
-        className={(className, styles.modal)}
-        contentClassName={styles.modal}
-      >
+      <Modal isOpen className={styles.modal} contentClassName={styles.modal}>
         <ModalHeader toggle={this.toggle} className={styles.h1}>
           Register
         </ModalHeader>
@@ -41,6 +71,8 @@ export default class RegisterModal extends Component {
                   <Input
                     type="text"
                     name="firstName"
+                    value={firstName}
+                    onChange={this.handleInputChange}
                     id="firstName"
                     placeholder="First Name"
                     aria-label="First Name"
@@ -53,6 +85,8 @@ export default class RegisterModal extends Component {
                   <Input
                     type="text"
                     name="lastName"
+                    value={lastName}
+                    onChange={this.handleInputChange}
                     id="lastName"
                     placeholder="Last Name"
                     aria-label="Last Name"
@@ -65,6 +99,8 @@ export default class RegisterModal extends Component {
               <Input
                 type="email"
                 name="email"
+                value={email}
+                onChange={this.handleInputChange}
                 id="email"
                 placeholder="Email"
                 aria-label="Email"
@@ -75,6 +111,8 @@ export default class RegisterModal extends Component {
               <Input
                 type="password"
                 name="password"
+                value={password}
+                onChange={this.handleInputChange}
                 id="password"
                 placeholder="Password"
                 aria-label="Password"
@@ -85,6 +123,8 @@ export default class RegisterModal extends Component {
               <Input
                 type="password"
                 name="rePassword"
+                value={rePassword}
+                onChange={this.handleInputChange}
                 id="rePassword"
                 placeholder="Re-Enter Password"
                 aria-label="Re-Enter Password"
@@ -102,7 +142,7 @@ export default class RegisterModal extends Component {
             type="submit"
             form="Register"
             value="Submit"
-            onClick={this.toggle}
+            onClick={this.save}
           >
             Confirm
           </Button>
@@ -112,7 +152,9 @@ export default class RegisterModal extends Component {
   }
 }
 
+export default container(RegisterModal);
+
 RegisterModal.propTypes = {
-  className: PropTypes.string.isRequired,
-  history: ReactRouterPropTypes.history.isRequired
+  history: ReactRouterPropTypes.history.isRequired,
+  signUp: PropTypes.func.isRequired,
 };

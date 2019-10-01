@@ -11,10 +11,15 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "precommit": "lint-staged",
-    "reactjs": "cd reactjs && npm start",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run reactjs\"",
-    "heroku-postbuild": "npm install --only=dev --prefix reactjs && npm install --prefix reactjs && npm run build --prefix reactjs"
+    "reactjs": "npm start --prefix reactjs",
+    "start": "npm start --prefix nodejs",
+    "install-reactjs": "npm install --prefix reactjs",
+    "install-nodejs": "npm install --prefix nodejs",
+    "build-reactjs": "npm run build --prefix reactjs",
+    "build-nodejs": "npm run db-update --prefix nodejs",
+    "nodejs": "npm run dev --prefix nodejs",
+    "dev": "concurrently --kill-others-on-fail \"npm run nodejs\" \"npm run reactjs\"",
+    "heroku-postbuild": "concurrently \"npm:install-*\"; concurrently \"npm:build-*\"; "
   },
   "repository": {
     "type": "git",
@@ -39,13 +44,14 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1",
-    "eslint": "^6.2.2",
+    "concurrently": "^4.1.2",
+    "eslint": "^6.4.0",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.2.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "husky": "^3.0.5",
     "lint-staged": "^9.2.4",

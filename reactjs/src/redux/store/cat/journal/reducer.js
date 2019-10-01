@@ -15,7 +15,7 @@ import {
   UPDATE_JOURNAL_ERROR,
   DELETE_JOURNAL_PENDING,
   DELETE_JOURNAL_SUCCESS,
-  DELETE_JOURNAL_ERROR
+  DELETE_JOURNAL_ERROR,
 } from '../../actionTypes';
 
 const initialState = {
@@ -28,7 +28,7 @@ const initialState = {
   // tracking if the state is loading
   isLoading: false,
   // any errors loading all the data
-  error: null
+  error: null,
 };
 
 function journalPending(state, action) {
@@ -40,9 +40,9 @@ function journalPending(state, action) {
       [action.payload.id]: {
         ...state.byId[action.payload.id],
         isLoading: true,
-        error: null
-      }
-    }
+        error: null,
+      },
+    },
   };
 }
 
@@ -58,11 +58,11 @@ function journalSuccess(state, action) {
         loadedAt: Date.now(),
         data: {
           ...action.data,
-          id: action.payload.id
-        }
-      }
+          id: action.payload.id,
+        },
+      },
     },
-    allIds: [...new Set([...state.allIds, action.payload.id])]
+    allIds: [...new Set([...state.allIds, action.payload.id])],
   };
 }
 
@@ -75,9 +75,9 @@ function journalError(state, action) {
       [action.payload.id]: {
         ...state.byId[action.payload.id],
         isLoading: false,
-        error: action.err
-      }
-    }
+        error: action.err,
+      },
+    },
   };
 }
 function journalsPending(state, action) {
@@ -85,7 +85,7 @@ function journalsPending(state, action) {
   return {
     ...state,
     isLoading: true,
-    error: null
+    error: null,
   };
 }
 
@@ -107,15 +107,15 @@ function journalsSuccess(state, action) {
             data: journal,
             isLoading: false,
             loadedAt: Date.now(),
-            error: null
-          }
+            error: null,
+          },
         }),
         {}
-      )
+      ),
     },
     allIds: [
-      ...new Set([...state.allIds, ...action.data.map(journal => journal.id)])
-    ]
+      ...new Set([...state.allIds, ...action.data.map(journal => journal.id)]),
+    ],
   };
 }
 
@@ -124,7 +124,7 @@ function journalsError(state, action) {
   return {
     ...state,
     isLoading: false,
-    error: action.err
+    error: action.err,
   };
 }
 
@@ -134,7 +134,7 @@ function deleteJournalSuccess(state, action) {
   return {
     ...state,
     byId: withoutJournal,
-    allIds: state.allIds.filter(id => id !== action.payload.id)
+    allIds: state.allIds.filter(id => id !== action.payload.id),
   };
 }
 
@@ -153,5 +153,5 @@ export default createReducer(initialState, {
   [UPDATE_JOURNAL_ERROR]: journalError,
   [DELETE_JOURNAL_PENDING]: journalPending,
   [DELETE_JOURNAL_SUCCESS]: deleteJournalSuccess,
-  [DELETE_JOURNAL_ERROR]: journalError
+  [DELETE_JOURNAL_ERROR]: journalError,
 });

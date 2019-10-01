@@ -26,6 +26,8 @@ import notes from './cat/note/reducer';
 import tickers from './cat/ticker/reducer';
 import articles from './cat/article/reducer';
 import companyData from './cat/companyData/reducer';
+import auth from './cat/auth/reducer';
+import alerts from './cat/alerts/reducer';
 // combine multiple reducers into one
 const rootReducer = combineReducers({
   blocks,
@@ -34,12 +36,14 @@ const rootReducer = combineReducers({
   notes,
   tickers,
   articles,
-  companyData
+  companyData,
+  auth,
+  alerts,
 });
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

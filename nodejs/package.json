@@ -1,0 +1,37 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db-update": "sequelize db:migrate; sequelize db:seed:all;",
+    "db-wrecked": "sequelize db:migrate:undo:all; sequelize db:migrate; sequelize db:seed:all;",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "morgan-debug": "^2.0.0",
+    "nodemailer": "^6.3.0",
+    "nodemailer-pug-engine": "^1.0.1",
+    "nodemailer-sparkpost-transport": "^2.2.0",
+    "pg": "^7.12.1",
+    "sequelize": "^5.18.4",
+    "sequelize-cli": "^5.5.1",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}

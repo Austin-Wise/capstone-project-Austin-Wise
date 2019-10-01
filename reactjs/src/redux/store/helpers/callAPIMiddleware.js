@@ -1,3 +1,5 @@
+import { LOGOUT } from '../actionTypes';
+
 export default function callAPIMiddleware({ dispatch, getState }) {
   return next => async action => {
     const {
@@ -35,7 +37,7 @@ export default function callAPIMiddleware({ dispatch, getState }) {
     // ? dispatch the request action (`REQ_ITEM`)
     dispatch({
       ...props,
-      type: requestType
+      type: requestType,
     });
     try {
       const resp = await callAPI();
@@ -43,14 +45,19 @@ export default function callAPIMiddleware({ dispatch, getState }) {
       dispatch({
         ...props,
         type: successType,
-        data: resp.data
+        data: resp.data,
       });
     } catch (err) {
+      if (err.response.status === 401) {
+        dispatch({
+          type: LOGOUT,
+        });
+      }
       // ? there was an error, dispatch `REQ_ITEM_ERROR`
       dispatch({
         ...props,
         type: failureType,
-        err
+        err: err.response.data,
       });
     }
   };
