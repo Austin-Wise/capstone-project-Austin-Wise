@@ -7,7 +7,7 @@ module.exports = {
           id: '506f4a26-dd6a-4432-8fde-c54eafd61720',
           ticker: 'AAPL',
 
-          userId: '58a89401-ea15-4c96-8040-cb81f12860ef',
+          userId: '1e1f588b-38c1-4170-bc8e-68a4364e3ed8',
           createdAt: Sequelize.literal('NOW()'),
           updatedAt: Sequelize.literal('NOW()'),
           headline:
