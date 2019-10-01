@@ -204,7 +204,7 @@ class News extends Component {
           </Row>
         </Jumbotron>
         <Row className="d-flex justify-content-center">
-          {isLoading > Date.now() + 500 && <Spinner color="warning" />}
+          {isLoading && <Spinner color="warning" />}
           {articles.map(article => {
             const bookmark = bookmarks.find(
               mark => mark.articleId === article.id.toString()
@@ -275,7 +275,6 @@ News.defaultProps = {
   news: [],
   ticker: {},
   articles: [],
-  isLoading: Date.now(),
 };
 
 News.propTypes = {
@@ -315,7 +314,7 @@ News.propTypes = {
   ticker: PropTypes.shape({
     symbol: PropTypes.string,
   }),
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
   articles: PropTypes.arrayOf(PropTypes.object),
   bookmarks: PropTypes.func.isRequired,

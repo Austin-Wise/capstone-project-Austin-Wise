@@ -14,7 +14,7 @@ import {
   REQ_BLOCKS_ERROR,
   DELETE_BLOCK_PENDING,
   DELETE_BLOCK_SUCCESS,
-  DELETE_BLOCK_ERROR
+  DELETE_BLOCK_ERROR,
 } from '../../actionTypes';
 
 // cache data for 5 minutes
@@ -26,7 +26,7 @@ export const createBlock = block => {
   return {
     types: [ADD_BLOCK_PENDING, ADD_BLOCK_SUCCESS, ADD_BLOCK_ERROR],
     callAPI: () => API.post('/blocks', { ...block, id }),
-    payload: { id }
+    payload: { id },
   };
 };
 
@@ -40,7 +40,7 @@ export const fetchBlock = id => ({
     const isCached = Date.now() - loadedAt < CACHE_TIME;
     return !loadedAt || !isCached;
   },
-  payload: { id }
+  payload: { id },
 });
 
 export const fetchBlocks = () => ({
@@ -56,11 +56,11 @@ export const fetchBlocks = () => ({
     const isCached = Date.now() - loadedAt < CACHE_TIME;
     // if we don't have the blocked item or it's beyond the cache timeout make the api call
     return !loadedAt || !isCached;
-  }
+  },
 });
 
 export const deleteBlock = id => ({
   types: [DELETE_BLOCK_PENDING, DELETE_BLOCK_SUCCESS, DELETE_BLOCK_ERROR],
   callAPI: () => API.delete(`/blocks/${id}`),
-  payload: { id }
+  payload: { id },
 });

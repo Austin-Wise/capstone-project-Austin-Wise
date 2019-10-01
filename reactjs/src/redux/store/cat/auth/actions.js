@@ -31,7 +31,7 @@ export const logout = () => {
 };
 
 export const forgotPassword = credentials => ({
-  types: [FORGOT_PENDING, FORGOT_ERROR, FORGOT_SUCCESS],
+  types: [FORGOT_PENDING, FORGOT_SUCCESS, FORGOT_ERROR],
   callAPI: () => API.post('/auth/forgot', credentials),
 });
 
