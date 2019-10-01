@@ -1,7 +1,10 @@
-exports.throwError = (code, errorType, errorMessage) => error => {
-  if (!error) error = new Error(errorMessage || 'Default Error');
+exports.throwError = (code, errorType, errorMessage) => err => {
+  const error = err || new Error(errorMessage || 'We gooned it.');
   error.code = code;
   error.errorType = errorType;
+  if (error.errors)
+    // eslint-disable-next-line no-shadow
+    error.message = error.errors.map(err => err.message).join('\n');
   throw error;
 };
 
@@ -17,7 +20,6 @@ exports.sendSuccess = (res, message) => data => {
 };
 
 exports.sendError = (res, status, message) => error => {
-  console.log(error);
   res.status(status || error.status || error.code || 500).json({
     type: 'error',
     message: message || error.message,

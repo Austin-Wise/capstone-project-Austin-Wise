@@ -5,9 +5,9 @@ const { throwIf, throwError, sendError } = require('../utils/errorHandling');
 exports.getContent = async (req, res) => {
   // run the find all function on the model
   try {
-    const journals = await Journals.findAll().catch(
-      throwError(500, 'sequelize error')
-    );
+    const journals = await Journals.findAll({
+      where: { userId: req.token.id },
+    }).catch(throwError(500, 'sequelize error'));
     // respond with json of the journals array
     res.json(journals);
   } catch (e) {

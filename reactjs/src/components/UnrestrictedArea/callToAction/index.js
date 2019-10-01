@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
 import { Container, Button, Row, Col } from 'reactstrap';
+import { Route, Link, NavLink as RRNavLink } from 'react-router-dom';
 
 import MediaBlock from '../mediaBlock';
 import FeatureCarousel from '../featureCarousel';
+import RegisterModal from '../AuthModals/register';
 
 import styles from './styles.module.css';
 
@@ -31,9 +33,16 @@ class CallToAction extends Component {
                     holdings, breaking news and their respective sentimental
                     analysis all to a single, easy to use interface.
                   </p>
-                  <Button color="secondary" onClick={this.toggle}>
-                    Create an Account
-                  </Button>
+                  <Link
+                    className={('mr-5', styles.loginItem)}
+                    tag={RRNavLink}
+                    to="/register"
+                    exact
+                  >
+                    <Button color="secondary" onClick={this.toggle}>
+                      Create an Account
+                    </Button>
+                  </Link>
                 </div>
               </Col>
               <Col className="col col-xl-4 col-l-6 pl-0">
@@ -42,6 +51,7 @@ class CallToAction extends Component {
             </Row>
           </Container>
         </div>
+        <Route path="/register" component={RegisterModal} />
       </>
     );
   }

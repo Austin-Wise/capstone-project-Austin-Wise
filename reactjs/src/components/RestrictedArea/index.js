@@ -3,37 +3,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, Nav, NavItem, Col, Row } from 'reactstrap';
-import { Route, NavLink as RRNavLink } from 'react-router-dom';
+import { Route, Switch, NavLink as RRNavLink } from 'react-router-dom';
 import container from './container';
 import PortfolioPanel from './portfolioPanel';
 import News from './news';
 import Journal from './journal';
 import Bookmark from './bookmark';
 import Settings from './settings';
+import NotFound from '../Shared/notFound';
 
 import styles from './styles.module.css';
 import TickerModal from './tickerModal';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class UserArea extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false,
-    };
-    this.toggle = this.toggle.bind(this);
-  }
-
-  toggle() {
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen,
-    }));
-  }
-
   // Match url always matches "/", moving the "/" to the end of the array for route wildcards allows for if/else checking on route alternatives
 
   render() {
     const { navigation, match, logout } = this.props;
-    const { isOpen } = this.state;
     return (
       <div className="container-fluid">
         <Row>
@@ -81,7 +68,7 @@ class UserArea extends React.Component {
             />
             <Nav className={styles.footer}>
               <NavItem>
-                <NavLink active href="">
+                <NavLink active href="/">
                   <button type="button" onClick={logout}>
                     Log Out
                   </button>
@@ -98,12 +85,16 @@ class UserArea extends React.Component {
               </NavItem>
             </Nav>
           </Col>
-          <Route path="/" exact component={News} />
-          <Route path="/news/:ticker" component={News} />
+
           <Route path="/news/:ticker/new" component={TickerModal} />
-          <Route path="/journal" component={Journal} />
-          <Route path="/bookmark" component={Bookmark} />
-          <Route path="/settings" component={Settings} />
+          <Switch>
+            <Route path="/" exact component={News} />
+            <Route path="/news/:ticker" component={News} />
+            <Route path="/journal" component={Journal} />
+            <Route path="/bookmark" component={Bookmark} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/" component={NotFound} />
+          </Switch>
         </Row>
       </div>
     );

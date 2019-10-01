@@ -85,7 +85,9 @@ class LoginModal extends Component {
               />
             </FormGroup>
 
-            <Link to="/login/reset">Forgot Password</Link>
+            <Link exact to="/login/reset">
+              Forgot Password
+            </Link>
           </Form>
         </ModalBody>
         <ModalFooter>
@@ -102,7 +104,7 @@ class LoginModal extends Component {
             Confirm
           </Button>
         </ModalFooter>
-        <Route path="/login/reset" exact component={ResetEmail} />
+        <Route path="/login/reset" component={ResetEmail} />
       </Modal>
     );
   }

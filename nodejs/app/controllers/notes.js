@@ -5,9 +5,9 @@ const { throwIf, throwError, sendError } = require('../utils/errorHandling');
 exports.getContent = async (req, res) => {
   // run the find all function on the model
   try {
-    const notes = await Notes.findAll().catch(
-      throwError(500, 'sequelize error')
-    );
+    const notes = await Notes.findAll({
+      where: { userId: req.token.id },
+    }).catch(throwError(500, 'sequelize error'));
     // respond with json of the notes array
     res.json(notes);
   } catch (e) {
@@ -46,6 +46,7 @@ exports.createNote = async (req, res) => {
       heading,
       body,
       bookmarkId,
+      userId: req.token.id,
       // 'catch' catches errors specific to validation. These are presets created within the models (isAlpha, len, etc..)
       // Catch first required, Captures type, second provides error code.
     })
@@ -62,7 +63,7 @@ exports.createNote = async (req, res) => {
 exports.updateNote = async (req, res) => {
   const { id } = req.params;
   try {
-    const updatedNotes = await Notes.update(req.body, id)
+    const updatedNotes = await Notes.update(req.body, { where: { id } })
       .catch(Sequelize.ValidationError, throwError(422, 'Validation Error'))
       .catch(throwError(500, 'sequelize error'));
     res.json(updatedNotes);

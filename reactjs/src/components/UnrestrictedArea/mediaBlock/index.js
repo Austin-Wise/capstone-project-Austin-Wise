@@ -8,7 +8,7 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  Container
+  Container,
 } from 'reactstrap';
 import { Route, NavLink as RRNavLink } from 'react-router-dom';
 
@@ -21,14 +21,14 @@ class MediaBlock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
     this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
     this.setState(prevState => ({
-      isOpen: !prevState.isOpen
+      isOpen: !prevState.isOpen,
     }));
   }
 

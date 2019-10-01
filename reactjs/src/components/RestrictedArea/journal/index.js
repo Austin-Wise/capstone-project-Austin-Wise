@@ -12,6 +12,7 @@ import {
   InputGroup,
   Container,
   Button,
+  Spinner,
 } from 'reactstrap';
 import container from './container';
 import styles from './styles.module.css';
@@ -32,8 +33,9 @@ const journalClear = {
 class Journal extends Component {
   constructor(props) {
     super(props);
+    const { fetchJournals } = props;
     this.state = { journal: journalClear };
-    props.fetchJournals();
+    fetchJournals();
   }
 
   handleInputChange = event => {
@@ -64,7 +66,6 @@ class Journal extends Component {
   };
 
   deleteJournalFunc = id => async event => {
-    console.log(this);
     const { deleteJournal } = this.props;
     event.stopPropagation();
     // stopPropagation stops event bubbling
@@ -73,7 +74,7 @@ class Journal extends Component {
   };
 
   render() {
-    const { journals } = this.props;
+    const { journals, isLoading } = this.props;
     // pull the data from state
     const { journal } = this.state;
     return (
@@ -271,6 +272,7 @@ class Journal extends Component {
             </tr>
           </thead>
           <tbody>
+            {' '}
             {journals.map(entry => (
               <tr
                 key={entry.id}
@@ -310,6 +312,8 @@ class Journal extends Component {
             ))}
           </tbody>
         </Table>
+        {isLoading && <Spinner color="warning" />}
+        {journals.length === 0 ? <h1>Nothing Saved Yet</h1> : {}}
       </Col>
     );
   }
@@ -317,6 +321,9 @@ class Journal extends Component {
 
 export default container(Journal);
 
+Journal.defaultProps = {
+  journals: [],
+};
 Journal.propTypes = {
   journals: PropTypes.arrayOf(
     PropTypes.shape({
@@ -336,8 +343,5 @@ Journal.propTypes = {
   fetchJournals: PropTypes.func.isRequired,
   deleteJournal: PropTypes.func.isRequired,
   updateJournal: PropTypes.func.isRequired,
-};
-
-Journal.defaultProps = {
-  journals: [],
+  isLoading: PropTypes.bool.isRequired,
 };

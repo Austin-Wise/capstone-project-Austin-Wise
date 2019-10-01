@@ -16,7 +16,7 @@ function mapStateToProps(state, props) {
       byId: { [match.params.ticker]: { data: companyData } = {} },
     },
     bookmarks: { byId: bookmarkId, allIds: allBookmarkIds },
-    articles: { byId, allIds },
+    articles: { byId, allIds, isLoading },
     tickers: { byId: tickersById, allIds: allTickerIds },
   } = state;
   // turn the array of ids into an array of objects
@@ -34,6 +34,7 @@ function mapStateToProps(state, props) {
     companyData,
     bookmarks,
     ticker,
+    isLoading,
   };
 }
 
