@@ -312,7 +312,7 @@ class Journal extends Component {
             ))}
           </tbody>
         </Table>
-        {isLoading > Date.now() + 500 && <Spinner color="warning" />}
+        {isLoading && <Spinner color="warning" />}
         {journals.length === 0 ? <h1>Nothing Saved Yet</h1> : {}}
       </Col>
     );
@@ -323,7 +323,6 @@ export default container(Journal);
 
 Journal.defaultProps = {
   journals: [],
-  isLoading: Date.now(),
 };
 Journal.propTypes = {
   journals: PropTypes.arrayOf(
@@ -344,5 +343,5 @@ Journal.propTypes = {
   fetchJournals: PropTypes.func.isRequired,
   deleteJournal: PropTypes.func.isRequired,
   updateJournal: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
 };

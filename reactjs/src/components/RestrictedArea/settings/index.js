@@ -103,7 +103,7 @@ class Settings extends Component {
             </Form>
 
             <ListGroup>
-              {isLoading > Date.now() + 500 && <Spinner color="warning" />}
+              {isLoading && <Spinner color="warning" />}
               {blocks.length === 0 ? (
                 <h1>Nothing Saved Yet</h1>
               ) : (
@@ -149,7 +149,7 @@ Settings.propTypes = {
     firstName: PropTypes.string,
     email: PropTypes.string,
   }),
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
   fetchBlocks: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
   deleteBlock: PropTypes.func.isRequired,
@@ -160,5 +160,4 @@ Settings.propTypes = {
 Settings.defaultProps = {
   blocks: [],
   user: {},
-  isLoading: Date.now(),
 };

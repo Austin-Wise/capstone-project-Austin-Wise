@@ -142,7 +142,6 @@ export default container(Bookmark);
 Bookmark.defaultProps = {
   bookmarks: [],
   notes: [],
-  isLoading: false,
 };
 
 Bookmark.propTypes = {
@@ -170,5 +169,5 @@ Bookmark.propTypes = {
   deleteBookmark: PropTypes.func.isRequired,
   fetchArticle: PropTypes.func.isRequired,
   fetchNotes: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
 };

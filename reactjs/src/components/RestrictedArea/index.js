@@ -68,7 +68,7 @@ class UserArea extends React.Component {
             />
             <Nav className={styles.footer}>
               <NavItem>
-                <NavLink active href="">
+                <NavLink active href="/">
                   <button type="button" onClick={logout}>
                     Log Out
                   </button>
