@@ -27,7 +27,7 @@ exports.forgotPassword = async (req, res) => {
       template: 'forgot',
       subject: 'Password Reset',
       ctx: {
-        url: `http://localhost:3000/auth/reset?token=${token}`,
+        url: `https://www.tkrtape.com/auth/reset?token=${token}`,
         name: user.firstName,
       },
     };
